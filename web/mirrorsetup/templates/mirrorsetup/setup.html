@@ -1,0 +1,20 @@
+{% extends "mirrorsetup/base.html" %}
+{% block configuration %}
+    <button class="nav-item nav-link" id="apply" type="button">Применить</button>
+    <button class="nav-item nav-link" id="cancel" href="{% url 'cancel' %}">Отменить</button>
+{% endblock %}
+{% block content %}
+{% load static %}
+{% csrf_token %}
+    <div class="setupfield" id="setupfield">
+        {% for widget, widget_values in widgets.items %}
+            <div class="widget" name="{{ widget_values.name }}" id="widget-{{ widget_values.id }}" relx="{{ widget_values.relx }}" rely="{{ widget_values.rely }}" width="{{ widget_values.width }}" height="{{ widget_values.height }}" anchor="{{ widget_values.anchor }}" minwidth="{{ widget_values.minwidth }}" minheight="{{ widget_values.minheight }}">
+              <div class="widget-header" id="widg-header-{{ widget_values.id }}">{{ widget_values.alias }}
+              </div>
+              <div class="widg-text-{{ widget_values.id }}">
+                <div class="resizer" id="widg-resizer-{{ widget_values.id }}"></div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

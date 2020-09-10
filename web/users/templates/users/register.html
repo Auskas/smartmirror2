@@ -1,0 +1,29 @@
+{% extends "mirrorsetup/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<section class="container-fluid">
+		<div class="content-section">
+
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Регистрация</legend>
+                      <div id="user_already_exists"></div>
+                      {{ form.username|as_crispy_field }}
+                      {{ form.email|as_crispy_field }}
+                      {{ form.password1|as_crispy_field }}
+                      <div id="passwords_match"></div>
+                      {{ form.password2|as_crispy_field }}
+				</fieldset>
+				<button id="submit_button" class="btn btn-outline-info" type="submit">Зарегистрироваться</button>
+			</form>
+
+			<div class="border-top pt-3">
+				<small class="text-muted">
+					Уже зарегистрированы? <a class="ml-2" href="{% url 'login' %}"></a>
+				</small>
+			</div>
+
+		</div>
+	</section>
+{% endblock content %}

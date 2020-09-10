@@ -1,0 +1,24 @@
+{% extends "mirrorsetup/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<section class="container-fluid">
+		<div class="content-section">
+			<form method="POST" >
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">Войти</legend>
+					{{ form|crispy }}
+				</fieldset>
+				<div class="form-group">
+					<button class="btn btn-outline-info" type="submit">Войти</button>
+					<small class="text-muted ml-2">
+						<a href="{% url 'password_reset' %}">Забыли пароль?</a>
+			</form>
+			<div class="border-top pt-3">
+				<small class="text-muted">
+					Нужен аккаунт? <a class="ml-2" href="{% url 'register' %}">Зарегистрируйтесь сейчас</a>
+				</small>
+			</div>
+		</div>
+	</section>
+{% endblock content %}

@@ -1,0 +1,439 @@
+.setupfield {
+  position: absolute;  
+  border: 5px solid black;
+}
+
+.widget {
+  position: absolute;
+  cursor: move;
+  z-index: 10;
+  background-color: #f1f1f1;
+  border: 3px solid #4286f4;
+  border-radius: 1%;
+  text-align: center;
+}
+
+.widget-header {
+  z-index: 9;
+  background-color: #2196F3;
+  color: #fff;
+  border: 1px solid #4286f4;
+  border-radius: 1%;
+}
+
+.widget-text {
+  z-index: 8;
+}
+
+.resizer{
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%; /*magic to turn square into circle*/
+  background: white;
+  border: 3px solid #4286f4;
+  right: -5px;
+  bottom: -5px;
+  cursor: nwse-resize;
+  box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'lemon_tuesdayregular';
+    src: url('fonts/lemon_tuesday/18224-webfont.eot');
+    src: url('fonts/lemon_tuesday/18224-webfont.eot') format('embedded-opentype'),
+         url('fonts/lemon_tuesday/18224-webfont.woff2') format('woff2'),
+         url('fonts/lemon_tuesday/18224-webfont.woff') format('woff'),
+         url('fonts/lemon_tuesday/18224-webfont.ttf') format('truetype'),
+         url('fonts/lemon_tuesday/18224-webfont.svg#lemon_tuesdayregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'raleway';
+    src: url('fonts/raleway/raleway-regular-webfont.eot');
+    src: url('fonts/raleway/raleway-regular-webfont.eot') format('embedded-opentype'),
+         url('fonts/raleway/raleway-regular-webfont.woff2') format('woff2'),
+         url('fonts/raleway/raleway-regular-webfont.woff') format('woff'),
+         url('fonts/raleway/raleway-regular-webfont.ttf') format('truetype'),
+         url('fonts/raleway/raleway-regular-webfont.svg#raleway') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'molotregular';
+    src: url('fonts/molot/molot-webfont.eot');
+    src: url('fonts/molot/molot-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/molot/molot-webfont.woff2') format('woff2'),
+         url('fonts/molot/molot-webfont.woff') format('woff'),
+         url('fonts/molot/molot-webfont.ttf') format('truetype'),
+         url('fonts/molot/molot-webfont.svg#molotregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.site-content {
+  min-height: 100%;
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  margin-bottom: -60px;
+}
+
+.content-inside {
+  padding: 5px;
+  padding-bottom: 50px;
+}
+
+.site-footer {
+  height: 50px;
+  margin-top: -50px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "raleway"
+}
+
+ul {
+  margin: 0;
+}
+
+.header-top {
+ background:#f4f4f4;
+ height: 110px;
+}
+
+.header-main {
+  z-index: -2;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-image: url("images/headerback.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  min-width: 100%;
+}
+
+.overlay {
+  z-index: -1;
+  position: absolute;
+  height: 100vh;
+  min-width: 100%;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width:1080px) { .container-fluid { width: 60% !important;} }
+@media (min-height:1920px) { .container-fluid { height: calc(100% - 110px) !important;} }
+
+.container-fluid {
+  padding: 10px;
+  flex: 1;
+  margin-top: 110px;
+}
+
+.container {
+  flex: 1;
+  margin-top: 110px;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.post-detail{
+  overflow: auto;
+}
+
+.post-header{
+  margin-bottom: 20px;
+}
+
+.post-list{
+  width:70%;
+  margin: auto;
+  padding: 10px;
+  position: relative;
+  top: 110px;
+}
+
+.quote{
+    padding: 2em;   
+    font-family: "raleway";
+    color:#666;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.quote-paragraph{
+  font-style: italic;
+  font-size: 22px;
+  padding: calc(1em * 0.3) !important;
+}
+
+.quote-author{
+  font-size: 16px;
+  padding: 0;
+  margin-right: 30px;
+}
+
+.description{
+  margin: auto;
+  padding: 2em;
+  font-family: 'raleway';
+  align-items: flex-start;
+}
+
+.description h1{
+  color:#378cad ;
+}
+
+.description p{
+ color:#000;
+ font-size: 20px;
+ line-height: 1.5;
+
+}
+
+.about{
+  font-family: 'raleway';
+  margin-bottom: 1em;
+  padding: 1em;
+  align-items: flex-center;
+}
+
+.about h1{
+  color:#F97300;
+  margin: 1em;
+  margin-top: 5px !important;
+}
+
+.about img{
+  width: 100%;
+  height: auto;
+  border-radius: 50%
+}
+
+.about .icon{
+  margin-left: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+.about a{
+  margin: 0;
+}
+
+.about a:hover{
+  transform: scale(1.2)
+}
+
+.about span{
+ display: block;
+ color: #888;
+ margin-bottom: 2em;
+}
+.about .desc{
+ padding: 2em;
+ border-left:4px solid #10828C;
+}
+.about .desc h2{
+ color: #10828C;
+
+}
+.about .desc p{
+ line-height:2;
+ color:#888;
+}
+
+.navbar {
+  background: #ffffff
+}
+
+.navbar-brand div{
+  font-family: 'lemon_tuesdayregular';
+  font-size: 18px;
+  color: #000000;
+  margin-left: 2em !important;
+  margin-right: 2em !important;
+}
+.navbar-brand:hover{color: #000000;}
+
+.bg-steel {
+  background-color: #378cad;
+}
+
+.nav-link{
+  font-family: 'molotregular';
+  font-size: 24px;
+  color: #000000;
+  margin-right: 1em !important;
+}
+
+.nav-link-login{
+  font-size: 16px;
+}
+
+.nav-link:hover, .nav-link-login:hover{
+  color: #3a7678
+}
+
+.navbar-collapse{
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbar-toggler{
+  background:#fff !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-img {
+  height: 50px;
+  width: 50px;
+  margin-right: 5px;
+}
+
+.icon{
+  margin-left: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+.icon:hover{
+  transform: rotate(0.05turn);
+}
+
+.icon:active{
+  transform: rotate(0.05turn) scale(1.2);
+}
+
+.content-section {
+  font-family: 'raleway';
+  border-radius: 3px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.content-section-inner {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #dddddd;
+  padding:10px;
+  border-radius: 10px;
+}
+.content-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left:0;
+  top:0;
+  padding:0;
+  margin:0;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.overlay-content-background {
+  height: 100%;
+  min-width: 100%;
+  background: rgba(244, 244, 244, 0.85);
+  border-radius: 10px;
+}
+
+.article-title {
+  font-family: 'raleway';
+  color: #000 solid !important;
+  margin-bottom: 0.5em !important;
+  font-weight: bold;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  font-family: 'raleway';
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-right: 16px;
+  align-items: center;
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.updated-content {
+  color: #000;
+}
+
+.article-topic-icon {
+  height: 25px;
+  width: 25px;
+  margin-right: 5px;
+  margin-left: 5px;
+  float: right;
+}
+
+.robot-button-container {
+  height: 50px;
+  margin-bottom: 20px;
+  align-items: flex-center;
+}
+
+.messagebanner {
+  position: relative;
+  top: 110px;  
+}
+
+.widget {
+  word-break:break-all;
+}

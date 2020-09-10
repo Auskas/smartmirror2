@@ -1,0 +1,11 @@
+<div class="site-footer">
+    <div class="footer-copyright text-center py-3">
+        {% now "Y" as current_year %}
+        {% if current_year == "2020" %}
+            kdablog.ru © 2020 <a href="">Дмитрий Кудряшов</a>
+        {% else %}
+            kdablog.ru © 2020—{{ current_year }} <a href="">Дмитрий Кудряшов</a>
+        {% endif %}
+    </div>
+</div>
+

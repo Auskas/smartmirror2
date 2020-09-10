@@ -1,0 +1,31 @@
+{% extends "mirrorsetup/base.html" %}
+{% block content %}
+{% load static %}
+	<section class="container d-flex flex-column-reverse">
+	<div class="d-flex flex-row">
+		<div class="description">
+			    <h1>Конфигуратор УМНОГО ЗЕРКАЛА v2</h1>
+			<div class="d-none d-md-block">
+			    <p>Блог создан в самообразовательных целях.
+			    Пишу обо всём, что мне интересно в IT технологиях и не только. Зарегистрируйтесь, чтобы подписаться на уведомления или стать автором.
+				</p>
+			</div>
+		 	<a href="" class="btn btn-outline-primary btn-lg" role="button">Далее</a>
+		 	{% if user.is_authenticated is False %}
+			 	<a href="" class="btn btn-outline-primary btn-lg" role="button">Регистрация</a>
+		 	{% endif %}  
+		</div> 
+	</div>
+	<div class="d-none d-lg-block">
+		<div class="quote d-flex flex-column">
+			<div class="quote-paragraph">«Даже путь в тысячу ли начинается с первого шага»</div>
+		 	<div class='quote-author'>Лао Цзы</div>
+		</div>
+	</div>
+	</section>
+	<header class="header-main">
+		<div class="overlay">
+		</div>
+	</header>
+{% endblock content %}
+

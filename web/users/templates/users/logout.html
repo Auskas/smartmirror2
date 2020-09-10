@@ -1,0 +1,11 @@
+{% extends "mirrorsetup/base.html" %}
+{% block content %}
+	<section class="container-fluid">
+		<h2>Вы вышли из своей учётной записи</h2>
+		<div class="border-top pt-3">
+			<small class="text-muted">
+				<a href="{% url 'login' %}">Войти снова</a>
+			</small>
+		</div>
+	</section>
+{% endblock content %}
