@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'mirrorsetup/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'mirrorsetup/widget_settings.css'%}">
+    <script type="text/javascript" src="{%  static 'js/jquery-3.5.1.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/widget_settings.js' %}"></script>
+    <title>Параметры виджета</title>
+</head>
+<body hidden>
+    <div id="widget-name" name="{{ name }}">
+    </div>
+    <section class="container-fluid">
+        <h1 id="heading"></h1>
+        <div class="row">
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox" id="showCheckbox" onclick="changeShowStatus()">
+              <span class="slider round"></span>
+            </label>
+            <span>Виджет показывается</span>
+        </div>
+        <div>
+        <a class="btn btn-outline-primary btn-lg" id="apply" href="#" onclick="applyChanges()">Применить</a>
+        <a class="btn btn-outline-primary btn-lg" id="cancel" href="{% url 'cancel' %}" onclick="window.close()">Отмена</a>
+        </div>
+    </section>
+
+</body>
+</html>

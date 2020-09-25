@@ -29,6 +29,7 @@ class Calendar:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
 
+        # Initial font size
         self.font_size = 28
 
         self.date_label = Label(
@@ -56,6 +57,8 @@ class Calendar:
         self.widget()
 
     def get_font_size(self):
+        """ The method decreases the font size until it satisfies the target
+            width and height of the widget."""
         while self.font_size > 12:
             self.date_label.config(font=("SFUIText", self.font_size, "bold"))
             self.date_label.update()
@@ -102,7 +105,7 @@ class Calendar:
             self.date_label.place_forget()
             self.date_label.after(1000, self.status)
 
-    def update(self, *args):
+    def widget_update(self, *args):
         self.relx = args[0]
         self.rely = args[1]
         width = args[2]
@@ -125,3 +128,9 @@ if __name__ == '__main__':
         window.mainloop()
     except KeyboardInterrupt:
         sys.exit()
+
+__version__ = '0.96' # 10th September 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"    
+__status__ = "Development"

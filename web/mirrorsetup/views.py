@@ -13,6 +13,11 @@ def home(request):
         return HttpResponseForbidden()
     return render(request, 'mirrorsetup/home.html')
 
+def intro(request):
+    if request.method == "POST":
+        return HttpResponseForbidden()
+    return render(request, 'mirrorsetup/intro.html')
+
 @login_required
 def setup(request):
     with open(f'{conf_settings.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
@@ -42,5 +47,15 @@ def apply(request):
 
 @login_required
 def cancel(request):
-    print('CANCEL')
-    return render(request, 'mirrorsetup/setup.html', context=context)
+    return render(request, 'mirrorsetup/setup.html')
+
+@login_required
+def widget_settings(request):
+    try:
+        widget_name = request.GET.__getitem__('widget')
+        with open(f'{conf_settings.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
+            WIDGETS_CONFIG = json.load(widgets_config_file)
+        context = WIDGETS_CONFIG[widget_name]
+        return render(request, 'mirrorsetup/widget_settings.html', context=context)
+    except Exception as exc:
+        logger.exception('Cannot process widget settings request!')

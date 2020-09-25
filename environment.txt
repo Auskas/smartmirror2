@@ -1,0 +1,2 @@
+List of required environment variables:
+YANDEX_WEATHER_TOKEN

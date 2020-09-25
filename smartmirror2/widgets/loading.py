@@ -31,7 +31,7 @@ class Loading:
         self.backup_image = PhotoImage(
             file=f'.{os.sep}images{os.sep}loading.png'
         )
-        print(f'Number of gif frames {len(self.frames)}')
+        #print(f'Number of gif frames {len(self.frames)}')
         self.loading_label = Label(
             self.window, 
             bg='black', 

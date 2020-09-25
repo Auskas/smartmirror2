@@ -18,8 +18,6 @@ class Clock:
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
-        self.class_name = Clock
-
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
         self.window_height = window.winfo_screenheight()
@@ -39,9 +37,11 @@ class Clock:
 
         self.logger.info('Clock widgets has been created.')
         self.show = True
-        self.widget()
+        self.status()
 
     def get_font_size(self):
+        """ The method decreases the font size until it satisfies the target
+            width and height of the widget."""
         while self.font_size > 12:
             self.timeLbl.config(font=("SFUIText", self.font_size, "bold"))
             self.timeLbl.update()
@@ -81,7 +81,7 @@ class Clock:
             self.timeLbl.place_forget()
             self.timeLbl.after(1000, self.status)
 
-    def update(self, *args):
+    def widget_update(self, *args):
         self.relx = args[0]
         self.rely = args[1]
         width = args[2]
@@ -104,3 +104,9 @@ if __name__ == '__main__':
         window.mainloop()
     except KeyboardInterrupt:
         sys.exit()
+
+__version__ = '0.96' # 10th September 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"    
+__status__ = "Development"

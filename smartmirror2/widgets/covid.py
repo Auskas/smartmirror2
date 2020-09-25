@@ -130,58 +130,65 @@ class Covid:
             '17,414', '+31',
             '821,169'
         ]
+        self.covid_test_figures = [
+            '24,925,950', '861,668', '18,209,780',
+            '1,000,500', '+4,952',
+            '17,414', '+31',
+            '821,169'
+        ]
 
         self.covid_frame.update()
         self.covid_frame_width = self.covid_frame.winfo_width()
         self.covid_frame_height = self.covid_frame.winfo_height()
-        print(int(self.covid_frame_width / self.window_width * 100))
-        print(int(self.covid_frame_height / self.window_height * 100))
+        #print(int(self.covid_frame_width / self.window_width * 100))
+        #print(int(self.covid_frame_height / self.window_height * 100))
         self.get_font_size()
         self.logger.info('Covid widget has been created.')
         self.widget()
 
     def get_font_size(self):
+        """ The method decreases the font size until it satisfies the target
+            width and height of the widget."""
         while self.font_size > 12:
-            #print(self.font_size)
+
+            self.world_cases.config(font=("SFUIText", self.font_size, "bold"))
+            self.world_deaths.config(font=("SFUIText", self.font_size, "bold"))
+            self.world_recovered.config(font=("SFUIText", self.font_size, "bold"))
+            self.RUS.config(font=("SFUIText", self.font_size - 2, "bold"))
+            self.rus_cases.config(font=("SFUIText", self.font_size - 2, "bold"))
+            self.rus_deaths.config(font=("SFUIText", self.font_size - 2, "bold"))
+            self.rus_recovered.config(font=("SFUIText", self.font_size - 2, "bold"))
+
+            icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
+            self.render_cases_world = ImageTk.PhotoImage(icon_cases_file_resized)            
+            self.icon_cases_world.config(image=self.render_cases_world)
+            
+            icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
+            self.render_cases_rus = ImageTk.PhotoImage(icon_cases_file_resized)            
+            self.icon_cases_rus.config(image=self.render_cases_rus)
+
+            icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
+            self.render_deaths_world = ImageTk.PhotoImage(icon_deaths_file_resized)            
+            self.icon_deaths_world.config(image=self.render_deaths_world)
+
+            icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
+            self.render_deaths_rus = ImageTk.PhotoImage(icon_deaths_file_resized)            
+            self.icon_deaths_rus.config(image=self.render_deaths_rus)
+
+            icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
+            self.render_recovered_world = ImageTk.PhotoImage(icon_recovered_file_resized)            
+            self.icon_recovered_world.config(image=self.render_recovered_world)
+
+            icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
+            self.render_recovered_rus = ImageTk.PhotoImage(icon_recovered_file_resized)            
+            self.icon_recovered_rus.config(image=self.render_recovered_rus)
+            
+            self.window.update()
+
             self.covid_frame_width = self.covid_frame.winfo_width()
             self.covid_frame_height = self.covid_frame.winfo_height()
+            
             if self.covid_frame_width > self.target_width or self.covid_frame_height > self.target_height:
-                self.world_cases.config(font=("SFUIText", self.font_size, "bold"))
-                self.world_deaths.config(font=("SFUIText", self.font_size, "bold"))
-                self.world_recovered.config(font=("SFUIText", self.font_size, "bold"))
-                self.RUS.config(font=("SFUIText", self.font_size - 2, "bold"))
-                self.rus_cases.config(font=("SFUIText", self.font_size - 2, "bold"))
-                self.rus_deaths.config(font=("SFUIText", self.font_size - 2, "bold"))
-                self.rus_recovered.config(font=("SFUIText", self.font_size - 2, "bold"))
-                self.window.update()
-                self.covid_frame_width = self.covid_frame.winfo_width()
-                self.covid_frame_height = self.covid_frame.winfo_height()
-
-                icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-                self.render_cases_world = ImageTk.PhotoImage(icon_cases_file_resized)            
-                self.icon_cases_world.config(image=self.render_cases_world)
-                
-                icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-                self.render_cases_rus = ImageTk.PhotoImage(icon_cases_file_resized)            
-                self.icon_cases_rus.config(image=self.render_cases_rus)
-
-                icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-                self.render_deaths_world = ImageTk.PhotoImage(icon_deaths_file_resized)            
-                self.icon_deaths_world.config(image=self.render_deaths_world)
-
-                icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-                self.render_deaths_rus = ImageTk.PhotoImage(icon_deaths_file_resized)            
-                self.icon_deaths_rus.config(image=self.render_deaths_rus)
-
-                icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-                self.render_recovered_world = ImageTk.PhotoImage(icon_recovered_file_resized)            
-                self.icon_recovered_world.config(image=self.render_recovered_world)
-
-                icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-                self.render_recovered_rus = ImageTk.PhotoImage(icon_recovered_file_resized)            
-                self.icon_recovered_rus.config(image=self.render_recovered_rus)
-                
-                self.window.update()
                 self.font_size -= 1
             else:
                 self.logger.debug(f'Target widget width {self.target_width}')
@@ -215,7 +222,7 @@ class Covid:
             self.covid_frame.place_forget()
             self.covid_frame.after(1000, self.status)
     
-    def update(self, *args):
+    def widget_update(self, *args):
         self.relx = args[0]
         self.rely = args[1]
         width = args[2]
@@ -238,3 +245,9 @@ if __name__ == '__main__':
         window.mainloop()
     except KeyboardInterrupt:
         sys.exit()
+
+__version__ = '0.96' # 10th September 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"    
+__status__ = "Development"

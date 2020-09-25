@@ -1,0 +1,17 @@
+{% extends "mirrorsetup/base.html" %}
+
+{% load static %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{%  static 'js/anime.min.js' %}"></script>  
+    <script type="text/javascript" src="{%  static 'js/intro.js' %}"></script>
+
+{% endblock javascript%}
+
+{% block content %}
+
+    <video autoplay muted id="introVideo" src="{% static 'mirrorsetup/video/intro.mp4' %}" type="video/mp4" redirect="{% url 'home' %}"></video>
+
+    <div class="introHeader" id="introHeader">SMART MIRROR MARK II</div>
+
+{% endblock content %}

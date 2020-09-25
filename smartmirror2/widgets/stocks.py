@@ -18,7 +18,7 @@ class Stocks:
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
-        self.font_size = 24
+        self.font_size = 100
 
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
@@ -31,9 +31,10 @@ class Stocks:
 
         self.anchor = anchor
 
-        self.rates_string = '$ 000.0↓   € 000.0↓   Brent 000.0↑'
+        self.rates_string = '*** Обновление данных по котировкам ***'
+        self.rates_test_string = '$ 000.0↓   € 000.0↓   Brent 000.0↑'
         self.stocks_label = Label(
-            window, text=self.rates_string, 
+            window, text=self.rates_test_string, 
             fg='lightblue', bg='black', 
             font=("SFUIText", self.font_size, "bold")
         )
@@ -64,7 +65,9 @@ class Stocks:
                 self.logger.debug(f'Real widget width {int(self.stocks_label_width)}')
                 self.logger.debug(f'Target widget height {self.target_height}')
                 self.logger.debug(f'Real widget height {int(self.stocks_label_height)}')
+                self.stocks_label.config(text='*** Обновление данных по котировкам ***')
                 break
+        self.stocks_label.config(text='*** Обновление данных по котировкам ***')
 
     def widget(self):
         self.stocks_label.after(1000, self.status)
@@ -78,7 +81,7 @@ class Stocks:
             self.stocks_label.place_forget()
             self.stocks_label.after(1000, self.status)
 
-    def update(self, *args):
+    def widget_update(self, *args):
         self.relx = args[0]
         self.rely = args[1]
         width = args[2]
@@ -86,7 +89,7 @@ class Stocks:
         self.anchor = args[4]
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
-        self.font_size = 24
+        self.font_size = 100
         self.get_font_size()
 
 if __name__ == '__main__':

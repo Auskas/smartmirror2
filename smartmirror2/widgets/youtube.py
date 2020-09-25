@@ -14,28 +14,31 @@
 # The pointing finger gesture controls the volume - a volume bar appears on top of the playback widget.
 # Moving the finger to the left and right turns the volume down and up accordingly.
 
+import os
 import logging
 from tkinter import *
+from PIL import Image, ImageTk
 import vlc
-print(vlc.__file__)
 vlc.logger.setLevel(logging.CRITICAL)
 import sys
 import time
-import threading
 import requests
 import urllib.request
 import urllib.parse
 import re
 import time
 from random import choice
-import threading
-#import alsaaudio
+import aiohttp
+import asyncio
+from multiprocessing import Process, Queue
+import alsaaudio
     
 
 class YoutubePlayer:
 
-    def __init__(self, window, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw'):
+    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw'):
         self.logger = logging.getLogger('SM.youtube')
+        self.loop = asyncloop
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -50,32 +53,29 @@ class YoutubePlayer:
         self.window_width = window.winfo_screenwidth()
         self.window_height = window.winfo_screenheight()
 
-        self.relx = relx
-        self.rely = rely
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
 
-        print(self.target_width, self.target_height)
+        self.icons_target_size = (
+            int(self.target_width / 30), 
+            int(self.target_width / 30)
+        )
+
+        self.relx = relx
+        self.rely = rely
 
         _isMacOS   = sys.platform.startswith('darwin')
         _isWindows = sys.platform.startswith('win')
         _isLinux = sys.platform.startswith('linux')
-        args = ['--video-wallpaper', '--play-and-exit', '--verbose=0', '--logfile=vlc-log.txt',
+        args = ['--video-wallpaper', '--play-and-exit', '--verbose=1', '--logfile=vlc-log.txt',
                 '--vout=X11', '--network-caching=1000', '--no-ts-trust-pcr', '--ts-seek-percent']
                #'--no-ts-trust-pcr', '--ts-seek-percent',  '--file-logging', '--logfile=vlc-log.txt', '--aout=alsa'
         if _isLinux:
             args.append('--no-xlib')
         # Below are some Youtube links for testing purposes. Leave one uncommented to see it on the screen.
-        #self.url = str('https://www.youtube.com/watch?v=9Auq9mYxFEE') # Sky News
-        #self.url = str('https://www.youtube.com/watch?v=fdN46JyP1lI') # Football Club 1
-        #self.url = str('https://www.youtube.com/watch?v=-fLF_ejuOjs&pbjreload=10') # Football Club 2
-        #self.url = str('https://www.youtube.com/watch?v=P-_lx0ysHfw') # Spartak
-        #self.url = str('https://www.youtube.com/watch?v=diRtRhcaUNI') # Metallica
-        self.url = str('https://www.youtube.com/watch?v=2MISe09ArHw')
-        #self.url = str('https://www.youtube.com/watch?v=RjIjKNcr_fk') # Al Jazeera
-        #self.url = str('https://www.youtube.com/watch?v=dI4jr5HyuT0') # NTV Russia live
-
+        #self.url = str('https://www.youtube.com/watch?v=2MISe09ArHw')
+        self.url = str('https://www.youtube.com/watch?v=r_izDyWAid4')
         self.instance = vlc.Instance(args)
 
         # Creating the media object (Youtube video URL).
@@ -83,6 +83,9 @@ class YoutubePlayer:
 
         # Creating an instance of MediaList object and assigning it a tuple containing only one URL from Youtube.
         self.media_list = self.instance.media_list_new((self.url, ))
+
+        self.audio = alsaaudio.Mixer()
+        self.audio_volume = self.audio.getvolume()[0] * 3
 
         # Creating an instance of the player.
         self.player = self.instance.media_player_new()
@@ -97,24 +100,107 @@ class YoutubePlayer:
         self.widgetCanvas = Canvas(self.window, width=self.target_width,
                                    height=self.target_height, bg='black',
                                    borderwidth=0, highlightbackground='black')
-        self.widgetCanvas.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
+        self.widgetCanvas.place(
+            relx=self.relx, 
+            rely=self.rely + self.icons_target_size[0] / self.window_height, 
+            anchor=self.anchor)
 
         # Set the window id where to render VLC's video output.
         self.widget_canvas_id = self.widgetCanvas.winfo_id()
-        #self.player.set_xwindow(self.widget_canvas_id)
-        #self.player.set_fullscreen(False)
 
         self.fullscreen_status = False
 
-        #if sys.platform != 'win32':
-            #self.audio = alsaaudio.Mixer()
-            #self.audio_volume = self.audio.getvolume()[0] # system audio volume
-            #self.logger.debug(f'Audio volume {self.audio_volume}')
-
-        #self.list_player.play()
         self.set_window()
         self.saved_video_status = None
+
+        self.external_command = None
+
+        self.queue = Queue()
+        receiver_loop = self.loop.create_task(self.process_receiver())
+        status_loop = self.loop.create_task(self.status())
+        
+        self.create_volume_bar()
+        
+        if __name__ == '__main__':
+            self.loop.create_task(self.window_updater())
+
+        self.show = True
+
         self.logger.info('Youtube widget has been initialized.')
+
+    def create_volume_bar(self):
+
+        self.volume_frame_width = self.target_width
+        self.volume_frame_height = self.icons_target_size[0]
+        # The range in pixels of the space between the muted speaker icon and the loud speaker to the right.
+        self.volume_range = int(self.volume_frame_width - 3 * self.volume_frame_height)
+
+        self.volume_frame = Canvas(self.window, width=self.volume_frame_width,
+                                   height=self.volume_frame_height, bg='black',
+                                   borderwidth=0, highlightbackground='black')
+
+        self.volume_frame.place(
+            relx=self.relx, 
+            #rely=self.rely - self.icons_target_size[0], 
+            rely=self.rely,
+            anchor=self.anchor
+            )
+
+        # Loads the images, that are used in the widget, resizes them and assigns to the widget.
+        image_bar = Image.open(f'icons{os.sep}volume_bar.png')
+        image_bar = image_bar.resize((self.volume_range + self.volume_frame_height, self.icons_target_size[0]), Image.ANTIALIAS)
+        render_bar = ImageTk.PhotoImage(image_bar)
+
+        image_speaker = Image.open(f'icons{os.sep}speaker.png')
+        image_speaker = image_speaker.resize(self.icons_target_size, Image.ANTIALIAS)
+        render_speaker = ImageTk.PhotoImage(image_speaker)
+
+        image_speaker_loud = Image.open(f'icons{os.sep}speaker_loud.png')
+        image_speaker_loud = image_speaker_loud.resize(self.icons_target_size, Image.ANTIALIAS)
+        render_speaker_loud = ImageTk.PhotoImage(image_speaker_loud)
+
+        image_speaker_ball = Image.open(f'icons{os.sep}speaker_ball.png')
+        image_speaker_ball = image_speaker_ball.resize(self.icons_target_size, Image.ANTIALIAS)
+        render_speaker_ball = ImageTk.PhotoImage(image_speaker_ball)
+
+        self.icon_speaker = Label(self.volume_frame, image=render_speaker, bg='black')
+        self.icon_speaker.image = render_speaker
+
+        self.icon_bar = Label(self.volume_frame, image=render_bar, bg='black')
+        self.icon_bar.image = render_bar
+        
+        self.icon_speaker_ball = Label(self.volume_frame, image=render_speaker_ball, bg='black')
+        self.icon_speaker.ball = render_speaker_ball
+
+        self.icon_speaker_loud = Label(self.volume_frame, image=render_speaker_loud, bg='black')
+        self.icon_speaker_loud.image = render_speaker_loud
+
+        self.icon_speaker.place(relx=0, rely=0, anchor='nw')
+        self.icon_bar.place(x=self.volume_frame_height, rely=0, anchor='nw')
+
+        self.icon_speaker_loud.place(relx=1, rely=0, anchor='ne')
+
+        self.volume_widget_timeout = 0
+        self.volume_widget_concealed = False
+        self.volume_widget_hide()        
+
+    def volume_widget_show(self):
+        self.volume_frame.config(width=self.volume_frame_width, 
+                                 height=self.volume_frame_height)
+        self.volume_widget_concealed = False
+
+    def volume_widget_hide(self):
+        self.volume_frame.config(width=0, height=0)
+        self.volume_widget_concealed = True
+
+    def volume_widget_ball_position(self, volume):
+        #self.icon_speaker.place(relx=0, rely=0, anchor='nw')
+        #self.icon_bar.place(x=self.volume_frame_height, rely=0, anchor='nw')
+
+        self.speaker_ball_position_absolute = round((volume * self.volume_range) / 100) + self.volume_frame_height
+        self.icon_speaker_ball.place(x=self.speaker_ball_position_absolute, rely=0, anchor='nw')
+
+        #self.icon_speaker_loud.place(relx=1, rely=0, anchor='ne')
 
     def video_fullscreen_status(self):
         """ The method is used to place the widget back either in the fullscreen or windowed mode
@@ -139,7 +225,7 @@ class YoutubePlayer:
         self.list_player.pause()
         self.video_status = 'stopped'
 
-    def search(self, topic):
+    async def search(self, topic):
         """ The method is used to get Youtube link of the desired topic.
             It loads the webpage using a proper request and finds the URL of the most relevant video.
             At the end it calls change_url method to actually change the URL.
@@ -147,21 +233,39 @@ class YoutubePlayer:
 
         self.logger.debug(f'Youtube URL searching for {topic}...')
         query_string = urllib.parse.urlencode({"search_query" : topic})
+        link = "http://www.youtube.com/results?" + query_string
 
         try:
-            res = requests.get("http://www.youtube.com/results?" + query_string)
-            if res.status_code == 200:
-                search_results = re.findall(r'"url":"\/watch\?v=(.{11})"', res.text)
-            else:
-                search_results = []
+            async with aiohttp.ClientSession() as session:
+                async with session.get(link) as resp:
+                    if resp.status != 200:
+                        self.logger.error(f'Cannot get {link}.\n Status {resp.status}')
+                    else:
+                        self.logger.debug(f'{link} loaded')
+                        results = await resp.text()
+                        results_parser_process = Process(target=self.process_results, args=(results, ))
+                        results_parser_process.start()
         except Exception as error:
-            self.logger.debug(f'Cannot load Youtube: {error}')
+            self.logger.debug(f'Cannot load the Youtube page: {error}')
 
+
+    def process_results(self, resp):
+        search_results = re.findall(r'"url":"\/watch\?v=(.{11})"', resp)
         if len(search_results) > 0:
             self.logger.debug('Found the URL for the requested video...')
-            self.change_url("https://www.youtube.com/watch?v=" + search_results[0])
+            self.queue.put("https://www.youtube.com/watch?v=" + search_results[0])
         else:
             self.logger.debug(f'Search results are empty.')
+            self.queue.put(None)
+
+    async def process_receiver(self):
+        while True:
+            if self.queue.empty():
+                await asyncio.sleep(1)
+            else:
+                url = self.queue.get()
+                if url is not None:
+                    self.change_url(url)            
 
     def change_url(self, url):
         """ The method is used to change video's URL.
@@ -181,7 +285,7 @@ class YoutubePlayer:
 
         self.player.set_xwindow(self.widget_canvas_id)
 
-        self.list_player.play()
+        #self.list_player.play()
 
         self.video_status = 'running'
 
@@ -190,7 +294,10 @@ class YoutubePlayer:
     def set_window(self):
         """ The method is used to change the size of the video canvas.
         The canvas occupies only small part of the main window."""
-        self.widgetCanvas.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
+        self.widgetCanvas.place(
+            relx=self.relx, 
+            rely=self.rely + self.icons_target_size[0] / self.window_height, 
+            anchor=self.anchor)
         self.widgetCanvas.config(width=self.target_width, height=self.target_height)
         self.player.set_xwindow(self.widget_canvas_id)
         self.fullscreen_status = False
@@ -206,31 +313,131 @@ class YoutubePlayer:
         self.fullscreen_status = True
         self.video_status = 'running'
 
-    def update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
+    def widget_update(self, *args):
         width = args[2]
         height = args[3]
         self.anchor = args[4]
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
+        self.icons_target_size = (
+            int(self.target_width / 30), 
+            int(self.target_width / 30)
+        )
+
+        self.relx = args[0]
+        self.rely = args[1] + self.icons_target_size[0] / self.window_height
+
+        self.volume_frame_width = self.target_width
+        self.volume_frame_height = self.icons_target_size[0]
+        # The range in pixels of the space between the muted speaker icon and the loud speaker to the right.
+        self.volume_range = int(self.volume_frame_width - 3 * self.volume_frame_height)
+        self.volume_frame.place(
+            relx=self.relx, 
+            #rely=self.rely - self.icons_target_size[0], 
+            rely=self.rely,
+            anchor=self.anchor
+            )        
+
         if self.fullscreen_status == False:
             self.set_window()
 
+    async def status(self):
+        while True:
+            if self.external_command == 'volume_down':
+                self.audio_volume -= 1
+                if self.audio_volume < 0:
+                    self.audio_volume = 0
+                self.audio.setvolume(int(self.audio_volume // 3))
+                self.volume_widget_ball_position(self.audio_volume // 3)
+
+            elif self.external_command == 'volume_up':
+                self.audio_volume += 1
+                if self.audio_volume > 300:
+                    self.audio_volume = 300
+                self.audio.setvolume(int(self.audio_volume // 3))
+                self.volume_widget_ball_position(self.audio_volume // 3)
+
+            if self.external_command in ('volume_up', 'volume_down') and self.volume_widget_concealed:
+                self.volume_widget_timeout = 20
+                self.volume_widget_show()
+
+            elif self.external_command not in ('volume_up', 'volume_down') and self.volume_widget_concealed == False:
+                if self.volume_widget_timeout == 0:
+                    self.volume_widget_hide()
+                else:
+                    self.volume_widget_timeout -= 1
+
+            await asyncio.sleep(0.05)
+
+
+    async def window_updater(self):
+        """ This method is used only if the module is executed directly.
+            Updates the tkinter window."""
+        interval = 1/120
+        while True:
+            self.window.update()
+            await asyncio.sleep(interval)
+
+
+    async def process_receiver_main(self, queue):
+        """ The method is asynchronously waits for strings in the queue."""
+        while True:
+            if queue.empty():
+                await asyncio.sleep(1)
+            else:
+                data = queue.get()
+                try:
+                    for key in data.keys():
+                        if key == 'detected_gesture':
+                            if data[key] == 'pointing_finger':
+                                self.external_command = 'volume_down'
+                            elif data[key] == 'sign_of_the_horns':
+                                self.external_command = 'volume_up'
+                            else:
+                                self.external_command = False
+                        elif key == 'face_detected':
+                            self.face_detected = data[key]
+                        else:
+                            self.face_detected = False
+                            self.gesture = False
+                except Exception as exc:
+                    self.logger.warning(f'Cannot process the data in the queue {exc}')
 
 if __name__ == '__main__':
     try:
+        loop = asyncio.get_event_loop()
         window = Tk()
         window.title('Youtube')
         window.configure(bg='black')
         #window.overrideredirect(True)
         w, h = window.winfo_screenwidth(), window.winfo_screenheight()
         window.geometry("%dx%d+0+0" % (w, h))
-        youtube = YoutubePlayer(window)     
-        youtube_thread = threading.Thread(target=youtube.play)
-        youtube_thread.start()      
-        #youtube.search('Corey Schafer Django')
-        window.mainloop()
+
+        youtube = YoutubePlayer(window, loop)
+        #youtube.play()
+        #search_loop = loop.create_task(youtube.search('Corey Schafer Django'))
+        
+        import cv2
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("gestures.py", "/media/data/sm2/smartmirror2/gestures.py")
+        gestures = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gestures)
+        
+
+        from multiprocessing import Process, Queue
+        cam = cv2.VideoCapture(0)
+        queue = Queue()
+        gestures_recognizer = gestures.GesturesRecognizer(cam, queue)
+        gestures_recognizer_process = Process(target=gestures_recognizer.tracker).start()
+
+        loop.create_task(youtube.process_receiver_main(queue))
+        loop.run_forever()
+        
     except KeyboardInterrupt:
         sys.exit()
-    print('Alles')
+
+__version__ = '0.96' # 10th September 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"    
+__status__ = "Development"

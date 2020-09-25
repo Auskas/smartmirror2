@@ -7,7 +7,7 @@ import logging
 
 class Ticker(Canvas):
 
-    def __init__(self, window, relx=0.05, rely=0.9, width=0.85, height=0.05, anchor='w', fps=125):
+    def __init__(self, window, relx=0.0, rely=0.93, width=0.97, height=0.05, anchor='w', fps=125):
         # Special news ticker for April's Fool day.
         self.april_fools_news = 'Владимир Путин выступил на Генеральной ассамблее ООН в костюме Деда Мороза.   ***   Дмитрий Медведев в ходе своего визита на Дальний восток заявил о невозможности разблокировки своего айфона.   ***  Укробандеровские собакофашисты вновь нарушили перемирие на Донбасе, коварно атаковав позиции отважных ополченцев.   ***    В ходе военных учений в Калининградской области российские войска уничтожили двести танков и триста самолетов противника. Условного.   ***   Президент России заявил о двухкратном снижении темпов прироста скорости падения российской экономики.   ***   Согласно опроса ФГЛПРФ ЗД более половины респондентов заявили о беззаговорочной поддержке курса Президента. Кормильца нашего, храни его Бог, благослави все дела его праведные.   ***   Виталий Мутко во время встречи со студентами МГУ признался, что только искренняя любовь к Отчизне заставляет его оставаться на своём посту.   ***   Глава МИД России Сергей Лавров считает овец перед сном.   ***   "Патриотизм и любовь к Родине обязаны быть в сердце каждого россиянина", - заявил Игорь Сечин на встрече с гостями и журналистами на борту своей яхты в Монте-Карло.   ***   Патриарх Московский и Всея Руси Кирилл считает, что российскому обществу следует отказаться от чрезмерной роскоши. В пользу РПЦ.'
         self.news_string = '   *** Загрузка новостей ***   '
@@ -56,16 +56,15 @@ class Ticker(Canvas):
             tags=("text",)
         )
         (x0, y0, x1, y1) = self.bbox("text")
-        print(x0, y0, x1, y1)
-        #width = (x1 - x0)
-        #height = (y1 - y0)
-        self.configure(width=self.target_width, height=self.target_height)
+        self.configure(width=self.target_width - 3, height=self.target_height - 3)
         self.place(relx=self.relx, rely=self.rely)
         self.logger.debug('An instance of Ticker widget has been created.')
         self.get_font_size()
         self.animate()
 
     def get_font_size(self):
+        """ The method decreases the font size until it satisfies the target
+            width and height of the widget."""
         self.itemconfig(self.text_id, text=self.april_fools_news)
         while self.font_size > 12:
             self.itemconfig(self.text_id, font=("SFUIText", self.font_size, "bold"))
@@ -77,6 +76,10 @@ class Ticker(Canvas):
                 self.font_size -= 1
             else:
                 self.itemconfig(self.text_id, text=self.news_string)
+                self.logger.debug(f'Target widget width {self.target_width}')
+                self.logger.debug(f'Real widget width {self.winfo_width()}')
+                self.logger.debug(f'Target widget height {self.target_height}')
+                self.logger.debug(f'Real widget height {self.winfo_height()}')
                 break
             self.update()
 
@@ -85,7 +88,6 @@ class Ticker(Canvas):
             self.after_id = self.after(2000, self.animate)
         else:
             (x0, y0, x1, y1) = self.bbox("text")
-            #print(x0, y0, x1, y1)
 
             # The text is off the screen. Resetting the x while also getting the news from newsruBot.
             if x1 < 0 or y1 < 0:
@@ -108,13 +110,32 @@ class Ticker(Canvas):
                 self.move("text", -1, 0)
                 self.after_id = self.after(int(1000/self.fps), self.animate)
 
+    def widget_update(self, *args):
+        self.relx = args[0]
+        self.rely = args[1]
+        self.place(relx=self.relx, rely=self.rely)
+        width = args[2]
+        height = args[3]
+        self.anchor = args[4]
+        self.target_width = int(width * self.window_width)
+        self.target_height = int(height * self.window_height)
+        self.configure(width=self.target_width - 3, height=self.target_height - 3)
+        self.font_size = 150
+        self.get_font_size()
+
 if __name__ == '__main__':
     window = Tk()
     window.title('Main Window')
     window.configure(bg='black')
-    #window.overrideredirect(True)
+    window.overrideredirect(True)
     w, h = window.winfo_screenwidth(), window.winfo_screenheight()
     window.geometry("%dx%d+0+0" % (w, h))
     m = Ticker(window)
     m.news_string = m.april_fools_news
     window.mainloop()
+
+__version__ = '0.96' # 10th September 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"    
+__status__ = "Development"

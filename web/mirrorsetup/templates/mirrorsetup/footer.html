@@ -1,10 +1,10 @@
 <div class="site-footer">
-    <div class="footer-copyright text-center py-3">
+    <div class="footer-copyright text-center py-3" id="footer">
         {% now "Y" as current_year %}
         {% if current_year == "2020" %}
-            kdablog.ru © 2020 <a href="">Дмитрий Кудряшов</a>
+            <a href="https://kdablog.ru">SmartCrafts</a> © 2020
         {% else %}
-            kdablog.ru © 2020—{{ current_year }} <a href="">Дмитрий Кудряшов</a>
+            <a href="https://kdablog.ru">SmartCrafts</a> © 2020—{{ current_year }}
         {% endif %}
     </div>
 </div>

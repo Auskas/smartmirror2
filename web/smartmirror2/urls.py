@@ -22,9 +22,11 @@ from mirrorsetup import views as setup_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mirrorsetup.urls')),
+    path('home/', setup_views.home, name='home'),
     path('setup/', setup_views.setup, name='setup'),
     path('setup/apply/', setup_views.apply, name='apply'),
     path('setup/cancel/', setup_views.setup, name='cancel'),
+    path('setup/widget-settings/', setup_views.widget_settings, name='widget_settings'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
