@@ -65,7 +65,7 @@ function changeAnchorStatus() {
 
 function applyChanges() {
     parentWidget.setAttribute('show', widget.getAttribute('show'));
-    parentWidget.setAttribute('anchor', widget.getAttribute('anchor'));
+    console.log('FAOJOJFOFJOIFOIF')
     window.opener.setWidgetsSizes();
-    window.close();
+    //window.close();
 }

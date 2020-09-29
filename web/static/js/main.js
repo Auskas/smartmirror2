@@ -7,10 +7,13 @@ var windowWidth, windowHeight;
 var areaWidth, areaHeight;
 var navbarHeight; // height of the navbar located at the top of the page
 var borderSize = 5; // width of the border of the setupfield
-var widgetsListCount = 0;
+var widgetsListCount;
+var initialization = true;
 const csrftoken = getCookie('csrftoken');
 
 function setWidgetsSizes() {
+  widgetsListCount = 0;
+
   windowWidth = window.innerWidth;
   windowHeight = window.innerHeight; 
 
@@ -34,7 +37,9 @@ function setWidgetsSizes() {
   let widgetsNode = document.querySelectorAll('[id^="widget-"]');
     for (widgetNode of widgetsNode) {
       let element = document.getElementById(widgetNode.id);
-      widgets.push(element.id)
+      if (initialization) {
+        widgets.push(element.id)
+      }
       if (widgetNode.getAttribute("show") == "True") {
         element.style.left = setupfield.offsetLeft + areaWidth * parseFloat(element.getAttribute("relx").replace(',', '.')) / 100 + "px"
         element.style.top = navbarHeight + areaHeight * parseFloat(element.getAttribute("rely").replace(',', '.')) / 100 + "px"
@@ -44,12 +49,14 @@ function setWidgetsSizes() {
       else {
         element.className = "widget-not-shown"
         element.style.left = setupfield.offsetLeft + setupfield.offsetWidth + "px";
-        element.style.top = navbarHeight + 50 + widgetsListCount * 50 + "px"
-        document.getElementById("widgetsList").appendChild(element);
+        element.style.top = navbarHeight + 50 + widgetsListCount * 50 + "px";
+        element.style.width = widgetsList.getBoundingClientRect().width - borderSize * 2 + "px";
+        element.style.height = 30 + "px"
+        //document.getElementById("widgetsList").appendChild(element);
         widgetsListCount += 1;
-
       }
     }
+    initialization = false;
   addListeners(); 
 }
 
@@ -73,7 +80,7 @@ function mouseUp(e) {
         e.clientY  < windowHeight) {
       if (div.className == "widget-not-shown") {
         div.className = "widget";
-        div.style.left = 0 + setupfield.offsetLeft + areaWidth * parseFloat(div.getAttribute("relx").replace(',', '.')) / 100 + "px"
+        div.style.left = setupfield.offsetLeft + areaWidth * parseFloat(div.getAttribute("relx").replace(',', '.')) / 100 + "px"
         div.style.top = 0 + navbarHeight + areaHeight * parseFloat(div.getAttribute("rely").replace(',', '.')) / 100 + "px"
         div.style.height = areaHeight * parseFloat(div.getAttribute("height").replace(',', '.')) / 100 + "px"
         div.style.width = areaWidth * parseFloat(div.getAttribute("width").replace(',', '.')) / 100 + "px"
@@ -88,10 +95,10 @@ function mouseUp(e) {
         e.clientY < windowHeight) {
       if (div.className == "widget") {
         div.className = "widget-not-shown";  
-        div.style.left = 0 + setupfield.offsetLeft + setupfield.offsetWidth + "px";
-        div.style.top = navbarHeight + 0 + 50 + widgetsListCount * 50 + "px"
-        div.style.height = 0 + "px";
-        div.style.width = widgetsList.offsetWidth - 0 * 5 + "px";       
+        div.style.left = setupfield.offsetLeft + setupfield.offsetWidth + "px";
+        div.style.top = navbarHeight + 50 + widgetsListCount * 50 + "px";
+        div.style.width = widgetsList.getBoundingClientRect().width - borderSize * 2 + "px";
+        div.style.height = 30 + "px"       
         div.setAttribute("show", "False")
         widgetsListCount += 1;  
       }
@@ -254,4 +261,15 @@ function resizeDiv(id) {
     window.removeEventListener('mousemove', resize);
     window.removeEventListener('mouseup', stopResize)
   }
+}
+
+function openSettingsWindow(widgetName) {  
+    let settingsWindowWidth = windowWidth * 0.5
+    let settingsWindowHeight = windowHeight * 0.5
+    let settingsWindow = window.open(
+      "widget-settings?widget=" + widgetName, 
+      "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes",
+      "width=1024,height=576"
+      )
+    //settingsWindow.console.log('This window has been opened!')
 }

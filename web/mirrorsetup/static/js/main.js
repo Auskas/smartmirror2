@@ -181,17 +181,24 @@ function formResponse() {
   let response = {};
   for (widget of widgets) {
     let elem = document.getElementById(widget);
+    let relx;
+    let rely;
+    let anchor = elem.getAttribute('anchor');
     let temp;
     if (elem.getAttribute("show") == "True") {
-      let relx = ((parseFloat(elem.style.left) - setupfield.offsetLeft) / parseFloat(areaWidth) * 100).toPrecision(10)
-      let rely = ((parseFloat(elem.style.top) - navbarHeight) / parseFloat(areaHeight) * 100).toPrecision(10)
+      relx = ((parseFloat(elem.style.left) - setupfield.offsetLeft) / parseFloat(areaWidth) * 100).toPrecision(10)
+      rely = ((parseFloat(elem.style.top) - navbarHeight) / parseFloat(areaHeight) * 100).toPrecision(10)
       let width = (parseFloat(elem.style.width) / parseFloat(areaWidth)* 100).toPrecision(10)
       let height = (parseFloat(elem.style.height) / parseFloat(areaHeight) * 100).toPrecision(10)
+      if (anchor == "e") {
+        relx += width;
+      }
       temp = {
         "relx": relx,
         "rely": rely,
         "width": width,
         "height": height,
+        "anchor": anchor,
         "show": true
       };
     }
@@ -269,6 +276,7 @@ function openSettingsWindow(widgetName) {
     let settingsWindow = window.open(
       "widget-settings?widget=" + widgetName, 
       "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes",
-      "width=500",
-      "height=500")
+      "width=1024,height=576"
+      )
+    //settingsWindow.console.log('This window has been opened!')
 }

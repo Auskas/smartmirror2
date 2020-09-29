@@ -8,7 +8,7 @@ import os
 
 class Covid:
 
-    def __init__(self, window, relx=0.62, rely=0.03, width=0.36, height=0.09, anchor='ne'):
+    def __init__(self, window, relx=0.62, rely=0.03, width=0.36, height=0.09, anchor='w'):
         self.logger = logging.getLogger('SM.covid')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
