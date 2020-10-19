@@ -28,7 +28,7 @@ class VoiceAssistant():
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
-        self.logger.critical(f'{relx}, {rely}, {width}, {height}, {anchor}')
+        #self.logger.critical(f'{relx}, {rely}, {width}, {height}, {anchor}')
         self.window = window
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()

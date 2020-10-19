@@ -38,6 +38,8 @@ class Stocks:
             fg='lightblue', bg='black', 
             font=("SFUIText", self.font_size, "bold")
         )
+        if self.anchor == 'e':
+            self.relx += width
         self.stocks_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
         
         self.show = True
@@ -75,7 +77,11 @@ class Stocks:
         
     def status(self):
         if self.show:
-            self.stocks_label.place(relx=self.relx, rely=self.rely)
+            self.stocks_label.place(
+                relx=self.relx, 
+                rely=self.rely,
+                anchor=self.anchor
+            )
             self.widget()
         else:
             self.stocks_label.place_forget()
@@ -87,10 +93,17 @@ class Stocks:
         width = args[2]
         height = args[3]
         self.anchor = args[4]
+        if self.anchor == 'e':
+            self.relx += width
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.font_size = 100
         self.get_font_size()
+        self.stocks_label.place(
+            relx=self.relx, 
+            rely=self.rely,
+            anchor=self.anchor
+        )
 
 if __name__ == '__main__':
     try:

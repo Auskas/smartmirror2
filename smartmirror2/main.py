@@ -36,7 +36,7 @@ class Mirror():
         logFileHandler.setLevel(logging.DEBUG)
 
         logConsole = logging.StreamHandler()
-        logConsole.setLevel(logging.INFO)
+        logConsole.setLevel(logging.DEBUG)
 
         formatterFile = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         formatterConsole = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
@@ -242,6 +242,7 @@ class Mirror():
                         self.WIDGETS_CONFIG[widget_name]['width'] = float(widgets[widget]['width'])
                         self.WIDGETS_CONFIG[widget_name]['height'] = float(widgets[widget]['height'])
                         self.WIDGETS_CONFIG[widget_name]['show'] = widgets[widget]['show']
+                        self.WIDGETS_CONFIG[widget_name]['anchor'] = widgets[widget]['anchor']
                 self.update_widgets = True
                 with open(f'{self.HOME_DIR}{os.sep}widgets.json', 'w', encoding='utf-8') as widgets_config_file:
                     json.dump(self.WIDGETS_CONFIG, widgets_config_file, indent=2)

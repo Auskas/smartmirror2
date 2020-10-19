@@ -29,7 +29,11 @@ class Clock:
         self.anchor = anchor
 
         self.font_size = 150
-        self.timeLbl = Label(window, text='00:00:00', fg='lightblue', bg='black', font=("SFUIText", self.font_size, "bold"))
+        self.timeLbl = Label(window, text='00:00:00', fg='lightblue', bg='white', font=("SFUIText", self.font_size, "bold"))
+        
+        if self.anchor == 'e':
+            self.relx += width
+
         self.timeLbl.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
         self.timeLbl.update()
         self.time_label_width = self.timeLbl.winfo_width()
@@ -76,7 +80,7 @@ class Clock:
         
     def status(self):
         if self.show:
-            self.timeLbl.place(relx=self.relx, rely=self.rely)
+            self.timeLbl.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.widget()
         else:
             self.timeLbl.place_forget()
@@ -88,10 +92,13 @@ class Clock:
         width = args[2]
         height = args[3]
         self.anchor = args[4]
+        if self.anchor == 'e':
+            self.relx += width
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.font_size = 150
         self.get_font_size()
+        self.timeLbl.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
 
 if __name__ == '__main__':
     try:

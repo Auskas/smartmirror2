@@ -5,9 +5,7 @@ var showText;
 var anchorCheckbox;
 var anchorText;
 console.log('Settings window')
-window.onload = getElements;
-
-function getElements () {
+document.addEventListener("DOMContentLoaded", function(event) {
     const widgetName = document.getElementById("widget-name").getAttribute("name")
     parentWidget = window.opener.document.getElementById('widget-' + widgetName)
     widget = parentWidget.cloneNode(true);
@@ -17,7 +15,7 @@ function getElements () {
     showCheckbox = document.getElementById('showCheckbox');
     showText = document.getElementById('showText')
 
-    let anchorStatus = widget.getAttribute('widget')
+    let anchorStatus = widget.getAttribute('anchor')
     anchorCheckbox = document.getElementById('anchorCheckbox');
     anchorText = document.getElementById('anchorText')
 
@@ -25,7 +23,7 @@ function getElements () {
         showCheckbox.checked = true;
         showText.innerHTML = "Виджет показывается"
     }
-    else if (showStatus == "False" && showCheckbox.checked == true) {
+    else if (showStatus == "False" && showCheckbox.checked == false) {
         showCheckbox.checked = false;
         showText.innerHTML = "Виджет не показывается"
     }
@@ -39,7 +37,7 @@ function getElements () {
         anchorText.innerHTML = "Выравнивание по левому краю"
     }
     $('body').removeAttr('hidden');
-}
+});
 
 function changeShowStatus() {
     if (showCheckbox.checked) {
@@ -66,6 +64,6 @@ function changeAnchorStatus() {
 function applyChanges() {
     parentWidget.setAttribute('show', widget.getAttribute('show'));
     parentWidget.setAttribute('anchor', widget.getAttribute('anchor'));
-    window.opener.setWidgetsSizes();
+    window.opener.updateShowStatus(widget.getAttribute('id'));
     window.close();
 }

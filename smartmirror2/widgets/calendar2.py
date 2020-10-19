@@ -25,6 +25,7 @@ class Calendar:
         self.window_height = window.winfo_screenheight()
 
         self.relx = relx
+        self.anchor = anchor
         self.rely = rely
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
@@ -38,7 +39,11 @@ class Calendar:
             bg='black', 
             font=("SFUIText", self.font_size, "bold")
         )
-        self.date_label.place(relx=self.relx, rely=self.rely)
+
+        if self.anchor == 'e':
+            self.relx += width
+
+        self.date_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
 
         self.date_label.update()
         self.date_label_width = self.date_label.winfo_width()
@@ -99,7 +104,7 @@ class Calendar:
 
     def status(self):
         if self.show:
-            self.date_label.place(relx=self.relx, rely=self.rely)
+            self.date_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.widget()
         else:
             self.date_label.place_forget()
@@ -111,6 +116,8 @@ class Calendar:
         width = args[2]
         height = args[3]
         self.anchor = args[4]
+        if self.anchor == 'e':
+            self.relx += width
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.font_size = 28

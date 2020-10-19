@@ -60,6 +60,26 @@ function setWidgetsSizes() {
   addListeners(); 
 }
 
+function updateShowStatus(id) {
+  let widget = document.getElementById(id)
+  console.log(widget)
+  if (widget.getAttribute('show') == "False") {
+    widget.className = "widget-not-shown"
+    widget.style.left = setupfield.offsetLeft + setupfield.offsetWidth + "px";
+    widget.style.top = navbarHeight + 50 + widgetsListCount * 50 + "px";
+    widget.style.width = widgetsList.getBoundingClientRect().width - borderSize * 2 + "px";
+    widget.style.height = 30 + "px"
+    //document.getElementById("widgetsList").appendChild(element);
+    widgetsListCount += 1;    
+  }
+  else {
+    widget.style.left = setupfield.offsetLeft + areaWidth * parseFloat(widget.getAttribute("relx").replace(',', '.')) / 100 + "px";
+    widget.style.top = navbarHeight + areaHeight * parseFloat(widget.getAttribute("rely").replace(',', '.')) / 100 + "px";
+    widget.style.height = areaHeight * parseFloat(widget.getAttribute("height").replace(',', '.')) / 100 + "px";
+    widget.style.width = areaWidth * parseFloat(widget.getAttribute("width").replace(',', '.')) / 100 + "px";
+  }
+}
+
 function addListeners() {
     //document.getElementById('widget-2').addEventListener('mousedown', mouseDown, false);
     window.addEventListener('mousedown', mouseDown, false);
@@ -86,6 +106,10 @@ function mouseUp(e) {
         div.style.width = areaWidth * parseFloat(div.getAttribute("width").replace(',', '.')) / 100 + "px"
         div.setAttribute("show", "True")
         widgetsListCount -= 1;
+      }
+      else {
+        div.setAttribute("relx", ((parseFloat(div.style.left) - setupfield.offsetLeft) / parseFloat(areaWidth) * 100).toPrecision(10));
+        div.setAttribute("rely", ((parseFloat(div.style.top) - navbarHeight) / parseFloat(areaHeight) * 100).toPrecision(10));
       }
     }
     // If an element is released inside the widgets list field.
@@ -185,14 +209,12 @@ function formResponse() {
     let rely;
     let anchor = elem.getAttribute('anchor');
     let temp;
+    // Note: toPrecision() method transforms a float value into a string.
     if (elem.getAttribute("show") == "True") {
-      relx = ((parseFloat(elem.style.left) - setupfield.offsetLeft) / parseFloat(areaWidth) * 100).toPrecision(10)
-      rely = ((parseFloat(elem.style.top) - navbarHeight) / parseFloat(areaHeight) * 100).toPrecision(10)
-      let width = (parseFloat(elem.style.width) / parseFloat(areaWidth)* 100).toPrecision(10)
-      let height = (parseFloat(elem.style.height) / parseFloat(areaHeight) * 100).toPrecision(10)
-      if (anchor == "e") {
-        relx += width;
-      }
+      relx = ((parseFloat(elem.style.left) - setupfield.offsetLeft) / parseFloat(areaWidth) * 100).toPrecision(10);
+      rely = ((parseFloat(elem.style.top) - navbarHeight) / parseFloat(areaHeight) * 100).toPrecision(10);
+      let width = (parseFloat(elem.style.width) / parseFloat(areaWidth)* 100).toPrecision(10);
+      let height = (parseFloat(elem.style.height) / parseFloat(areaHeight) * 100).toPrecision(10);
       temp = {
         "relx": relx,
         "rely": rely,
@@ -258,6 +280,14 @@ function resizeDiv(id) {
         currentWidget.offsetTop + newHeight < areaHeight + navbarHeight) {
       currentWidget.style.width = newWidth + 'px';
       currentWidget.style.height = newHeight + 'px';
+      currentWidget.setAttribute(
+        "width", 
+        (parseFloat(currentWidget.style.width) / parseFloat(areaWidth)* 100).toPrecision(10)
+      )
+      currentWidget.setAttribute(
+        "height", 
+        (parseFloat(currentWidget.style.height) / parseFloat(areaHeight) * 100).toPrecision(10)
+      )
     }
     else {
       console.log('Nope')
