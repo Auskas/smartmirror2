@@ -34,24 +34,34 @@ class Weather:
         self.window_height = window.winfo_screenheight()
         self.relx = relx
         self.rely = rely
+        self.anchor = anchor
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
 
         self.font_size = 100
         # The main frame of the widget.
         self.weather_frame = Frame(self.window, bg='black', bd=0)
-        self.weather_frame.place(relx=self.relx, rely=self.rely)
+
+        if self.anchor == 'ne':
+            self.relx += width
+        self.weather_frame.place(
+            relx=self.relx, 
+            rely=self.rely,
+            anchor=self.anchor)
 
         # The inner top frame with the name of the city.
         self.topframe_inside = Frame(self.weather_frame, bg='black', bd=0)
-        self.topframe_inside.grid(column=0, row=0, sticky='w')
+        self.topframe_inside.grid(column=0, row=0, sticky=self.anchor)
 
         # The inner bottom frame where all the weather data is displayed.
         self.bottomframe_inside = Frame(self.weather_frame, bg='black', bd=0)
-        self.bottomframe_inside.grid(column=0, row=1, sticky='w')
+        self.bottomframe_inside.grid(column=0, row=1, sticky=self.anchor)
 
         self.title_label = Label(self.topframe_inside, text="Москва", fg='lightblue', bg='black', font=("SFUIText", self.font_size, "bold"))
-        self.title_label.pack(side=LEFT)
+        if self.anchor == 'w':
+            self.title_label.pack(side=LEFT)
+        else:
+            self.title_label.pack(side=RIGHT)
 
         # The icon of the current weather taken from the self.ICONS_DIR folder.
         # It is placed the leftmost inside the inner bottom frame.
@@ -65,24 +75,29 @@ class Weather:
         # The current temperature frame placed to the right of the weather icon.
         self.degrees = Label(self.bottomframe_inside, text="-5°C", fg='lightblue', bg='black', font=("SFUIText", self.font_size, "bold"))
         self.degrees.pack(side=LEFT)
-
         # The forecast frame that is placed to the right of the current temperature frame.
         self.next_frame = Frame(self.bottomframe_inside, bg='black', bd=0)
         self.next_frame.pack(side=LEFT)
 
         # The top frame inside the forecast frame where the next period temperature is displayed.
         self.next_frame_top = Frame(self.next_frame, bg='black', bd=0)
-        self.next_frame_top.grid(column=0, row=0, sticky='w')
+        self.next_frame_top.grid(column=0, row=0, sticky=self.anchor)
 
         # The bottom frame inside the forecast frame where the second upcoming temperature period is shown.
         self.next_frame_bottom = Frame(self.next_frame, bg='black', bd=0)
-        self.next_frame_bottom.grid(column=0, row=1, sticky='w')
+        self.next_frame_bottom.grid(column=0, row=1, sticky=self.anchor)
 
         self.next_forecast = Label(self.next_frame_top, text="Днём -3°C", fg='lightblue', bg='black', font=("SFUIText", int(self.font_size / 2), "bold"))
-        self.next_forecast.pack(side = LEFT)
+        if self.anchor == 'w':
+            self.next_forecast.pack(side = LEFT)
+        else:
+            self.next_forecast.pack(side = RIGHT)
 
         self.next_next_forecast = Label(self.next_frame_bottom, text="Вечером -6°C", fg='lightblue', bg='black', font=("SFUIText", int(self.font_size / 2), "bold"))
-        self.next_next_forecast.pack(side = LEFT)
+        if self.anchor == 'w':
+            self.next_next_forecast.pack(side = LEFT)
+        else:
+            self.next_next_forecast.pack(side = RIGHT)
         
         self.show = True
 
@@ -135,7 +150,11 @@ class Weather:
 
     def status(self):
         if self.show and self.forecast_string is not None:
-            self.weather_frame.place(relx=self.relx, rely=self.rely)
+            self.weather_frame.place(
+                relx=self.relx, 
+                rely=self.rely,
+                anchor=self.anchor
+            )
             self.widget()
         else:
             self.weather_frame.place_forget()
@@ -182,10 +201,44 @@ class Weather:
         width = args[2]
         height = args[3]
         self.anchor = args[4]
+        if self.anchor == 'ne':
+            self.relx += width
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.font_size = 100
         self.get_font_size()
+        self.topframe_inside.grid(
+            column=0, 
+            row=0, 
+            sticky=self.anchor
+        )
+
+        self.bottomframe_inside.grid(
+            column=0, 
+            row=1, 
+            sticky=self.anchor
+        )
+
+        self.next_frame_top.grid(
+            column=0, 
+            row=0, 
+            sticky=self.anchor
+        )
+
+        self.next_frame_bottom.grid(
+            column=0, 
+            row=1, 
+            sticky=self.anchor
+        )
+
+        if self.anchor == 'nw':
+            self.title_label.pack(side=LEFT)
+            self.next_forecast.pack(side = LEFT)
+            self.next_next_forecast.pack(side = LEFT)
+        else:
+            self.title_label.pack(side=RIGHT)
+            self.next_forecast.pack(side = RIGHT)
+            self.next_next_forecast.pack(side = RIGHT)
 
 
 if __name__ == '__main__':

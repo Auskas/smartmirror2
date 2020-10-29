@@ -129,7 +129,7 @@ class LuaUpdater:
                 pass
 
             try:
-                os.remove(self.temp_file)
+                #os.remove(self.temp_file)
                 self.logger.debug('Temp file has been deleted.')
             except Exception as remove_error:
                 self.logger.error(f'Cannot delete the temp file: {remove_error}')

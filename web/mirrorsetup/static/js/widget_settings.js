@@ -4,9 +4,10 @@ var showCheckbox;
 var showText;
 var anchorCheckbox;
 var anchorText;
+var widgetName;
 console.log('Settings window')
 document.addEventListener("DOMContentLoaded", function(event) {
-    const widgetName = document.getElementById("widget-name").getAttribute("name")
+    widgetName = document.getElementById("widget-name").getAttribute("name")
     parentWidget = window.opener.document.getElementById('widget-' + widgetName)
     widget = parentWidget.cloneNode(true);
     document.getElementById("heading").innerHTML = widget.getAttribute("alias")
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         showText.innerHTML = "Виджет не показывается"
     }
 
-    if (anchorStatus == "e") {
+    if (anchorStatus == "ne") {
         anchorCheckbox.checked = true;
         anchorText.innerHTML = "Выравнивание по правому краю"
     }
@@ -52,11 +53,11 @@ function changeShowStatus() {
 
 function changeAnchorStatus() {
     if (anchorCheckbox.checked) {
-        widget.setAttribute("anchor", "e");
+        widget.setAttribute("anchor", "ne");
         anchorText.innerHTML = "Выравнивание по правому краю"
     }
     else {
-        widget.setAttribute("anchor", "w");
+        widget.setAttribute("anchor", "nw");
         anchorText.innerHTML = "Выравнивание по левому краю"
     }
 }
@@ -64,6 +65,11 @@ function changeAnchorStatus() {
 function applyChanges() {
     parentWidget.setAttribute('show', widget.getAttribute('show'));
     parentWidget.setAttribute('anchor', widget.getAttribute('anchor'));
+    // If it is the Youtube widget configuration window, updates the widget
+    // element of the main settings using the value of the input field.
+    if (widgetName == "youtube") {
+        parentWidget.setAttribute('defaultVideo', document.getElementById('defaultVideoField').value)
+    }
     window.opener.updateShowStatus(widget.getAttribute('id'));
     window.close();
 }

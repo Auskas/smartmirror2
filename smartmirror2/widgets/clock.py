@@ -8,7 +8,7 @@ import logging
 
 class Clock:
 
-    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='w'):
+    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw'):
         self.logger = logging.getLogger('SM.clock')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -29,9 +29,15 @@ class Clock:
         self.anchor = anchor
 
         self.font_size = 150
-        self.timeLbl = Label(window, text='00:00:00', fg='lightblue', bg='white', font=("SFUIText", self.font_size, "bold"))
+        self.timeLbl = Label(
+            window, 
+            text='00:00:00', 
+            fg='lightblue', 
+            bg='black', 
+            font=("SFUIText", self.font_size, "bold")
+        )
         
-        if self.anchor == 'e':
+        if self.anchor == 'ne':
             self.relx += width
 
         self.timeLbl.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
@@ -92,7 +98,7 @@ class Clock:
         width = args[2]
         height = args[3]
         self.anchor = args[4]
-        if self.anchor == 'e':
+        if self.anchor == 'ne':
             self.relx += width
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)

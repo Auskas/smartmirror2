@@ -174,6 +174,7 @@ function divMove(e) {
 }
 
 $("#apply").click(function () {
+  console.log("Applying!")
   $.ajax({
     type: "POST",
     url: "apply/",
@@ -233,7 +234,10 @@ function formResponse() {
         "show": false
       };
     }
-
+    // If the widget is Youtube sends the defaultVideo field as well.
+    if (elem.getAttribute("name") == "youtube") {
+      temp["defaultVideo"] = elem.getAttribute("defaultVideo");
+    }
     response[widget] = temp;
     console.log(JSON.stringify(response))
   }

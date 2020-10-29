@@ -18,7 +18,7 @@ class VoiceAssistant():
         rely=0.4, 
         width=0.4, 
         height=0.1, 
-        anchor='n'        
+        anchor='nw'        
     ):
     
         self.logger = logging.getLogger('SM.voice_assistant')
@@ -56,7 +56,7 @@ class VoiceAssistant():
             fg='lightblue', bg='black', 
             font=("SFUIText", self.font_size, "bold")
         )
-        self.message_label.grid(column=2, row=0, sticky='nw')
+        self.message_label.grid(column=2, row=0, sticky=self.anchor)
 
         self.speech_recognizer = sr.Recognizer()
 
@@ -100,6 +100,19 @@ class VoiceAssistant():
         self.show = True
         self.show_wave = False
         self.logger.info('Voice assistant has been initialized!')
+        self.voice_being_processed = False
+        self.status()
+
+    def status(self):
+        if self.show:
+            self.assistant_frame.place(
+                relx=self.relx, 
+                rely=self.rely, 
+                anchor=self.anchor
+            )
+        else:
+            self.assistant_frame.place_forget()
+        self.assistant_frame.after(1000, self.status)
 
     def show_wave_widget(self, ind=0):
         try:
@@ -110,6 +123,7 @@ class VoiceAssistant():
                 if ind == len(self.frames) - 1:
                     ind = 0
                 self.wave_label.configure(image=frame)
+                
                 self.wave_label.after(100, self.show_wave_widget, ind)
             else:
                 self.wave_label.configure(image='')
@@ -126,7 +140,8 @@ class VoiceAssistant():
         self.target_height = int(height * self.window_height)
 
 
-    def _listen(self):
+    def listen(self, queue):
+        self.voice_being_processed = True
         with sr.Microphone(sample_rate=16000, chunk_size=1024) as source:
             # Represents the minimum length of silence (in seconds) that will register as the end of a phrase (type: float).
             self.speech_recognizer.pause_threshold = 1
@@ -135,36 +150,38 @@ class VoiceAssistant():
             #self.speech_recognizer.dynamic_energy_threshold = False
             self.speech_recognizer.adjust_for_ambient_noise(source, duration=0.5)
             try:
-                self.show_wave = True
-                self.show_wave_widget()
                 audio = self.speech_recognizer.listen(source, timeout=3, phrase_time_limit=3)
                 
                 #self.message_label.config(text='CONFIG')
-                self._recognize(audio)
+                self._recognize(audio, queue)
             # Catches the exception when there is nothing said during speech recognition.
             except sr.WaitTimeoutError:
                 self.logger.debug('Timeout: no speech has been registred.')
+                self.voice_being_processed = False
+                self.show_wave = False
                 return None
             except Exception as exc:
                 self.logger.debug(f'Cannot get the mic: {exc}')
+                self.voice_being_processed = False
+                self.show_wave = False
                 return None
 
-    def _recognize(self, audio):
+    def _recognize(self, audio, queue):
         try:
             user_speech = self.speech_recognizer.recognize_google(audio, language = "en-EN").lower()
             self.logger.debug(f'User said: {user_speech}')
             self.message_label.config(text=user_speech)
             time.sleep(2)
             self.message_label.config(text='')
-            self.show_wave = False
-
-            self.cmd_handler(user_speech)
+            self.cmd_handler(user_speech, queue)
         except sr.UnknownValueError:
             self.logger.info('Cannot recognize speech...')
+            self.voice_being_processed = False
+            self.show_wave = False
             return None
 
             
-    def cmd_handler(self, cmd):
+    def cmd_handler(self, cmd, queue):
         """ Gets a string of recognized speech as cmd. 
             Checks if there are any sort of commands in it.
             Modifies self.cmd according to the detected commands."""
@@ -335,8 +352,10 @@ class VoiceAssistant():
 
         if len(self.cmd) > 0:
             self.logger.debug(f'The following phrases have been detected: {self.cmd}')
-        return cmd
-    
+        queue.put({'detected_voice_command' : self.cmd})
+        self.voice_being_processed = False
+        self.show_wave = False
+          
     def second_part_command(self, cmd):
         """ Method checks if there is a word in the voice command associated with showing or
             concealing a widget.
@@ -360,11 +379,14 @@ if __name__ == '__main__':
     window.geometry("%dx%d+0+0" % (w, h))
     HOME_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     import json
-    import threading
+    from multiprocessing import Process, Queue
     with open(f'{HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
         WIDGETS_CONFIG = json.load(widgets_config_file)
     assistant = VoiceAssistant(window, WIDGETS_CONFIG)
-    listen_thread = threading.Thread(target=assistant._listen).start()
-
+    #listen_thread = threading.Thread(target=assistant._listen).start()
+    queue = Queue()
+    assistant.show_wave = True
+    assistant.show_wave_widget()
+    assistant_process = Process(target=assistant.listen, args=(queue,)).start()
     window.mainloop()
 

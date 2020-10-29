@@ -8056,3 +8056,1733 @@
 2020-10-19 13:55:50,430 - SM.weather - DEBUG - Target widget height 76
 2020-10-19 13:55:50,430 - SM.weather - DEBUG - Real widget height 76
 2020-10-19 14:04:44,685 - SM - INFO - Closing mirror...
+2020-10-20 11:18:08,231 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:18:08,741 - SM - INFO - Main window has been created
+2020-10-20 11:18:09,061 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:18:09,415 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:18:09,415 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:18:09,415 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:18:09,415 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:18:09,416 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:18:09,439 - SM.calendar - DEBUG - Target widget width 436
+2020-10-20 11:18:09,439 - SM.calendar - DEBUG - Real widget width 421
+2020-10-20 11:18:09,439 - SM.calendar - DEBUG - Target widget height 131
+2020-10-20 11:18:09,439 - SM.calendar - DEBUG - Real widget height 40
+2020-10-20 11:18:09,440 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:18:09,952 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:18:10,049 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:18:10,460 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:18:10,479 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:18:12,263 - SM.ticker - DEBUG - Target widget width 1229
+2020-10-20 11:18:12,263 - SM.ticker - DEBUG - Real widget width 1228
+2020-10-20 11:18:12,264 - SM.ticker - DEBUG - Target widget height 38
+2020-10-20 11:18:12,264 - SM.ticker - DEBUG - Real widget height 37
+2020-10-20 11:18:12,306 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:18:13,011 - SM.weather - DEBUG - Target widget width 273
+2020-10-20 11:18:13,011 - SM.weather - DEBUG - Real widget width 225
+2020-10-20 11:18:13,011 - SM.weather - DEBUG - Target widget height 76
+2020-10-20 11:18:13,011 - SM.weather - DEBUG - Real widget height 76
+2020-10-20 11:18:13,172 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:18:13,173 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:18:13,173 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:18:14,146 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:18:14,183 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:18:14,567 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:18:14,639 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:18:14,767 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:18:15,014 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:18:15,025 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:18:15,149 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:18:15,582 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:18:17,362 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:20:01,995 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:20:02,354 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:20:02,355 - SM.clock - DEBUG - Real widget width 299
+2020-10-20 11:20:02,355 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:20:02,355 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:20:02,357 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:20:02,358 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:20:02,358 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:20:02,358 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:20:02,996 - SM.stocks - DEBUG - Target widget width 438
+2020-10-20 11:20:02,997 - SM.stocks - DEBUG - Real widget width 427
+2020-10-20 11:20:02,997 - SM.stocks - DEBUG - Target widget height 112
+2020-10-20 11:20:02,997 - SM.stocks - DEBUG - Real widget height 33
+2020-10-20 11:20:05,512 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:20:05,512 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:20:05,513 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:20:05,513 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:20:06,098 - SM.weather - DEBUG - Target widget width 360
+2020-10-20 11:20:06,098 - SM.weather - DEBUG - Real widget width 360
+2020-10-20 11:20:06,098 - SM.weather - DEBUG - Target widget height 165
+2020-10-20 11:20:06,099 - SM.weather - DEBUG - Real widget height 155
+2020-10-20 11:20:29,727 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:20:30,090 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:20:30,090 - SM.clock - DEBUG - Real widget width 308
+2020-10-20 11:20:30,090 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:20:30,090 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:20:30,091 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:20:30,091 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:20:30,091 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:20:30,092 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:20:30,750 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:20:30,751 - SM.stocks - DEBUG - Real widget width 567
+2020-10-20 11:20:30,751 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:20:30,751 - SM.stocks - DEBUG - Real widget height 43
+2020-10-20 11:20:33,515 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:20:33,515 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:20:33,515 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:20:33,515 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:20:34,123 - SM.weather - DEBUG - Target widget width 360
+2020-10-20 11:20:34,123 - SM.weather - DEBUG - Real widget width 360
+2020-10-20 11:20:34,123 - SM.weather - DEBUG - Target widget height 165
+2020-10-20 11:20:34,124 - SM.weather - DEBUG - Real widget height 155
+2020-10-20 11:21:16,199 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:21:16,581 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:21:16,582 - SM.clock - DEBUG - Real widget width 288
+2020-10-20 11:21:16,582 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:21:16,582 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:21:16,583 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:21:16,583 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:21:16,583 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:21:16,583 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:21:17,256 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:21:17,256 - SM.stocks - DEBUG - Real widget width 567
+2020-10-20 11:21:17,256 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:21:17,257 - SM.stocks - DEBUG - Real widget height 43
+2020-10-20 11:21:19,934 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:21:19,935 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:21:19,935 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:21:19,935 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:21:20,653 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:21:20,653 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:21:20,653 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:21:20,654 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:26:07,235 - SM - INFO - Closing mirror...
+2020-10-20 11:26:10,482 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:26:10,729 - SM - INFO - Main window has been created
+2020-10-20 11:26:10,943 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:26:11,195 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:26:11,195 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:26:11,195 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:26:11,196 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:26:11,196 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:26:11,209 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:26:11,209 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:26:11,210 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:26:11,210 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:26:11,210 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:26:11,664 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:26:11,798 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:26:11,799 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:26:11,799 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:26:11,799 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:26:11,800 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:26:11,853 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:26:11,873 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:26:13,535 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:26:13,535 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:26:13,535 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:26:13,535 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:26:13,554 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:26:14,164 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:26:14,164 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:26:14,164 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:26:14,165 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:26:14,306 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:26:14,306 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:26:14,306 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:26:14,648 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:26:14,652 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:26:14,888 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:26:14,979 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:26:14,980 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:26:15,040 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:26:15,097 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:26:15,365 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:26:15,496 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:26:18,026 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:26:25,820 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:26:26,239 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:26:26,239 - SM.clock - DEBUG - Real widget width 307
+2020-10-20 11:26:26,239 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:26:26,240 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:26:26,249 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:26:26,249 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:26:26,249 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:26:26,249 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:26:26,916 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:26:26,916 - SM.stocks - DEBUG - Real widget width 555
+2020-10-20 11:26:26,916 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:26:26,916 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:26:29,427 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:26:29,427 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:26:29,428 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:26:29,428 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:26:30,111 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:26:30,112 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:26:30,112 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:26:30,113 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:27:05,255 - SM - INFO - Closing mirror...
+2020-10-20 11:31:17,219 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:31:17,459 - SM - INFO - Main window has been created
+2020-10-20 11:31:17,651 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:31:17,897 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:31:17,898 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:31:17,898 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:31:17,898 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:31:17,898 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:31:17,915 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:31:17,915 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:31:17,916 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:31:17,916 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:31:17,917 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:31:18,332 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:31:18,485 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:31:18,486 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:31:18,486 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:31:18,486 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:31:18,487 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:31:18,545 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:31:18,565 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:31:20,238 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:31:20,239 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:31:20,239 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:31:20,239 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:31:20,257 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:31:20,902 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:31:20,902 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:31:20,903 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:31:20,903 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:31:21,043 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:31:21,043 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:31:21,044 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:31:21,391 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:31:21,399 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:31:21,595 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:31:21,725 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:31:21,757 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:31:21,797 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:31:21,867 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:31:22,165 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:31:22,340 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:31:24,950 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:33:34,375 - SM - INFO - Closing mirror...
+2020-10-20 11:33:36,952 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:33:37,193 - SM - INFO - Main window has been created
+2020-10-20 11:33:37,387 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:33:37,635 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:33:37,635 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:33:37,635 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:33:37,636 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:33:37,636 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:33:37,647 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:33:37,647 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:33:37,647 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:33:37,648 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:33:37,648 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:33:38,080 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:33:38,214 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:33:38,214 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:33:38,215 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:33:38,215 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:33:38,216 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:33:38,273 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:33:38,287 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:33:39,898 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:33:39,898 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:33:39,898 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:33:39,898 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:33:39,915 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:33:40,537 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:33:40,537 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:33:40,537 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:33:40,537 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:33:40,679 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:33:40,679 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:33:40,680 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:33:41,030 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:33:41,038 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:33:41,215 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:33:41,345 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:33:41,426 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:33:41,437 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:33:41,568 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:33:41,708 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:33:41,849 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:33:44,301 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:34:50,381 - SM - INFO - Closing mirror...
+2020-10-20 11:34:53,311 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:34:53,547 - SM - INFO - Main window has been created
+2020-10-20 11:34:53,761 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:34:54,006 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:34:54,007 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:34:54,007 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:34:54,007 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:34:54,007 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:34:54,019 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:34:54,019 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:34:54,019 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:34:54,019 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:34:54,020 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:34:54,447 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:34:54,580 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:34:54,581 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:34:54,581 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:34:54,581 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:34:54,582 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:34:54,642 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:34:54,655 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:34:56,282 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:34:56,283 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:34:56,283 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:34:56,283 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:34:56,300 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:34:56,906 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:34:56,907 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:34:56,907 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:34:56,907 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:34:57,045 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:34:57,045 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:34:57,045 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:34:57,391 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:34:57,399 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:34:57,563 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:34:57,722 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:34:57,793 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:34:57,797 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:34:57,922 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:34:58,074 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:34:58,273 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:35:00,695 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:37:14,890 - SM - INFO - Closing mirror...
+2020-10-20 11:37:17,879 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:37:18,129 - SM - INFO - Main window has been created
+2020-10-20 11:37:18,353 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:37:18,612 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:37:18,612 - SM.clock - DEBUG - Real widget width 334
+2020-10-20 11:37:18,613 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:37:18,613 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:37:18,613 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:37:18,624 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:37:18,625 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:37:18,625 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:37:18,625 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:37:18,625 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:37:19,031 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:37:19,182 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:37:19,182 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:37:19,183 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:37:19,183 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:37:19,184 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:37:19,241 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:37:19,254 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:37:20,910 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:37:20,910 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:37:20,911 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:37:20,911 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:37:20,928 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:37:21,532 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:37:21,532 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:37:21,532 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:37:21,532 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:37:21,669 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:37:21,669 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:37:21,670 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:37:22,017 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:37:22,026 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:37:22,178 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:37:22,413 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:37:22,624 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:37:22,911 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:37:23,039 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:37:23,085 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:37:23,245 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:37:25,873 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:37:45,699 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:37:46,100 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:37:46,100 - SM.clock - DEBUG - Real widget width 306
+2020-10-20 11:37:46,100 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:37:46,101 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:37:46,104 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:37:46,105 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:37:46,105 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:37:46,105 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:37:46,726 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:37:46,726 - SM.stocks - DEBUG - Real widget width 565
+2020-10-20 11:37:46,726 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:37:46,726 - SM.stocks - DEBUG - Real widget height 43
+2020-10-20 11:37:49,223 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:37:49,223 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:37:49,223 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:37:49,223 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:37:49,867 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:37:49,868 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:37:49,868 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:37:49,868 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:38:09,338 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:38:09,732 - SM.clock - DEBUG - Target widget width 356
+2020-10-20 11:38:09,733 - SM.clock - DEBUG - Real widget width 312
+2020-10-20 11:38:09,733 - SM.clock - DEBUG - Target widget height 89
+2020-10-20 11:38:09,733 - SM.clock - DEBUG - Real widget height 88
+2020-10-20 11:38:09,734 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:38:09,734 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:38:09,734 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:38:09,735 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:38:10,423 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:38:10,424 - SM.stocks - DEBUG - Real widget width 565
+2020-10-20 11:38:10,424 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:38:10,424 - SM.stocks - DEBUG - Real widget height 43
+2020-10-20 11:38:13,087 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:38:13,088 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:38:13,088 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:38:13,088 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:38:13,792 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:38:13,793 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:38:13,793 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:38:13,793 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:38:31,890 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:38:32,262 - SM.clock - DEBUG - Target widget width 350
+2020-10-20 11:38:32,262 - SM.clock - DEBUG - Real widget width 319
+2020-10-20 11:38:32,262 - SM.clock - DEBUG - Target widget height 92
+2020-10-20 11:38:32,262 - SM.clock - DEBUG - Real widget height 92
+2020-10-20 11:38:32,263 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:38:32,263 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:38:32,263 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:38:32,263 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:38:32,918 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:38:32,918 - SM.stocks - DEBUG - Real widget width 565
+2020-10-20 11:38:32,918 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:38:32,918 - SM.stocks - DEBUG - Real widget height 43
+2020-10-20 11:38:35,631 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:38:35,632 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:38:35,632 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:38:35,632 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:38:36,248 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:38:36,249 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:38:36,249 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:38:36,249 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:42:53,987 - SM - INFO - Closing mirror...
+2020-10-20 11:52:37,249 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:52:37,495 - SM - INFO - Main window has been created
+2020-10-20 11:52:37,690 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:52:37,929 - SM.clock - DEBUG - Target widget width 350
+2020-10-20 11:52:37,929 - SM.clock - DEBUG - Real widget width 348
+2020-10-20 11:52:37,929 - SM.clock - DEBUG - Target widget height 92
+2020-10-20 11:52:37,930 - SM.clock - DEBUG - Real widget height 91
+2020-10-20 11:52:37,930 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:52:37,944 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:52:37,945 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:52:37,945 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:52:37,945 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:52:37,946 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:52:38,406 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:52:38,547 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:52:38,548 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:52:38,548 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:52:38,548 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:52:38,549 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:52:38,603 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:52:38,622 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:52:40,288 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:52:40,288 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:52:40,289 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:52:40,289 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:52:40,307 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:52:40,919 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:52:40,919 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:52:40,919 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:52:40,920 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:52:41,057 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:55:23,846 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:55:24,079 - SM - INFO - Main window has been created
+2020-10-20 11:55:24,285 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:55:24,537 - SM.clock - DEBUG - Target widget width 350
+2020-10-20 11:55:24,538 - SM.clock - DEBUG - Real widget width 348
+2020-10-20 11:55:24,538 - SM.clock - DEBUG - Target widget height 92
+2020-10-20 11:55:24,538 - SM.clock - DEBUG - Real widget height 91
+2020-10-20 11:55:24,539 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:55:24,551 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:55:24,552 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:55:24,552 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:55:24,552 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:55:24,552 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:55:24,987 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:55:25,121 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:55:25,121 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:55:25,122 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:55:25,122 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:55:25,123 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:55:25,180 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:55:25,199 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:55:26,888 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:55:26,888 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:55:26,889 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:55:26,889 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:55:26,906 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:55:27,523 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:55:27,524 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:55:27,524 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:55:27,524 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:55:27,661 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:56:02,705 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-20 11:56:02,941 - SM - INFO - Main window has been created
+2020-10-20 11:56:03,144 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:56:03,396 - SM.clock - DEBUG - Target widget width 350
+2020-10-20 11:56:03,396 - SM.clock - DEBUG - Real widget width 348
+2020-10-20 11:56:03,396 - SM.clock - DEBUG - Target widget height 92
+2020-10-20 11:56:03,397 - SM.clock - DEBUG - Real widget height 91
+2020-10-20 11:56:03,397 - SM.clock - INFO - Clock widgets has been created.
+2020-10-20 11:56:03,413 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:56:03,413 - SM.calendar - DEBUG - Real widget width 514
+2020-10-20 11:56:03,413 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:56:03,413 - SM.calendar - DEBUG - Real widget height 48
+2020-10-20 11:56:03,414 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-20 11:56:03,844 - SM.covid - INFO - Covid widget has been created.
+2020-10-20 11:56:03,983 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:56:03,983 - SM.stocks - DEBUG - Real widget width 566
+2020-10-20 11:56:03,984 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:56:03,984 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:56:03,985 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-20 11:56:04,040 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-20 11:56:04,053 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-20 11:56:05,767 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:56:05,767 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:56:05,767 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:56:05,768 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:56:05,785 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-20 11:56:06,402 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:56:06,402 - SM.weather - DEBUG - Real widget width 348
+2020-10-20 11:56:06,402 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:56:06,402 - SM.weather - DEBUG - Real widget height 115
+2020-10-20 11:56:06,544 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-20 11:56:06,545 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-20 11:56:06,545 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-20 11:56:06,889 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-20 11:56:06,898 - SM - INFO - A camera device has been found on board.
+2020-10-20 11:56:07,092 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-20 11:56:07,269 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-20 11:56:07,300 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-20 11:56:07,375 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-20 11:56:07,465 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-20 11:56:08,991 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-20 11:56:09,186 - SM.scraper - INFO - Got the latest news.
+2020-10-20 11:56:10,464 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-20 11:56:36,678 - SM.loading - INFO - Loading widget has been created.
+2020-10-20 11:56:37,072 - SM.clock - DEBUG - Target widget width 350
+2020-10-20 11:56:37,073 - SM.clock - DEBUG - Real widget width 324
+2020-10-20 11:56:37,073 - SM.clock - DEBUG - Target widget height 92
+2020-10-20 11:56:37,073 - SM.clock - DEBUG - Real widget height 92
+2020-10-20 11:56:37,079 - SM.calendar - DEBUG - Target widget width 527
+2020-10-20 11:56:37,079 - SM.calendar - DEBUG - Real widget width 411
+2020-10-20 11:56:37,080 - SM.calendar - DEBUG - Target widget height 104
+2020-10-20 11:56:37,080 - SM.calendar - DEBUG - Real widget height 49
+2020-10-20 11:56:37,780 - SM.stocks - DEBUG - Target widget width 569
+2020-10-20 11:56:37,780 - SM.stocks - DEBUG - Real widget width 555
+2020-10-20 11:56:37,781 - SM.stocks - DEBUG - Target widget height 86
+2020-10-20 11:56:37,781 - SM.stocks - DEBUG - Real widget height 42
+2020-10-20 11:56:40,510 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-20 11:56:40,510 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-20 11:56:40,511 - SM.ticker - DEBUG - Target widget height 34
+2020-10-20 11:56:40,511 - SM.ticker - DEBUG - Real widget height 33
+2020-10-20 11:56:41,174 - SM.weather - DEBUG - Target widget width 349
+2020-10-20 11:56:41,174 - SM.weather - DEBUG - Real widget width 290
+2020-10-20 11:56:41,174 - SM.weather - DEBUG - Target widget height 126
+2020-10-20 11:56:41,174 - SM.weather - DEBUG - Real widget height 126
+2020-10-20 11:56:57,382 - SM - INFO - Closing mirror...
+2020-10-21 11:19:50,712 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-21 11:19:51,230 - SM - INFO - Main window has been created
+2020-10-21 11:19:51,659 - SM.loading - INFO - Loading widget has been created.
+2020-10-21 11:19:52,017 - SM.clock - DEBUG - Target widget width 350
+2020-10-21 11:19:52,017 - SM.clock - DEBUG - Real widget width 348
+2020-10-21 11:19:52,018 - SM.clock - DEBUG - Target widget height 92
+2020-10-21 11:19:52,018 - SM.clock - DEBUG - Real widget height 91
+2020-10-21 11:19:52,018 - SM.clock - INFO - Clock widgets has been created.
+2020-10-21 11:19:52,031 - SM.calendar - DEBUG - Target widget width 527
+2020-10-21 11:19:52,032 - SM.calendar - DEBUG - Real widget width 514
+2020-10-21 11:19:52,032 - SM.calendar - DEBUG - Target widget height 104
+2020-10-21 11:19:52,032 - SM.calendar - DEBUG - Real widget height 48
+2020-10-21 11:19:52,033 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-21 11:19:52,552 - SM.covid - INFO - Covid widget has been created.
+2020-10-21 11:19:52,687 - SM.stocks - DEBUG - Target widget width 569
+2020-10-21 11:19:52,687 - SM.stocks - DEBUG - Real widget width 566
+2020-10-21 11:19:52,687 - SM.stocks - DEBUG - Target widget height 86
+2020-10-21 11:19:52,688 - SM.stocks - DEBUG - Real widget height 42
+2020-10-21 11:19:52,688 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-21 11:19:53,131 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-21 11:19:53,151 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-21 11:19:55,000 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-21 11:19:55,001 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-21 11:19:55,001 - SM.ticker - DEBUG - Target widget height 34
+2020-10-21 11:19:55,001 - SM.ticker - DEBUG - Real widget height 33
+2020-10-21 11:19:55,041 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-21 11:19:55,654 - SM.weather - DEBUG - Target widget width 349
+2020-10-21 11:19:55,654 - SM.weather - DEBUG - Real widget width 348
+2020-10-21 11:19:55,655 - SM.weather - DEBUG - Target widget height 126
+2020-10-21 11:19:55,655 - SM.weather - DEBUG - Real widget height 115
+2020-10-21 11:19:55,803 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-21 11:19:55,803 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-21 11:19:55,804 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-21 11:19:56,708 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-21 11:19:56,732 - SM - INFO - A camera device has been found on board.
+2020-10-21 11:19:57,094 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-21 11:19:57,222 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-21 11:19:57,282 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-21 11:19:57,609 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-21 11:19:57,677 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-21 11:19:57,849 - SM.scraper - INFO - Got the latest news.
+2020-10-21 11:19:58,174 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-21 11:19:59,839 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-21 11:28:04,202 - SM - INFO - Closing mirror...
+2020-10-28 16:26:28,983 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-28 16:26:29,694 - SM - INFO - Main window has been created
+2020-10-28 16:26:30,056 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 16:26:30,473 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 16:26:30,473 - SM.clock - DEBUG - Real widget width 348
+2020-10-28 16:26:30,474 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 16:26:30,474 - SM.clock - DEBUG - Real widget height 91
+2020-10-28 16:26:30,474 - SM.clock - INFO - Clock widgets has been created.
+2020-10-28 16:26:30,485 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 16:26:30,485 - SM.calendar - DEBUG - Real widget width 514
+2020-10-28 16:26:30,486 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 16:26:30,486 - SM.calendar - DEBUG - Real widget height 48
+2020-10-28 16:26:30,486 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-28 16:26:30,978 - SM.covid - INFO - Covid widget has been created.
+2020-10-28 16:26:31,120 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 16:26:31,121 - SM.stocks - DEBUG - Real widget width 566
+2020-10-28 16:26:31,121 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 16:26:31,122 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 16:26:31,122 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-28 16:26:31,724 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-28 16:26:31,743 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-28 16:26:33,539 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-28 16:26:33,540 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-28 16:26:33,540 - SM.ticker - DEBUG - Target widget height 34
+2020-10-28 16:26:33,540 - SM.ticker - DEBUG - Real widget height 33
+2020-10-28 16:26:33,581 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-28 16:26:34,236 - SM.weather - DEBUG - Target widget width 349
+2020-10-28 16:26:34,236 - SM.weather - DEBUG - Real widget width 348
+2020-10-28 16:26:34,236 - SM.weather - DEBUG - Target widget height 126
+2020-10-28 16:26:34,237 - SM.weather - DEBUG - Real widget height 115
+2020-10-28 16:26:34,461 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-28 16:26:34,461 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-28 16:26:34,461 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-28 16:26:35,478 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-28 16:26:35,510 - SM - INFO - A camera device has been found on board.
+2020-10-28 16:26:36,185 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-28 16:26:36,360 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-28 16:26:36,511 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-28 16:26:36,634 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-28 16:26:36,741 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-28 16:26:36,771 - SM.scraper - INFO - Got the latest news.
+2020-10-28 16:26:37,173 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-28 16:26:38,989 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-28 16:28:34,004 - SM - INFO - Closing mirror...
+2020-10-28 17:12:41,728 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-28 17:12:41,967 - SM - INFO - Main window has been created
+2020-10-28 17:12:42,177 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 17:12:42,427 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 17:12:42,427 - SM.clock - DEBUG - Real widget width 348
+2020-10-28 17:12:42,427 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 17:12:42,428 - SM.clock - DEBUG - Real widget height 91
+2020-10-28 17:12:42,428 - SM.clock - INFO - Clock widgets has been created.
+2020-10-28 17:12:42,442 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 17:12:42,443 - SM.calendar - DEBUG - Real widget width 514
+2020-10-28 17:12:42,443 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 17:12:42,443 - SM.calendar - DEBUG - Real widget height 48
+2020-10-28 17:12:42,443 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-28 17:12:42,869 - SM.covid - INFO - Covid widget has been created.
+2020-10-28 17:12:42,998 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 17:12:42,998 - SM.stocks - DEBUG - Real widget width 566
+2020-10-28 17:12:42,998 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 17:12:42,999 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 17:12:42,999 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-28 17:13:47,197 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-28 17:13:47,426 - SM - INFO - Main window has been created
+2020-10-28 17:13:47,610 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 17:13:47,846 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 17:13:47,847 - SM.clock - DEBUG - Real widget width 348
+2020-10-28 17:13:47,847 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 17:13:47,847 - SM.clock - DEBUG - Real widget height 91
+2020-10-28 17:13:47,848 - SM.clock - INFO - Clock widgets has been created.
+2020-10-28 17:13:47,857 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 17:13:47,857 - SM.calendar - DEBUG - Real widget width 514
+2020-10-28 17:13:47,857 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 17:13:47,858 - SM.calendar - DEBUG - Real widget height 48
+2020-10-28 17:13:47,858 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-28 17:13:48,276 - SM.covid - INFO - Covid widget has been created.
+2020-10-28 17:13:48,426 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 17:13:48,426 - SM.stocks - DEBUG - Real widget width 566
+2020-10-28 17:13:48,427 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 17:13:48,427 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 17:13:48,428 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-28 17:14:30,999 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-28 17:14:31,242 - SM - INFO - Main window has been created
+2020-10-28 17:14:31,458 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 17:14:31,707 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 17:14:31,708 - SM.clock - DEBUG - Real widget width 348
+2020-10-28 17:14:31,708 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 17:14:31,709 - SM.clock - DEBUG - Real widget height 91
+2020-10-28 17:14:31,709 - SM.clock - INFO - Clock widgets has been created.
+2020-10-28 17:14:31,720 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 17:14:31,720 - SM.calendar - DEBUG - Real widget width 514
+2020-10-28 17:14:31,721 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 17:14:31,721 - SM.calendar - DEBUG - Real widget height 48
+2020-10-28 17:14:31,721 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-28 17:14:32,162 - SM.covid - INFO - Covid widget has been created.
+2020-10-28 17:14:32,307 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 17:14:32,307 - SM.stocks - DEBUG - Real widget width 566
+2020-10-28 17:14:32,307 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 17:14:32,308 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 17:14:32,308 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-28 17:14:32,361 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-28 17:14:32,380 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-28 17:14:34,032 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-28 17:14:34,032 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-28 17:14:34,033 - SM.ticker - DEBUG - Target widget height 34
+2020-10-28 17:14:34,033 - SM.ticker - DEBUG - Real widget height 33
+2020-10-28 17:14:34,049 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-28 17:14:34,657 - SM.weather - DEBUG - Target widget width 349
+2020-10-28 17:14:34,657 - SM.weather - DEBUG - Real widget width 348
+2020-10-28 17:14:34,658 - SM.weather - DEBUG - Target widget height 126
+2020-10-28 17:14:34,658 - SM.weather - DEBUG - Real widget height 115
+2020-10-28 17:14:34,799 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-28 17:14:34,799 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-28 17:14:34,799 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-28 17:14:35,147 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-28 17:14:35,154 - SM - INFO - A camera device has been found on board.
+2020-10-28 17:14:35,457 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-28 17:14:35,516 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-28 17:14:35,536 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-28 17:14:35,638 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-28 17:14:35,776 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-28 17:14:35,812 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-28 17:14:35,967 - SM.scraper - INFO - Got the latest news.
+2020-10-28 17:14:38,995 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-28 17:17:43,906 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 17:17:44,312 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 17:17:44,313 - SM.clock - DEBUG - Real widget width 320
+2020-10-28 17:17:44,313 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 17:17:44,313 - SM.clock - DEBUG - Real widget height 92
+2020-10-28 17:17:44,317 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 17:17:44,317 - SM.calendar - DEBUG - Real widget width 370
+2020-10-28 17:17:44,317 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 17:17:44,317 - SM.calendar - DEBUG - Real widget height 49
+2020-10-28 17:17:44,932 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 17:17:44,932 - SM.stocks - DEBUG - Real widget width 560
+2020-10-28 17:17:44,932 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 17:17:44,932 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 17:17:47,589 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-28 17:17:47,589 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-28 17:17:47,590 - SM.ticker - DEBUG - Target widget height 34
+2020-10-28 17:17:47,590 - SM.ticker - DEBUG - Real widget height 33
+2020-10-28 17:17:48,271 - SM.weather - DEBUG - Target widget width 349
+2020-10-28 17:17:48,272 - SM.weather - DEBUG - Real widget width 299
+2020-10-28 17:17:48,272 - SM.weather - DEBUG - Target widget height 126
+2020-10-28 17:17:48,272 - SM.weather - DEBUG - Real widget height 126
+2020-10-28 17:18:00,220 - SM.loading - INFO - Loading widget has been created.
+2020-10-28 17:18:00,627 - SM.clock - DEBUG - Target widget width 350
+2020-10-28 17:18:00,628 - SM.clock - DEBUG - Real widget width 327
+2020-10-28 17:18:00,628 - SM.clock - DEBUG - Target widget height 92
+2020-10-28 17:18:00,628 - SM.clock - DEBUG - Real widget height 92
+2020-10-28 17:18:00,629 - SM.calendar - DEBUG - Target widget width 527
+2020-10-28 17:18:00,629 - SM.calendar - DEBUG - Real widget width 370
+2020-10-28 17:18:00,629 - SM.calendar - DEBUG - Target widget height 104
+2020-10-28 17:18:00,629 - SM.calendar - DEBUG - Real widget height 49
+2020-10-28 17:18:01,343 - SM.stocks - DEBUG - Target widget width 569
+2020-10-28 17:18:01,343 - SM.stocks - DEBUG - Real widget width 560
+2020-10-28 17:18:01,343 - SM.stocks - DEBUG - Target widget height 86
+2020-10-28 17:18:01,343 - SM.stocks - DEBUG - Real widget height 42
+2020-10-28 17:18:04,219 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-28 17:18:04,220 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-28 17:18:04,220 - SM.ticker - DEBUG - Target widget height 34
+2020-10-28 17:18:04,220 - SM.ticker - DEBUG - Real widget height 33
+2020-10-28 17:18:04,980 - SM.weather - DEBUG - Target widget width 349
+2020-10-28 17:18:04,981 - SM.weather - DEBUG - Real widget width 299
+2020-10-28 17:18:04,981 - SM.weather - DEBUG - Target widget height 126
+2020-10-28 17:18:04,981 - SM.weather - DEBUG - Real widget height 126
+2020-10-28 17:27:46,028 - SM - INFO - Closing mirror...
+2020-10-29 11:39:32,343 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 11:39:32,651 - SM - INFO - Main window has been created
+2020-10-29 11:39:33,029 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 11:39:33,353 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 11:39:33,353 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 11:39:33,354 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 11:39:33,354 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 11:39:33,354 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 11:39:33,364 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 11:39:33,364 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 11:39:33,364 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 11:39:33,365 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 11:39:33,365 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 11:39:33,892 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 11:39:34,030 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 11:39:34,030 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 11:39:34,030 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 11:39:34,031 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 11:39:34,031 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 11:39:34,101 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 11:39:34,123 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 11:39:36,097 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 11:39:36,098 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 11:39:36,098 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 11:39:36,098 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 11:39:36,139 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 11:39:36,748 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 11:39:36,748 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 11:39:36,749 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 11:39:36,749 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 11:39:36,901 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 11:39:36,902 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 11:39:36,902 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 11:39:37,416 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 11:39:37,420 - SM - INFO - A camera device has been found on board.
+2020-10-29 11:39:37,421 - SM.youtube - DEBUG - Youtube URL searching for Corey Schafer Django 2...
+2020-10-29 11:39:37,741 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 11:39:37,893 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Corey+Schafer+Django+2 loaded
+2020-10-29 11:39:37,967 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 11:39:38,243 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 11:39:38,282 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 11:39:38,315 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 11:39:38,378 - SM.scraper - INFO - Got the latest news.
+2020-10-29 11:39:38,422 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=a48xeeo5Vnk
+2020-10-29 11:39:38,668 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 11:40:22,675 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 11:40:22,919 - SM - INFO - Main window has been created
+2020-10-29 11:40:23,124 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 11:40:23,377 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 11:40:23,378 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 11:40:23,378 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 11:40:23,378 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 11:40:23,378 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 11:40:23,391 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 11:40:23,391 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 11:40:23,391 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 11:40:23,392 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 11:40:23,392 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 11:40:23,798 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 11:40:23,931 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 11:40:23,931 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 11:40:23,931 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 11:40:23,932 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 11:40:23,932 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 11:40:23,991 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 11:40:24,011 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 11:40:25,961 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 11:40:25,961 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 11:40:25,962 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 11:40:25,962 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 11:40:25,978 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 11:40:26,597 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 11:40:26,597 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 11:40:26,597 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 11:40:26,598 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 11:40:26,740 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 11:40:26,740 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 11:40:26,740 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 11:40:27,088 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 11:40:27,098 - SM - INFO - A camera device has been found on board.
+2020-10-29 11:40:27,101 - SM.youtube - DEBUG - Youtube URL searching for Corey Schafer Django 2...
+2020-10-29 11:40:27,287 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 11:40:27,465 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 11:40:27,471 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Corey+Schafer+Django+2 loaded
+2020-10-29 11:40:27,507 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 11:40:27,527 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 11:40:27,648 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 11:40:27,777 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 11:40:27,901 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 11:40:27,933 - SM.scraper - INFO - Got the latest news.
+2020-10-29 11:40:28,101 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=a48xeeo5Vnk
+2020-10-29 11:40:30,481 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 11:47:34,123 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 11:47:34,700 - SM - INFO - Main window has been created
+2020-10-29 11:47:35,067 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 11:47:35,453 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 11:47:35,454 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 11:47:35,454 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 11:47:35,454 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 11:47:35,455 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 11:47:35,464 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 11:47:35,465 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 11:47:35,465 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 11:47:35,465 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 11:47:35,465 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 11:47:35,954 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 11:47:36,103 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 11:47:36,103 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 11:47:36,103 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 11:47:36,104 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 11:47:36,104 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 11:47:36,534 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 11:47:36,553 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 11:47:38,187 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 11:47:38,187 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 11:47:38,188 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 11:47:38,188 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 11:47:38,247 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 11:47:38,846 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 11:47:38,847 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 11:47:38,847 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 11:47:38,847 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 11:47:38,996 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 11:47:39,016 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 11:47:39,017 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 11:47:39,563 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 11:47:39,582 - SM - INFO - A camera device has been found on board.
+2020-10-29 11:47:39,586 - SM.youtube - DEBUG - Youtube URL searching for Corey Schafer Django 2...
+2020-10-29 11:47:39,998 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 11:47:40,084 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Corey+Schafer+Django+2 loaded
+2020-10-29 11:47:40,146 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 11:47:40,401 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 11:47:40,440 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 11:47:40,450 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 11:47:40,587 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=a48xeeo5Vnk
+2020-10-29 11:47:40,590 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 11:47:41,234 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 11:47:41,590 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 11:47:41,723 - SM.scraper - INFO - Got the latest news.
+2020-10-29 11:47:42,941 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 11:49:05,312 - SM - INFO - Closing mirror...
+2020-10-29 11:57:49,938 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 11:57:50,178 - SM - INFO - Main window has been created
+2020-10-29 11:57:50,375 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 11:57:50,611 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 11:57:50,611 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 11:57:50,612 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 11:57:50,612 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 11:57:50,612 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 11:57:50,622 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 11:57:50,622 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 11:57:50,622 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 11:57:50,623 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 11:57:50,623 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 11:57:51,013 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 11:57:51,160 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 11:57:51,160 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 11:57:51,160 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 11:57:51,160 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 11:57:51,161 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 11:57:51,222 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 11:57:51,235 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 11:57:52,813 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 11:57:52,813 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 11:57:52,813 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 11:57:52,814 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 11:57:52,831 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 11:57:53,432 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 11:57:53,432 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 11:57:53,432 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 11:57:53,432 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 11:57:53,568 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 11:57:53,569 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 11:57:53,569 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 11:57:53,925 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 11:57:53,934 - SM - INFO - A camera device has been found on board.
+2020-10-29 11:57:53,936 - SM.youtube - DEBUG - Youtube URL searching for Corey Schafer Django 2...
+2020-10-29 11:57:54,115 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 11:57:54,255 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 11:57:54,260 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Corey+Schafer+Django+2 loaded
+2020-10-29 11:57:54,312 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 11:57:54,335 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 11:57:54,425 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 11:57:54,680 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 11:57:54,750 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 11:57:54,871 - SM.scraper - INFO - Got the latest news.
+2020-10-29 11:57:54,937 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=a48xeeo5Vnk
+2020-10-29 11:57:54,939 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 11:57:57,529 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:00:54,421 - SM - INFO - Closing mirror...
+2020-10-29 12:00:57,543 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:00:57,780 - SM - INFO - Main window has been created
+2020-10-29 12:00:57,976 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:00:58,220 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:00:58,220 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:00:58,220 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:00:58,221 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:00:58,221 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:00:58,234 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:00:58,234 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:00:58,234 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:00:58,235 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:00:58,235 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:00:58,656 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:00:58,800 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:00:58,800 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:00:58,801 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:00:58,801 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:00:58,802 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:00:58,856 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:00:58,868 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:01:00,564 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:01:00,564 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:01:00,565 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:01:00,565 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:01:00,582 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:01:01,191 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:01:01,191 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:01:01,191 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:01:01,192 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:01:01,331 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:01:01,331 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:01:01,331 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:01:01,674 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:01:01,680 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:01:01,681 - SM.youtube - DEBUG - Youtube URL searching for Manowar...
+2020-10-29 12:01:01,888 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:01:01,981 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Manowar loaded
+2020-10-29 12:01:02,036 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:01:02,079 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:01:02,138 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:01:02,251 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:01:02,362 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:01:02,478 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:01:02,547 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:01:02,683 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=IaXzcTrY0Vg
+2020-10-29 12:01:02,684 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:01:05,339 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:01:14,307 - SM - INFO - Closing mirror...
+2020-10-29 12:02:05,674 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:02:05,915 - SM - INFO - Main window has been created
+2020-10-29 12:02:06,129 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:02:06,382 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:02:06,382 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:02:06,382 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:02:06,383 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:02:06,383 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:02:06,395 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:02:06,396 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:02:06,396 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:02:06,396 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:02:06,397 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:02:06,843 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:02:06,978 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:02:06,978 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:02:06,978 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:02:06,979 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:02:06,979 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:02:07,039 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:02:07,053 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:02:08,710 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:02:08,711 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:02:08,711 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:02:08,711 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:02:08,730 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:02:09,345 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:02:09,345 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:02:09,345 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:02:09,345 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:02:09,501 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:02:09,501 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:02:09,501 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:02:09,851 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:02:09,858 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:02:09,860 - SM.youtube - DEBUG - Youtube URL searching for Manowar...
+2020-10-29 12:02:10,018 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:02:10,182 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:02:10,216 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Manowar loaded
+2020-10-29 12:02:10,267 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:02:10,284 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:02:10,407 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:02:10,524 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:02:10,679 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:02:10,851 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:02:10,861 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=IaXzcTrY0Vg
+2020-10-29 12:02:10,863 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:02:14,009 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:03:42,829 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:03:43,179 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:03:43,179 - SM.clock - DEBUG - Real widget width 337
+2020-10-29 12:03:43,180 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:03:43,180 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:03:43,183 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:03:43,184 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:03:43,184 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:03:43,184 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:03:43,878 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:03:43,878 - SM.stocks - DEBUG - Real widget width 562
+2020-10-29 12:03:43,878 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:03:43,879 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:03:43,879 - SM - ERROR - Cannot update the window tuple index out of range
+2020-10-29 12:04:02,537 - SM - INFO - Closing mirror...
+2020-10-29 12:24:55,605 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:24:55,853 - SM - INFO - Main window has been created
+2020-10-29 12:24:56,067 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:24:56,299 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:24:56,300 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:24:56,300 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:24:56,300 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:24:56,300 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:24:56,314 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:24:56,315 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:24:56,315 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:24:56,315 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:24:56,315 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:24:56,760 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:24:56,905 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:24:56,905 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:24:56,905 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:24:56,906 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:24:56,906 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:24:56,963 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:24:56,975 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:24:58,587 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:24:58,587 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:24:58,587 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:24:58,588 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:24:58,604 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:24:59,214 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:24:59,214 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:24:59,214 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:24:59,214 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:24:59,351 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:24:59,352 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:24:59,352 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:24:59,704 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:24:59,713 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:24:59,715 - SM.youtube - DEBUG - Youtube URL searching for Guns'n'Roses...
+2020-10-29 12:24:59,949 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:25:00,055 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Guns%27n%27Roses loaded
+2020-10-29 12:25:00,091 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:25:00,127 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:25:00,201 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:25:00,305 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:25:00,441 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:25:00,579 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:25:00,608 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:25:00,722 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=8SbUC-UaAxE
+2020-10-29 12:25:00,724 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:25:03,327 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:25:12,642 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:25:12,643 - SM - ERROR - Cannot update the window 'defaultVideo'
+2020-10-29 12:25:24,494 - SM - INFO - Closing mirror...
+2020-10-29 12:28:27,994 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:28:28,236 - SM - INFO - Main window has been created
+2020-10-29 12:28:28,446 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:28:28,678 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:28:28,678 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:28:28,678 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:28:28,678 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:28:28,678 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:28:28,691 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:28:28,691 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:28:28,692 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:28:28,692 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:28:28,692 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:28:29,129 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:28:29,265 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:28:29,265 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:28:29,266 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:28:29,266 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:28:29,266 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:28:29,319 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:28:29,331 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:28:30,957 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:28:30,957 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:28:30,958 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:28:30,958 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:28:30,974 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:28:31,578 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:28:31,578 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:28:31,579 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:28:31,579 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:28:31,720 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:28:31,721 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:28:31,721 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:28:32,061 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:28:32,068 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:28:32,069 - SM.youtube - DEBUG - Youtube URL searching for Guns'n'Roses...
+2020-10-29 12:28:32,249 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:28:32,377 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Guns%27n%27Roses loaded
+2020-10-29 12:28:32,388 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:28:32,437 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:28:32,459 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:28:32,553 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:28:32,755 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:28:32,954 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:28:32,957 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:28:33,072 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=8SbUC-UaAxE
+2020-10-29 12:28:33,074 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:28:35,357 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:28:49,586 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:28:50,039 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:28:50,040 - SM.clock - DEBUG - Real widget width 339
+2020-10-29 12:28:50,040 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:28:50,040 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:28:50,047 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:28:50,048 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:28:50,048 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:28:50,048 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:28:50,798 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:28:50,799 - SM.stocks - DEBUG - Real widget width 562
+2020-10-29 12:28:50,799 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:28:50,799 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:28:53,642 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:28:53,642 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:28:53,643 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:28:53,643 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:28:54,311 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:28:54,312 - SM.weather - DEBUG - Real widget width 296
+2020-10-29 12:28:54,312 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:28:54,312 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:28:54,333 - SM.youtube - DEBUG - Youtube URL searching for Edguy...
+2020-10-29 12:28:54,534 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Edguy loaded
+2020-10-29 12:28:54,904 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:28:55,335 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=7BrO2VwLBcc
+2020-10-29 12:28:55,347 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:29:27,030 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:29:27,437 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:29:27,438 - SM.clock - DEBUG - Real widget width 335
+2020-10-29 12:29:27,438 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:29:27,438 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:29:27,439 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:29:27,439 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:29:27,439 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:29:27,439 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:29:28,148 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:29:28,148 - SM.stocks - DEBUG - Real widget width 562
+2020-10-29 12:29:28,148 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:29:28,148 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:29:30,955 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:29:30,955 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:29:30,955 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:29:30,955 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:29:31,648 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:29:31,649 - SM.weather - DEBUG - Real widget width 296
+2020-10-29 12:29:31,649 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:29:31,649 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:29:31,651 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:29:31,873 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:29:32,372 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:29:32,670 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:29:32,700 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:29:48,975 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:29:49,389 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:29:49,389 - SM.clock - DEBUG - Real widget width 339
+2020-10-29 12:29:49,389 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:29:49,389 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:29:49,390 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:29:49,390 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:29:49,390 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:29:49,391 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:29:50,091 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:29:50,091 - SM.stocks - DEBUG - Real widget width 562
+2020-10-29 12:29:50,091 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:29:50,092 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:29:52,871 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:29:52,872 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:29:52,872 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:29:52,872 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:29:53,561 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:29:53,561 - SM.weather - DEBUG - Real widget width 296
+2020-10-29 12:29:53,562 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:29:53,562 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:29:53,564 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:29:53,768 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:29:54,296 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:29:54,572 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:29:54,583 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:30:09,311 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:30:09,803 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:30:09,803 - SM.clock - DEBUG - Real widget width 341
+2020-10-29 12:30:09,804 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:30:09,804 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:30:09,808 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:30:09,809 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:30:09,809 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:30:09,809 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:30:10,478 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:30:10,478 - SM.stocks - DEBUG - Real widget width 562
+2020-10-29 12:30:10,479 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:30:10,479 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:30:13,179 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:30:13,179 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:30:13,179 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:30:13,180 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:30:13,905 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:30:13,905 - SM.weather - DEBUG - Real widget width 296
+2020-10-29 12:30:13,905 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:30:13,905 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:30:13,909 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:30:14,173 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:30:14,664 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:30:14,931 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:30:14,940 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:32:02,318 - SM - INFO - Closing mirror...
+2020-10-29 12:32:05,434 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:32:05,677 - SM - INFO - Main window has been created
+2020-10-29 12:32:05,882 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:32:06,116 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:32:06,116 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:32:06,116 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:32:06,117 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:32:06,117 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:32:06,132 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:32:06,133 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:32:06,134 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:32:06,134 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:32:06,134 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:32:06,572 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:32:06,725 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:32:06,725 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:32:06,725 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:32:06,725 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:32:06,726 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:32:06,787 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:32:06,799 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:32:08,485 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:32:08,485 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:32:08,486 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:32:08,486 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:32:08,504 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:32:09,107 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:32:09,108 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:32:09,108 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:32:09,108 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:32:09,249 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:32:09,250 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:32:09,250 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:32:09,598 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:32:09,602 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:32:09,603 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:32:09,770 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:32:09,910 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:32:09,940 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:32:09,974 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:32:10,000 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:32:10,095 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:32:10,293 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:32:10,412 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:32:10,439 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:32:10,605 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:32:10,608 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:32:13,336 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:32:39,256 - SM - INFO - Closing mirror...
+2020-10-29 12:33:04,197 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:33:04,438 - SM - INFO - Main window has been created
+2020-10-29 12:33:04,629 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:33:04,870 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:33:04,870 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:33:04,871 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:33:04,871 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:33:04,871 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:33:04,886 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:33:04,887 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:33:04,887 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:33:04,887 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:33:04,888 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:33:05,333 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:33:05,465 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:33:05,465 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:33:05,466 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:33:05,466 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:33:05,467 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:33:05,522 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:33:05,534 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:33:07,207 - SM.ticker - DEBUG - Target widget width 1340
+2020-10-29 12:33:07,207 - SM.ticker - DEBUG - Real widget width 1339
+2020-10-29 12:33:07,208 - SM.ticker - DEBUG - Target widget height 34
+2020-10-29 12:33:07,208 - SM.ticker - DEBUG - Real widget height 33
+2020-10-29 12:33:07,225 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:33:07,876 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:33:07,876 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:33:07,877 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:33:07,877 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:33:08,018 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:33:08,019 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:33:08,019 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:33:08,366 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:33:08,371 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:33:08,373 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:33:08,581 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:33:08,678 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:33:08,714 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:33:08,768 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:33:08,811 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:33:08,881 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:33:09,073 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:33:09,207 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:33:09,251 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:33:09,374 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:33:09,376 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:33:11,843 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:36:52,635 - SM - INFO - Closing mirror...
+2020-10-29 12:36:55,873 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:36:56,118 - SM - INFO - Main window has been created
+2020-10-29 12:36:56,306 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:36:56,544 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:36:56,544 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:36:56,544 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:36:56,544 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:36:56,545 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:36:56,558 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:36:56,558 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:36:56,559 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:36:56,559 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:36:56,559 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:36:56,973 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:36:57,127 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:36:57,128 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:36:57,128 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:36:57,128 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:36:57,129 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:36:57,190 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:36:57,202 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:36:58,883 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:36:59,475 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:36:59,476 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:36:59,476 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:36:59,476 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:36:59,614 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:36:59,615 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:36:59,615 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:36:59,958 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:36:59,962 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:36:59,964 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:37:00,161 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:37:00,293 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:37:00,337 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:37:00,338 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:37:00,447 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:37:00,551 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:37:00,691 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:37:00,817 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:37:00,830 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:37:00,967 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:37:00,969 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:37:03,667 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:37:26,908 - SM - INFO - Closing mirror...
+2020-10-29 12:40:58,190 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:40:58,429 - SM - INFO - Main window has been created
+2020-10-29 12:40:58,623 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:40:58,843 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:40:58,844 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:40:58,844 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:40:58,844 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:40:58,845 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:40:58,856 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:40:58,857 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:40:58,857 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:40:58,857 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:40:58,857 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:40:59,293 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:40:59,438 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:40:59,439 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:40:59,439 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:40:59,439 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:40:59,440 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:40:59,495 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:40:59,507 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:41:01,201 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:41:01,809 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:41:01,810 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:41:01,810 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:41:01,810 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:41:01,951 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:41:01,951 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:41:01,951 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:41:02,300 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:41:02,307 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:41:02,310 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:41:02,486 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:41:02,632 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:41:02,634 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:41:02,702 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:41:02,718 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:41:02,843 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:41:03,026 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:41:03,117 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:41:03,181 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:41:03,312 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:41:03,314 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:41:05,878 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:41:50,249 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:41:50,644 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:41:50,644 - SM.clock - DEBUG - Real widget width 328
+2020-10-29 12:41:50,644 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:41:50,644 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:41:50,649 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:41:50,649 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:41:50,649 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:41:50,650 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:41:51,325 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:41:51,325 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:41:51,326 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:41:51,326 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:41:54,778 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:41:54,779 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:41:54,779 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:41:54,779 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:41:54,782 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:41:54,988 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:41:55,467 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:41:55,801 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:41:55,820 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:42:46,005 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:42:46,380 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:42:46,381 - SM.clock - DEBUG - Real widget width 338
+2020-10-29 12:42:46,381 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:42:46,381 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:42:46,382 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:42:46,382 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:42:46,382 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:42:46,382 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:42:47,059 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:42:47,060 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:42:47,060 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:42:47,060 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:42:50,675 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:42:50,675 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:42:50,675 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:42:50,675 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:42:50,679 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:42:50,885 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:42:51,328 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:42:51,696 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:42:51,703 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:46:09,655 - SM - INFO - Closing mirror...
+2020-10-29 12:47:43,895 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 12:47:44,138 - SM - INFO - Main window has been created
+2020-10-29 12:47:44,359 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:47:44,638 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:47:44,638 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 12:47:44,639 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:47:44,639 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 12:47:44,639 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 12:47:44,654 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:47:44,654 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 12:47:44,654 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:47:44,654 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 12:47:44,655 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 12:47:45,105 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 12:47:45,288 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:47:45,288 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 12:47:45,288 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:47:45,289 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 12:47:45,289 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 12:47:45,349 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 12:47:45,362 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 12:47:47,321 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 12:47:47,992 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:47:47,992 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 12:47:47,993 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:47:47,993 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 12:47:48,135 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 12:47:48,135 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 12:47:48,136 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 12:47:48,478 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 12:47:48,484 - SM - INFO - A camera device has been found on board.
+2020-10-29 12:47:48,485 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:47:48,671 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 12:47:48,808 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:47:48,891 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 12:47:48,938 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 12:47:49,063 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 12:47:49,063 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 12:47:49,101 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 12:47:49,351 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:47:49,477 - SM.scraper - INFO - Got the latest news.
+2020-10-29 12:47:49,486 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:47:49,488 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:47:52,291 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 12:48:41,313 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:48:41,715 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:48:41,715 - SM.clock - DEBUG - Real widget width 342
+2020-10-29 12:48:41,716 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:48:41,716 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:48:41,724 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:48:41,725 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:48:41,725 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:48:41,725 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:48:42,497 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:48:42,498 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:48:42,498 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:48:42,498 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:48:46,124 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:48:46,125 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:48:46,125 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:48:46,125 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:48:46,130 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:48:46,347 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:48:46,806 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:48:47,143 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:48:47,154 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:49:15,884 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:49:16,312 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:49:16,312 - SM.clock - DEBUG - Real widget width 329
+2020-10-29 12:49:16,312 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:49:16,313 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:49:16,314 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:49:16,314 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:49:16,314 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:49:16,314 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:49:16,971 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:49:16,971 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:49:16,971 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:49:16,972 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:49:19,596 - SM.ticker - DEBUG - Target widget width 1342
+2020-10-29 12:49:19,597 - SM.ticker - DEBUG - Real widget width 1341
+2020-10-29 12:49:19,597 - SM.ticker - DEBUG - Target widget height 42
+2020-10-29 12:49:19,598 - SM.ticker - DEBUG - Real widget height 41
+2020-10-29 12:49:20,287 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:49:20,287 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:49:20,287 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:49:20,288 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:49:20,300 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:49:20,492 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:49:21,034 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:49:21,302 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:49:21,311 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:49:31,945 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:49:32,374 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:49:32,374 - SM.clock - DEBUG - Real widget width 328
+2020-10-29 12:49:32,374 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:49:32,374 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:49:32,375 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:49:32,375 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:49:32,375 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:49:32,375 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:49:33,044 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:49:33,044 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:49:33,044 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:49:33,044 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:49:35,589 - SM.ticker - DEBUG - Target widget width 1338
+2020-10-29 12:49:35,589 - SM.ticker - DEBUG - Real widget width 1337
+2020-10-29 12:49:35,589 - SM.ticker - DEBUG - Target widget height 78
+2020-10-29 12:49:35,589 - SM.ticker - DEBUG - Real widget height 77
+2020-10-29 12:49:36,307 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:49:36,308 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:49:36,308 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:49:36,308 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:49:36,312 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:49:36,532 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:49:36,985 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:49:37,331 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:49:37,340 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:50:25,662 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:50:26,071 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:50:26,072 - SM.clock - DEBUG - Real widget width 336
+2020-10-29 12:50:26,072 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:50:26,072 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:50:26,073 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:50:26,073 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:50:26,073 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:50:26,074 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:50:26,804 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:50:26,804 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:50:26,805 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:50:26,805 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:50:29,501 - SM.ticker - DEBUG - Target widget width 1338
+2020-10-29 12:50:29,501 - SM.ticker - DEBUG - Real widget width 1337
+2020-10-29 12:50:29,501 - SM.ticker - DEBUG - Target widget height 78
+2020-10-29 12:50:29,501 - SM.ticker - DEBUG - Real widget height 77
+2020-10-29 12:50:30,195 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:50:30,196 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:50:30,196 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:50:30,196 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:50:30,199 - SM.youtube - DEBUG - Youtube URL searching for Muse Uprising Live...
+2020-10-29 12:50:30,407 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Muse+Uprising+Live loaded
+2020-10-29 12:50:30,978 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:50:31,219 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=ygANMV2I3XE
+2020-10-29 12:50:31,226 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:51:09,706 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 12:51:10,144 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 12:51:10,145 - SM.clock - DEBUG - Real widget width 328
+2020-10-29 12:51:10,145 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 12:51:10,145 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 12:51:10,147 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 12:51:10,147 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 12:51:10,147 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 12:51:10,148 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 12:51:10,872 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 12:51:10,872 - SM.stocks - DEBUG - Real widget width 563
+2020-10-29 12:51:10,873 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 12:51:10,873 - SM.stocks - DEBUG - Real widget height 43
+2020-10-29 12:51:13,540 - SM.ticker - DEBUG - Target widget width 1338
+2020-10-29 12:51:13,540 - SM.ticker - DEBUG - Real widget width 1337
+2020-10-29 12:51:13,541 - SM.ticker - DEBUG - Target widget height 78
+2020-10-29 12:51:13,541 - SM.ticker - DEBUG - Real widget height 77
+2020-10-29 12:51:14,292 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 12:51:14,293 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 12:51:14,293 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 12:51:14,293 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 12:51:14,296 - SM.youtube - DEBUG - Youtube URL searching for Sunrise Avenue Forever Yours Live...
+2020-10-29 12:51:14,510 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Sunrise+Avenue+Forever+Yours+Live loaded
+2020-10-29 12:51:14,939 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 12:51:15,309 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=rWlyJ0OVikk
+2020-10-29 12:51:15,316 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 12:51:22,275 - SM - INFO - Closing mirror...
+2020-10-29 13:39:48,403 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-29 13:39:48,649 - SM - INFO - Main window has been created
+2020-10-29 13:39:48,843 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 13:39:49,092 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 13:39:49,092 - SM.clock - DEBUG - Real widget width 348
+2020-10-29 13:39:49,093 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 13:39:49,093 - SM.clock - DEBUG - Real widget height 91
+2020-10-29 13:39:49,094 - SM.clock - INFO - Clock widgets has been created.
+2020-10-29 13:39:49,109 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 13:39:49,110 - SM.calendar - DEBUG - Real widget width 514
+2020-10-29 13:39:49,110 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 13:39:49,110 - SM.calendar - DEBUG - Real widget height 48
+2020-10-29 13:39:49,111 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-29 13:39:49,596 - SM.covid - INFO - Covid widget has been created.
+2020-10-29 13:39:49,758 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 13:39:49,759 - SM.stocks - DEBUG - Real widget width 566
+2020-10-29 13:39:49,759 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 13:39:49,759 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 13:39:49,760 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-29 13:39:49,834 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-29 13:39:49,846 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-29 13:39:51,468 - SM.ticker - DEBUG - Target widget width 1338
+2020-10-29 13:39:51,468 - SM.ticker - DEBUG - Real widget width 1337
+2020-10-29 13:39:51,469 - SM.ticker - DEBUG - Target widget height 78
+2020-10-29 13:39:51,469 - SM.ticker - DEBUG - Real widget height 77
+2020-10-29 13:39:51,487 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-29 13:39:52,102 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 13:39:52,102 - SM.weather - DEBUG - Real widget width 348
+2020-10-29 13:39:52,103 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 13:39:52,103 - SM.weather - DEBUG - Real widget height 115
+2020-10-29 13:39:52,241 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-29 13:39:52,242 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-29 13:39:52,242 - SM.scraper - DEBUG - YANDEX_WEATHER_TOKEN environment variable found
+2020-10-29 13:39:52,967 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-29 13:39:52,976 - SM - INFO - A camera device has been found on board.
+2020-10-29 13:39:52,978 - SM.youtube - DEBUG - Youtube URL searching for Sunrise Avenue Forever Yours Live...
+2020-10-29 13:39:53,152 - SM.scraper - DEBUG - https://api.weather.yandex.ru/v1/informers? loaded
+2020-10-29 13:39:53,315 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=Sunrise+Avenue+Forever+Yours+Live loaded
+2020-10-29 13:39:53,321 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-29 13:39:53,381 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-29 13:39:53,427 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-29 13:39:53,589 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-29 13:39:53,779 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-29 13:39:53,820 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 13:39:53,917 - SM.scraper - INFO - Got the latest news.
+2020-10-29 13:39:53,979 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=rWlyJ0OVikk
+2020-10-29 13:39:53,980 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 13:39:56,777 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-29 13:40:33,175 - SM.loading - INFO - Loading widget has been created.
+2020-10-29 13:40:33,558 - SM.clock - DEBUG - Target widget width 350
+2020-10-29 13:40:33,558 - SM.clock - DEBUG - Real widget width 341
+2020-10-29 13:40:33,558 - SM.clock - DEBUG - Target widget height 92
+2020-10-29 13:40:33,559 - SM.clock - DEBUG - Real widget height 92
+2020-10-29 13:40:33,564 - SM.calendar - DEBUG - Target widget width 527
+2020-10-29 13:40:33,564 - SM.calendar - DEBUG - Real widget width 405
+2020-10-29 13:40:33,564 - SM.calendar - DEBUG - Target widget height 104
+2020-10-29 13:40:33,564 - SM.calendar - DEBUG - Real widget height 49
+2020-10-29 13:40:34,278 - SM.stocks - DEBUG - Target widget width 569
+2020-10-29 13:40:34,279 - SM.stocks - DEBUG - Real widget width 557
+2020-10-29 13:40:34,279 - SM.stocks - DEBUG - Target widget height 86
+2020-10-29 13:40:34,279 - SM.stocks - DEBUG - Real widget height 42
+2020-10-29 13:40:36,863 - SM.ticker - DEBUG - Target widget width 1338
+2020-10-29 13:40:36,864 - SM.ticker - DEBUG - Real widget width 1337
+2020-10-29 13:40:36,864 - SM.ticker - DEBUG - Target widget height 78
+2020-10-29 13:40:36,864 - SM.ticker - DEBUG - Real widget height 77
+2020-10-29 13:40:37,591 - SM.weather - DEBUG - Target widget width 349
+2020-10-29 13:40:37,591 - SM.weather - DEBUG - Real widget width 301
+2020-10-29 13:40:37,592 - SM.weather - DEBUG - Target widget height 126
+2020-10-29 13:40:37,592 - SM.weather - DEBUG - Real widget height 126
+2020-10-29 13:40:37,595 - SM.youtube - DEBUG - Youtube URL searching for Редакция...
+2020-10-29 13:40:37,836 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%86%D0%B8%D1%8F loaded
+2020-10-29 13:40:38,405 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-29 13:40:38,618 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=Rfi7h-voIH0
+2020-10-29 13:40:38,629 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-29 13:41:14,833 - SM - INFO - Closing mirror...

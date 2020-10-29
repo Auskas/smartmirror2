@@ -8,7 +8,7 @@
 {% csrf_token %}
       <section class="setupfield" id="setupfield">
         {% for widget, widget_values in widgets.items %}
-          <div class="widget" name="{{ widget_values.name }}" alias="{{ widget_values.alias }}"id="widget-{{ widget }}" test=5.0321 relx="{{ widget_values.relx|floatformat:5 }}" rely="{{ widget_values.rely|floatformat:5 }}" width="{{ widget_values.width|floatformat:5 }}" height="{{ widget_values.height|floatformat:5 }}" anchor="{{ widget_values.anchor }}" minwidth="{{ widget_values.minwidth }}" minheight="{{ widget_values.minheight }}" keepAspectRatio="{{ widget_values.keepAspectRatio }}" show="{{ widget_values.show }}">
+          <div class="widget" name="{{ widget_values.name }}" alias="{{ widget_values.alias }}"id="widget-{{ widget }}" test=5.0321 relx="{{ widget_values.relx|floatformat:5 }}" rely="{{ widget_values.rely|floatformat:5 }}" width="{{ widget_values.width|floatformat:5 }}" height="{{ widget_values.height|floatformat:5 }}" anchor="{{ widget_values.anchor }}" minwidth="{{ widget_values.minwidth }}" minheight="{{ widget_values.minheight }}" keepAspectRatio="{{ widget_values.keepAspectRatio }}" show="{{ widget_values.show }}" defaultVideo="{{ widget_values.defaultVideo }}">
             <div class="widg-header" id="widg-header-{{ widget_values.id }}">{{ widget_values.alias }}
               <img src="{% static 'mirrorsetup/images/gear.png' %}" style="width:20px;height:20px;cursor:pointer;" id="settings" onclick="openSettingsWindow('{{ widget_values.name }}')">
             </div>

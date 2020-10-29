@@ -124,9 +124,10 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    default_video=params[5]
                 )
-                self.youtube.play()
+                #self.youtube.play()
                 self.widgets[widget_name] = self.youtube
 
             elif widget_name == 'ticker':
@@ -214,12 +215,17 @@ class Mirror():
         self.loading_window.lift(self.window)
 
     def widget_init(self, widget_name):
+        if widget_name == 'youtube':
+            default_video = self.WIDGETS_CONFIG[widget_name]['defaultVideo']
+        else:
+            default_video = False
         return (
             round(self.WIDGETS_CONFIG[widget_name]['relx'] / 100, 5),
             round(self.WIDGETS_CONFIG[widget_name]['rely'] / 100, 5),
             round(self.WIDGETS_CONFIG[widget_name]['width'] / 100, 5),
             round(self.WIDGETS_CONFIG[widget_name]['height'] / 100, 5),
-            self.WIDGETS_CONFIG[widget_name]['anchor']
+            self.WIDGETS_CONFIG[widget_name]['anchor'],
+            default_video
         )
 
     async def cmd_from_web_cfg(self, reader, writer):
@@ -243,6 +249,9 @@ class Mirror():
                         self.WIDGETS_CONFIG[widget_name]['height'] = float(widgets[widget]['height'])
                         self.WIDGETS_CONFIG[widget_name]['show'] = widgets[widget]['show']
                         self.WIDGETS_CONFIG[widget_name]['anchor'] = widgets[widget]['anchor']
+                    # Special key for YouTube widget.    
+                    if widget_name == 'youtube':
+                        self.WIDGETS_CONFIG[widget_name]['defaultVideo'] = widgets[widget]['defaultVideo']
                 self.update_widgets = True
                 with open(f'{self.HOME_DIR}{os.sep}widgets.json', 'w', encoding='utf-8') as widgets_config_file:
                     json.dump(self.WIDGETS_CONFIG, widgets_config_file, indent=2)
@@ -266,13 +275,18 @@ class Mirror():
                     self.loading = Loading(self.loading_window)
                     for widget in self.WIDGETS_CONFIG.keys():
                         if self.WIDGETS_CONFIG[widget]['show']:
+                            if widget == 'youtube':
+                                default_video = self.WIDGETS_CONFIG[widget]['defaultVideo']
+                            else:
+                                default_video = None
                             self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = True
                             self.widgets[self.WIDGETS_CONFIG[widget]['name']].widget_update(
                                 round(self.WIDGETS_CONFIG[widget]['relx'] / 100, 5),
                                 round(self.WIDGETS_CONFIG[widget]['rely'] / 100, 5),
                                 round(self.WIDGETS_CONFIG[widget]['width'] / 100, 5),
                                 round(self.WIDGETS_CONFIG[widget]['height'] / 100, 5),
-                                self.WIDGETS_CONFIG[widget]['anchor']
+                                self.WIDGETS_CONFIG[widget]['anchor'],
+                                default_video
                             )
                         else:
                             self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = False
@@ -284,7 +298,8 @@ class Mirror():
                     elif self.gesture == 'sign_of_the_horns':
                         self.youtube.external_command = 'volume_up'
                     elif self.gesture == None:
-                        self.youtube.external_command = None
+                        self.youtube.external_command = None                 
+
                 if self.scraper:
                     self.covid.covid_figures = self.scraper.covid_figures   
                     self.stocks.rates_string = self.scraper.rates_string   
@@ -312,8 +327,6 @@ class Mirror():
                                 self.gesture = data[key]
                         elif key == 'face_detected':
                             self.face_detected = data[key]
-                        elif key == 'voice_command':
-                            pass
                         else:
                             self.face_detected = False
                             self.gesture = False

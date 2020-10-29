@@ -36,7 +36,7 @@ import alsaaudio
 
 class YoutubePlayer:
 
-    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw'):
+    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', default_video='Manowar'):
         self.logger = logging.getLogger('SM.youtube')
         self.loop = asyncloop
 
@@ -63,7 +63,11 @@ class YoutubePlayer:
         )
 
         self.relx = relx
+        if self.anchor == 'ne':
+            self.relx += width
         self.rely = rely
+
+        self.default_video = default_video
 
         _isMacOS   = sys.platform.startswith('darwin')
         _isWindows = sys.platform.startswith('win')
@@ -74,8 +78,8 @@ class YoutubePlayer:
         if _isLinux:
             args.append('--no-xlib')
         # Below are some Youtube links for testing purposes. Leave one uncommented to see it on the screen.
-        #self.url = str('https://www.youtube.com/watch?v=2MISe09ArHw')
-        self.url = str('https://www.youtube.com/watch?v=r_izDyWAid4')
+        #self.url = str('https://www.youtube.com/watch?v=r_izDyWAid4')
+        self.url = ''
         self.instance = vlc.Instance(args)
 
         # Creating the media object (Youtube video URL).
@@ -118,6 +122,9 @@ class YoutubePlayer:
         self.queue = Queue()
         receiver_loop = self.loop.create_task(self.process_receiver())
         status_loop = self.loop.create_task(self.status())
+
+        # Changes the video to the topic written in default_video
+        initial_search_loop = self.loop.create_task(self.search(self.default_video))
         
         self.create_volume_bar()
         
@@ -285,7 +292,7 @@ class YoutubePlayer:
 
         self.player.set_xwindow(self.widget_canvas_id)
 
-        #self.list_player.play()
+        self.list_player.play()
 
         self.video_status = 'running'
 
@@ -325,6 +332,8 @@ class YoutubePlayer:
         )
 
         self.relx = args[0]
+        if self.anchor == 'ne':
+            self.relx += width
         self.rely = args[1] + self.icons_target_size[0] / self.window_height
 
         self.volume_frame_width = self.target_width
@@ -340,6 +349,9 @@ class YoutubePlayer:
 
         if self.fullscreen_status == False:
             self.set_window()
+
+        search_loop = self.loop.create_task(self.search(args[5]))
+
 
     async def status(self):
         while True:
@@ -414,8 +426,6 @@ if __name__ == '__main__':
         window.geometry("%dx%d+0+0" % (w, h))
 
         youtube = YoutubePlayer(window, loop)
-        #youtube.play()
-        #search_loop = loop.create_task(youtube.search('Corey Schafer Django'))
         
         import cv2
         import importlib.util
@@ -433,6 +443,7 @@ if __name__ == '__main__':
         loop.create_task(youtube.process_receiver_main(queue))
         loop.run_forever()
         
+
     except KeyboardInterrupt:
         sys.exit()
 
