@@ -30,9 +30,12 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav">
             {% if user.is_authenticated %}
+
+              <a class="nav-item nav-link" href="{% url 'wifi' %}">WiFi</a>
+
               {% block configuration %}
                 <a class="nav-item nav-link" href="{% url 'setup' %}">КОНФИГУРАТОР</a>
-              {% endblock %}
+              {% endblock configuration%}
             {% endif %}
           </div>
           <!-- Navbar Right Side -->

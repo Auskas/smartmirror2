@@ -18,11 +18,15 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from users import views as user_views
 from mirrorsetup import views as setup_views
+from wificonfig import views as wifi_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mirrorsetup.urls')),
     path('home/', setup_views.home, name='home'),
+    path('wifi/', wifi_views.status, name='wifi'),
+    path('wifi/update/', wifi_views.update_hotspots_list, name='wifiupdate'),
+    path('wifi/config/', wifi_views.config, name='wificonfig'),
     path('setup/', setup_views.setup, name='setup'),
     path('setup/apply/', setup_views.apply, name='apply'),
     path('setup/cancel/', setup_views.setup, name='cancel'),

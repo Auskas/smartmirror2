@@ -25,6 +25,12 @@
   padding: 0px;
 }
 
+.wifilist {
+  position: absolute;
+  margin: 0px;
+  padding: 0px;  
+}
+
 .widgets-list {
   border: 5px solid black;
   position: absolute;

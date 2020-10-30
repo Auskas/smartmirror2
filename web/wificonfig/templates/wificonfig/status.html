@@ -1,0 +1,51 @@
+{% extends "mirrorsetup/base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% csrf_token %}
+
+  <section class="wifilist" id="wifilist">
+    <table class="table table-bordered table-hover">
+      <caption>Найденные точки доступа</caption>
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Имя точки доступа</th>
+          <th scope="col">Канал</th>
+          <th scope="col">Качество</th>
+          <th scope="col">Шифрование</th>
+          <th scope="col">Статус</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        {% if status %}
+          {% for index, values in result.items %}
+            <tr id="hotspotNumber-{{ index }}" chosen="false" ssid="{{ values.SSID }}" onclick="clickedHotspot(this.id)">
+              <td>{{ index }}</td>
+              <td>{{ values.SSID }}</td>
+              <td>{{ values.channel }}</td>
+              <td>{{ values.quality }}%</td>
+              {% if values.encryption %}
+                <td>Да</td>
+              {% else %}
+                <td>Нет</td>
+              {% endif %}
+              <td></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+    <button type="button" id="connect" class="btn btn-lg btn-primary" disabled>Выбрать</button>
+  </section>
+
+{% endblock content %}
+
+{% block javascript %}<script type="text/javascript" src="{%  static 'js/wifi.js' %}"></script>{% endblock %}
+
+{% block footer %}
+
+{% endblock footer%}
+

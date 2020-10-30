@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mirrorsetup.apps.MirrorsetupConfig',
+    'wificonfig.apps.WificonfigConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
 ]
