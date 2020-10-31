@@ -10,18 +10,18 @@ logger = logging.getLogger('django.wifisetup')
 def status(request):
     if request.method == "POST":
         return HttpResponseForbidden()
-    result = wifimanager.scanner()
+    result, result2 = wifimanager.scanner()
     if result:
-        context = {"status": True, "result": result}
+        context = {"status": True, "result": result, "connected": result2}
     else:
         context = {"status": False,}    
     return render(request, 'wificonfig/status.html', context=context)
 
 @login_required
 def update_hotspots_list(request):
-    result = wifimanager.scanner()
+    result, result2 = wifimanager.scanner()
     if result:
-        data = {"status": True, "result": result}
+        data = {"status": True, "result": result, "connected": result2}
     else:
         data = {"status": False,} 
     return JsonResponse(data)

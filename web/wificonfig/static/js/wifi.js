@@ -109,7 +109,12 @@ function updateTable(data) {
             }
             columnIndex += 1;
             nextColumn = nextRow.insertCell(columnIndex);
-            nextColumn.innerHTML = "";
+            if (data['connected'] == data['result'][key]['SSID']) {
+	        nextColumn.innerHTML = "Подключено";
+            }
+            else {
+                nextColumn.innerHTML = "";
+            }
             rowIndex += 1;
         }
     }

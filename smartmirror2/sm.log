@@ -9786,3 +9786,129 @@
 2020-10-29 13:40:38,618 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=Rfi7h-voIH0
 2020-10-29 13:40:38,629 - SM.youtube - DEBUG - The URL has been changed.
 2020-10-29 13:41:14,833 - SM - INFO - Closing mirror...
+2020-10-31 15:58:40,719 - SM - INFO - ########## MIRROR STARTED ##########
+2020-10-31 15:58:41,183 - SM - INFO - Main window has been created
+2020-10-31 15:58:42,092 - SM.loading - INFO - Loading widget has been created.
+2020-10-31 15:58:43,717 - SM.clock - DEBUG - Target widget width 431
+2020-10-31 15:58:43,718 - SM.clock - DEBUG - Real widget width 426
+2020-10-31 15:58:43,724 - SM.clock - DEBUG - Target widget height 126
+2020-10-31 15:58:43,724 - SM.clock - DEBUG - Real widget height 110
+2020-10-31 15:58:43,725 - SM.clock - INFO - Clock widgets has been created.
+2020-10-31 15:58:43,749 - SM.calendar - DEBUG - Target widget width 648
+2020-10-31 15:58:43,750 - SM.calendar - DEBUG - Real widget width 533
+2020-10-31 15:58:43,751 - SM.calendar - DEBUG - Target widget height 142
+2020-10-31 15:58:43,751 - SM.calendar - DEBUG - Real widget height 49
+2020-10-31 15:58:43,751 - SM.calendar - INFO - Calendar widget has been created.
+2020-10-31 15:58:46,068 - SM.covid - INFO - Covid widget has been created.
+2020-10-31 15:58:47,018 - SM.stocks - DEBUG - Target widget width 700
+2020-10-31 15:58:47,019 - SM.stocks - DEBUG - Real widget width 693
+2020-10-31 15:58:47,020 - SM.stocks - DEBUG - Target widget height 117
+2020-10-31 15:58:47,021 - SM.stocks - DEBUG - Real widget height 49
+2020-10-31 15:58:47,022 - SM.stocks - DEBUG - Stocks Widget has been created.
+2020-10-31 15:58:47,359 - SM.youtube - INFO - Youtube widget has been initialized.
+2020-10-31 15:58:47,384 - SM.ticker - DEBUG - An instance of Ticker widget has been created.
+2020-10-31 15:58:53,622 - SM.ticker - DEBUG - Target widget width 1646
+2020-10-31 15:58:53,623 - SM.ticker - DEBUG - Real widget width 1645
+2020-10-31 15:58:53,624 - SM.ticker - DEBUG - Target widget height 106
+2020-10-31 15:58:53,625 - SM.ticker - DEBUG - Real widget height 105
+2020-10-31 15:58:53,716 - SM.weather - DEBUG - Weather Widget has been initialized.
+2020-10-31 15:58:56,192 - SM.weather - DEBUG - Target widget width 430
+2020-10-31 15:58:56,192 - SM.weather - DEBUG - Real widget width 417
+2020-10-31 15:58:56,193 - SM.weather - DEBUG - Target widget height 173
+2020-10-31 15:58:56,193 - SM.weather - DEBUG - Real widget height 136
+2020-10-31 15:58:56,756 - SM.voice_assistant - INFO - Voice assistant has been initialized!
+2020-10-31 15:58:56,757 - SM.scraper - DEBUG - An instance of Scraper has been created.
+2020-10-31 15:58:56,757 - SM.scraper - DEBUG - Cannot get YANDEX_WEATHER_TOKEN environment variable
+2020-10-31 15:58:57,209 - SM.gestures - INFO - Gestures recognizer has been initialiazed!
+2020-10-31 15:58:57,229 - SM - INFO - A camera device has been found on board.
+2020-10-31 15:58:57,234 - SM.youtube - DEBUG - Youtube URL searching for Редакция...
+2020-10-31 15:59:00,641 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%86%D0%B8%D1%8F loaded
+2020-10-31 15:59:00,720 - SM.scraper - DEBUG - https://yandex.ru/ loaded
+2020-10-31 15:59:00,996 - SM.scraper - DEBUG - https://www.worldometers.info/coronavirus/ loaded
+2020-10-31 15:59:01,206 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-31 15:59:01,225 - SM.scraper - DEBUG - https://www.newsru.com loaded
+2020-10-31 15:59:01,268 - SM.scraper - INFO - Got the string for the latest exchange rates.
+2020-10-31 15:59:01,365 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=PbntHQyEzHg
+2020-10-31 15:59:01,371 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-31 15:59:02,086 - SM.scraper - INFO - Got the latest news.
+2020-10-31 15:59:05,168 - SM.gestures - INFO - The CNN has been loaded.
+2020-10-31 15:59:19,838 - SM.scraper - INFO - Got the Covid-19 latest figures.
+2020-10-31 16:02:08,713 - SM.loading - INFO - Loading widget has been created.
+2020-10-31 16:02:11,905 - SM.clock - DEBUG - Target widget width 431
+2020-10-31 16:02:11,908 - SM.clock - DEBUG - Real widget width 411
+2020-10-31 16:02:11,922 - SM.clock - DEBUG - Target widget height 126
+2020-10-31 16:02:11,926 - SM.clock - DEBUG - Real widget height 120
+2020-10-31 16:02:11,932 - SM.calendar - DEBUG - Target widget width 648
+2020-10-31 16:02:11,934 - SM.calendar - DEBUG - Real widget width 406
+2020-10-31 16:02:11,935 - SM.calendar - DEBUG - Target widget height 142
+2020-10-31 16:02:11,936 - SM.calendar - DEBUG - Real widget height 49
+2020-10-31 16:02:17,205 - SM.stocks - DEBUG - Target widget width 700
+2020-10-31 16:02:17,208 - SM.stocks - DEBUG - Real widget width 687
+2020-10-31 16:02:17,209 - SM.stocks - DEBUG - Target widget height 117
+2020-10-31 16:02:17,210 - SM.stocks - DEBUG - Real widget height 49
+2020-10-31 16:02:45,825 - SM.ticker - DEBUG - Target widget width 1646
+2020-10-31 16:02:45,837 - SM.ticker - DEBUG - Real widget width 1645
+2020-10-31 16:02:45,840 - SM.ticker - DEBUG - Target widget height 106
+2020-10-31 16:02:45,842 - SM.ticker - DEBUG - Real widget height 105
+2020-10-31 16:02:48,952 - SM.weather - DEBUG - Target widget width 430
+2020-10-31 16:02:48,958 - SM.weather - DEBUG - Real widget width 417
+2020-10-31 16:02:48,959 - SM.weather - DEBUG - Target widget height 173
+2020-10-31 16:02:48,960 - SM.weather - DEBUG - Real widget height 136
+2020-10-31 16:02:48,963 - SM.youtube - DEBUG - Youtube URL searching for Редакция...
+2020-10-31 16:02:49,527 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%86%D0%B8%D1%8F loaded
+2020-10-31 16:02:50,141 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-31 16:02:50,185 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=PbntHQyEzHg
+2020-10-31 16:02:51,397 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-31 16:03:28,449 - SM.loading - INFO - Loading widget has been created.
+2020-10-31 16:03:31,631 - SM.clock - DEBUG - Target widget width 431
+2020-10-31 16:03:31,633 - SM.clock - DEBUG - Real widget width 428
+2020-10-31 16:03:31,636 - SM.clock - DEBUG - Target widget height 126
+2020-10-31 16:03:31,638 - SM.clock - DEBUG - Real widget height 115
+2020-10-31 16:03:31,662 - SM.calendar - DEBUG - Target widget width 648
+2020-10-31 16:03:31,663 - SM.calendar - DEBUG - Real widget width 406
+2020-10-31 16:03:31,664 - SM.calendar - DEBUG - Target widget height 142
+2020-10-31 16:03:31,664 - SM.calendar - DEBUG - Real widget height 49
+2020-10-31 16:03:34,987 - SM.stocks - DEBUG - Target widget width 700
+2020-10-31 16:03:34,988 - SM.stocks - DEBUG - Real widget width 687
+2020-10-31 16:03:34,989 - SM.stocks - DEBUG - Target widget height 117
+2020-10-31 16:03:34,990 - SM.stocks - DEBUG - Real widget height 49
+2020-10-31 16:03:40,190 - SM.ticker - DEBUG - Target widget width 1608
+2020-10-31 16:03:40,192 - SM.ticker - DEBUG - Real widget width 1607
+2020-10-31 16:03:40,194 - SM.ticker - DEBUG - Target widget height 58
+2020-10-31 16:03:40,195 - SM.ticker - DEBUG - Real widget height 57
+2020-10-31 16:03:43,391 - SM.weather - DEBUG - Target widget width 430
+2020-10-31 16:03:43,392 - SM.weather - DEBUG - Real widget width 417
+2020-10-31 16:03:43,393 - SM.weather - DEBUG - Target widget height 173
+2020-10-31 16:03:43,393 - SM.weather - DEBUG - Real widget height 136
+2020-10-31 16:03:43,395 - SM.youtube - DEBUG - Youtube URL searching for Редакция...
+2020-10-31 16:03:43,648 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%86%D0%B8%D1%8F loaded
+2020-10-31 16:03:44,139 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-31 16:03:44,433 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=PbntHQyEzHg
+2020-10-31 16:03:45,388 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-31 16:04:35,032 - SM.loading - INFO - Loading widget has been created.
+2020-10-31 16:04:40,700 - SM.clock - DEBUG - Target widget width 431
+2020-10-31 16:04:40,701 - SM.clock - DEBUG - Real widget width 430
+2020-10-31 16:04:40,702 - SM.clock - DEBUG - Target widget height 126
+2020-10-31 16:04:40,703 - SM.clock - DEBUG - Real widget height 115
+2020-10-31 16:04:40,711 - SM.calendar - DEBUG - Target widget width 648
+2020-10-31 16:04:40,712 - SM.calendar - DEBUG - Real widget width 406
+2020-10-31 16:04:40,714 - SM.calendar - DEBUG - Target widget height 142
+2020-10-31 16:04:40,715 - SM.calendar - DEBUG - Real widget height 49
+2020-10-31 16:04:51,673 - SM.stocks - DEBUG - Target widget width 700
+2020-10-31 16:04:52,310 - SM.stocks - DEBUG - Real widget width 687
+2020-10-31 16:04:52,311 - SM.stocks - DEBUG - Target widget height 117
+2020-10-31 16:04:52,311 - SM.stocks - DEBUG - Real widget height 49
+2020-10-31 16:05:20,365 - SM.ticker - DEBUG - Target widget width 1608
+2020-10-31 16:05:20,368 - SM.ticker - DEBUG - Real widget width 1607
+2020-10-31 16:05:20,369 - SM.ticker - DEBUG - Target widget height 58
+2020-10-31 16:05:20,370 - SM.ticker - DEBUG - Real widget height 57
+2020-10-31 16:05:23,522 - SM.weather - DEBUG - Target widget width 430
+2020-10-31 16:05:23,524 - SM.weather - DEBUG - Real widget width 417
+2020-10-31 16:05:23,531 - SM.weather - DEBUG - Target widget height 173
+2020-10-31 16:05:23,532 - SM.weather - DEBUG - Real widget height 136
+2020-10-31 16:05:23,608 - SM.youtube - DEBUG - Youtube URL searching for Редакция...
+2020-10-31 16:05:23,936 - SM.youtube - DEBUG - http://www.youtube.com/results?search_query=%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%86%D0%B8%D1%8F loaded
+2020-10-31 16:05:24,495 - SM.youtube - DEBUG - Found the URL for the requested video...
+2020-10-31 16:05:24,706 - SM.youtube - DEBUG - Changing URL of the media player: https://www.youtube.com/watch?v=PbntHQyEzHg
+2020-10-31 16:05:24,984 - SM.youtube - DEBUG - The URL has been changed.
+2020-10-31 16:05:40,693 - SM - INFO - Closing mirror...

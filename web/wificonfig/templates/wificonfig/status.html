@@ -32,7 +32,11 @@
               {% else %}
                 <td>Нет</td>
               {% endif %}
-              <td></td>
+              {% if connected == values.SSID %}
+	        <td>Подключено</td>
+              {% else %}
+	        <td></td>
+              {% endif %}
             </tr>
           {% endfor %}
         {% endif %}

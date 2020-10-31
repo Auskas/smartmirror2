@@ -15,23 +15,34 @@ def scanner(interface=False):
     try:
         if interface:
             proc = subprocess.Popen(
-                ["iwlist", interface, "scan"], 
+                ["sudo", "iwlist", interface, "scan"], 
+                stdout=subprocess.PIPE, 
+                universal_newlines=True
+            )
+            proc2 = subprocess.Popen(
+                ["sudo", "iwconfig"], 
                 stdout=subprocess.PIPE, 
                 universal_newlines=True
             )
         else:
             proc = subprocess.Popen(
-                ["iwlist", "scan"], 
+                ["sudo", "iwlist", "scan"], 
                 stdout=subprocess.PIPE, 
                 universal_newlines=True
-            )        
+            )
+            proc2 = subprocess.Popen(
+                ["sudo", "iwconfig"], 
+                stdout=subprocess.PIPE, 
+                universal_newlines=True
+            )
         output, error = proc.communicate()
-        return parser(output)
+        output2, error2 = proc2.communicate()
+        return parser(output, output2)
     except Exception as exc:
         logger.exception('Cannot get the stdout of iwlist command: ')
         return False
     
-def parser(result, index=0):
+def parser(result, result2, index=0):
     found_hotspots = {}
     lines = result.split('\n')
     cell_number_regex = re.compile(r'Cell \d\d - Address: \w\w:\w\w:\w\w:\w\w:\w\w:\w\w')
@@ -87,7 +98,14 @@ def parser(result, index=0):
                         break
                     index += 1
             index += 1
-        return found_hotspots
+        
+        lines = result2.split('\n')
+        connected_SSID = ''
+        for line in lines:
+            SSID_string = SSID_regex.search(line)
+            if SSID_string is not None:
+                connected_SSID = SSID_string.group()[7:len(SSID_string.group()) - 1]            
+        return found_hotspots, connected_SSID
     except Exception as exc:
         logger.exception('Cannot parse the result of scan: ')
         return False
@@ -99,5 +117,6 @@ def connect(data):
         logger.exception('Cannot connect to the hotspot')
 
 if __name__ == '__main__':
-    result = scanner()
+    result, result2 = scanner()
     print(result)
+    print(result2)

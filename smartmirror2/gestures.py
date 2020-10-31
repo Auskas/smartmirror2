@@ -41,18 +41,18 @@ class GesturesRecognizer:
         self.dilation_kernel = np.ones((3,3),np.uint8)
 
         self.LABELS = [
-            '5', 
-            '4', 
-            'inverted_l', 
-            'peace', 
-            'pointing_finger', 
-            None, 
-            'sign_of_the_horns', 
+            '5',
+            '4',
+            'inverted_l',
+            'peace',
+            'pointing_finger',
+            None,
+            'sign_of_the_horns',
             'thumb_up'
         ]
-        
+
         self.ROI_SIZE = 250
-        self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes 
+        self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes
         self.FPS = 30 # the number of frames analyzed per second.
 
         if __name__ == '__main__':
@@ -62,11 +62,11 @@ class GesturesRecognizer:
             self.camera = args[0]
             self.queue = args[1]
 
-        if self.camera.isOpened()== False: 
+        if self.camera.isOpened()== False:
             self.logger.critical("Error opening video stream or file")
         _, self.frame = self.camera.read()
-        
-        self.camera.set(10, 1) # Sets the brightness of the camera.
+
+        #self.camera.set(10, 1) # Sets the brightness of the camera.
         #self.camera.set(11, 50) # Sets the contrast of the camera.
         #self.camera.set(cv2.CAP_PROP_EXPOSURE, 40)
 
@@ -87,12 +87,12 @@ class GesturesRecognizer:
             roi_copy = roi_copy / 255.0
             roi_copy = roi_copy.reshape(-1, self.MODEL_IMG_SIZE, self.MODEL_IMG_SIZE, 1)
 
-            prediction = self.model.predict(roi_copy)       
+            prediction = self.model.predict(roi_copy)
             i = prediction.argmax(axis=-1)[0]
             if prediction[0][i] * 100 > 70:
                 self.predicted_gesture = self.LABELS[i]
             else:
-                self.predicted_gesture = None         
+                self.predicted_gesture = None
 
             if __name__ == '__main__':
                 if prediction[0][i] * 100 > 70:
@@ -104,7 +104,7 @@ class GesturesRecognizer:
                 cv2.putText(frame, text, (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, color , 4)
 
         except Exception as exc:
-            self.predicted_gesture = None 
+            self.predicted_gesture = None
             self.logger.error(f'Cannot predict the gesture: {exc}')
 
 
@@ -114,8 +114,8 @@ class GesturesRecognizer:
         # When using multiprocessing with the current module,
         # the model must be loaded inside a child process.
         try:
-            #self.model = load_model(f'data{os.sep}gestures_model.h5')
-            self.model = load_model(f'/media/data/sm2/smartmirror2/data{os.sep}gestures_model.h5')
+            self.model = load_model(f'data{os.sep}gestures_model.h5')
+            #self.model = load_model(f'/media/data/sm2/smartmirror2/data{os.sep}gestures_model.h5')
             self.logger.info('The CNN has been loaded.')
         except Exception as error:
             self.model = None
@@ -132,21 +132,21 @@ class GesturesRecognizer:
                     frame = cv2.resize(frame, (640,480))
 
                     roi = frame[self.begin_Y:self.end_Y, self.begin_X:self.end_X]
-                    
+
                     fgmask = self.background_substractor.apply(roi, learningRate=0.00005)
 
                     # Get rid of noise
                     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, self.kernel)
-                    
+
                     # Dilation of the foreground
                     fgmask = cv2.dilate(fgmask, self.dilation_kernel, iterations = 3)
-                   
+
                     self.predictor(frame, fgmask)
 
                     if self.queue:
                         self.queue.put({'detected_gesture' : self.predicted_gesture})
 
-                    if __name__ == '__main__':                  
+                    if __name__ == '__main__':
                         cv2.imshow('Camera capture', frame)
                         cv2.imshow('Foreground', fgmask)
 
@@ -168,5 +168,5 @@ if __name__ == '__main__':
 __version__ = '0.96' # 10th September 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
-__email__ = "dmitry-kud@yandex.ru"    
+__email__ = "dmitry-kud@yandex.ru"
 __status__ = "Development"
