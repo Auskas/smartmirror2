@@ -110,13 +110,34 @@ def parser(result, result2, index=0):
         logger.exception('Cannot parse the result of scan: ')
         return False
 
-def connect(data):
+def connect(credentials):
     try:
-        pass
+        proc = subprocess.Popen(
+            [
+                "nmcli", 
+                "dev", 
+                "wifi", 
+                "connect", 
+                credentials['ssid'],
+                "password",
+                credentials['password']
+            ], 
+            stdout=subprocess.PIPE, 
+            universal_newlines=True
+        )
+        output, error = proc.communicate()
+        success_regex = re.compile(r"Device '.*' successfully activated with")
+        if success_regex.search(output) is not None:
+            return True
+        else:
+            return False
     except Exception as exc:
         logger.exception('Cannot connect to the hotspot')
+        return False
 
 if __name__ == '__main__':
-    result, result2 = scanner()
-    print(result)
-    print(result2)
+    #result, result2 = scanner()
+    #print(result)
+    #print(result2)
+    a = connect({"ssid": "iPhoneCovax", "password": "Python4ever"})
+    print(a)

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound,JsonResponse
 from . import wifimanager
+import json
+import socket
 import logging
 
 logger = logging.getLogger('django.wifisetup')
@@ -35,3 +37,23 @@ def config(request):
         'ssid': ssid
     }
     return render(request, 'wificonfig/config.html', context=context)
+
+@login_required
+def connect(request):
+    """ Gets wifi credentials from provided by the user from the web interface."""
+    wifi_json_credentials = request.POST.get('credentials')
+    wifi_credentials = json.loads(wifi_json_credentials)
+
+    if wifimanager.connect(wifi_credentials):
+        data = {
+            "status": True,
+        }
+    else:
+        data = {
+            "status": False,
+        }
+
+    try:        
+        return JsonResponse(data)
+    except Exception as exc:
+        logger.exception('Cannot return status JSON response')

@@ -27,6 +27,7 @@ urlpatterns = [
     path('wifi/', wifi_views.status, name='wifi'),
     path('wifi/update/', wifi_views.update_hotspots_list, name='wifiupdate'),
     path('wifi/config/', wifi_views.config, name='wificonfig'),
+    path('wifi/config/connect/', wifi_views.connect, name='wificonnect'),
     path('setup/', setup_views.setup, name='setup'),
     path('setup/apply/', setup_views.apply, name='apply'),
     path('setup/cancel/', setup_views.setup, name='cancel'),

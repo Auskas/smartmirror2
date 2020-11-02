@@ -35,11 +35,11 @@ function updater() {
     type: "GET",
     url: "update/",
     success: function (data) {
-      console.log('Точки доступа обновлены!');
+      //console.log('Точки доступа обновлены!');
       updateTable(data);
     },
     error: function(data){
-      console.log('Невозможно обновить точки доступа!');
+      //console.log('Невозможно обновить точки доступа!');
     }
   });    
 }
