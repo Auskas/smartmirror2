@@ -32,9 +32,9 @@ class Covid:
         self.font_size = 50
 
         # Loading biohazard, scull, and heart icons.
-        self.icon_cases_file = Image.open(f'.{os.sep}icons{os.sep}biohazard.png')
-        self.icon_deaths_file = Image.open(f'.{os.sep}icons{os.sep}scull.png')
-        self.icon_recovered_file = Image.open(f'.{os.sep}icons{os.sep}heart.png')
+        self.icon_cases_file = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}biohazard.png')
+        self.icon_deaths_file = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}scull.png')
+        self.icon_recovered_file = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}heart.png')
 
         # Main frame for the widget.
         self.covid_frame = Frame(window, bg='black', bd=0)
@@ -61,7 +61,7 @@ class Covid:
         self.top_frame_deaths.grid(column=1, row=0, sticky=self.anchor)
 
         # Loads and places the scull icon.
-        
+
         icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
         self.render_deaths = ImageTk.PhotoImage(icon_deaths_file_resized)
         self.icon_deaths_world = Label(self.top_frame_deaths, image=self.render_deaths, bg='black')
@@ -75,7 +75,7 @@ class Covid:
         self.top_frame_recovered.grid(column=2, row=0, sticky=self.anchor)
 
         # Loads and places the heart icon.
-        
+
         icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
         self.render_recovered = ImageTk.PhotoImage(icon_recovered_file_resized)
         self.icon_recovered_world = Label(self.top_frame_recovered, image=self.render_recovered, bg='black')
@@ -160,34 +160,34 @@ class Covid:
             self.rus_recovered.config(font=("SFUIText", self.font_size - 2, "bold"))
 
             icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-            self.render_cases_world = ImageTk.PhotoImage(icon_cases_file_resized)            
+            self.render_cases_world = ImageTk.PhotoImage(icon_cases_file_resized)
             self.icon_cases_world.config(image=self.render_cases_world)
-            
+
             icon_cases_file_resized = self.icon_cases_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-            self.render_cases_rus = ImageTk.PhotoImage(icon_cases_file_resized)            
+            self.render_cases_rus = ImageTk.PhotoImage(icon_cases_file_resized)
             self.icon_cases_rus.config(image=self.render_cases_rus)
 
             icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-            self.render_deaths_world = ImageTk.PhotoImage(icon_deaths_file_resized)            
+            self.render_deaths_world = ImageTk.PhotoImage(icon_deaths_file_resized)
             self.icon_deaths_world.config(image=self.render_deaths_world)
 
             icon_deaths_file_resized = self.icon_deaths_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-            self.render_deaths_rus = ImageTk.PhotoImage(icon_deaths_file_resized)            
+            self.render_deaths_rus = ImageTk.PhotoImage(icon_deaths_file_resized)
             self.icon_deaths_rus.config(image=self.render_deaths_rus)
 
             icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.9), int(self.font_size * 1.9)), Image.ANTIALIAS)
-            self.render_recovered_world = ImageTk.PhotoImage(icon_recovered_file_resized)            
+            self.render_recovered_world = ImageTk.PhotoImage(icon_recovered_file_resized)
             self.icon_recovered_world.config(image=self.render_recovered_world)
 
             icon_recovered_file_resized = self.icon_recovered_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
-            self.render_recovered_rus = ImageTk.PhotoImage(icon_recovered_file_resized)            
+            self.render_recovered_rus = ImageTk.PhotoImage(icon_recovered_file_resized)
             self.icon_recovered_rus.config(image=self.render_recovered_rus)
-            
+
             self.window.update()
 
             self.covid_frame_width = self.covid_frame.winfo_width()
             self.covid_frame_height = self.covid_frame.winfo_height()
-            
+
             if self.covid_frame_width > self.target_width or self.covid_frame_height > self.target_height:
                 self.font_size -= 1
             else:
@@ -210,7 +210,7 @@ class Covid:
         #self.icon_recovered_world.configure(image=self.render_recovered)
         #self.icon_cases_rus.configure(image=self.render_cases_rus)
         #self.icon_deaths_rus.configure(image=self.render_deaths_rus)
-        #self.icon_recovered_rus.configure(image=self.render_recovered_rus)          
+        #self.icon_recovered_rus.configure(image=self.render_recovered_rus)
 
         self.world_cases.after(1000, self.status)
 
@@ -221,7 +221,7 @@ class Covid:
         else:
             self.covid_frame.place_forget()
             self.covid_frame.after(1000, self.status)
-    
+
     def widget_update(self, *args):
         self.relx = args[0]
         self.rely = args[1]
@@ -249,5 +249,5 @@ if __name__ == '__main__':
 __version__ = '0.96' # 10th September 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
-__email__ = "dmitry-kud@yandex.ru"    
+__email__ = "dmitry-kud@yandex.ru"
 __status__ = "Development"

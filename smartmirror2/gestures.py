@@ -66,7 +66,7 @@ class GesturesRecognizer:
             self.logger.critical("Error opening video stream or file")
         _, self.frame = self.camera.read()
 
-        #self.camera.set(10, 1) # Sets the brightness of the camera.
+        self.camera.set(10, 55) # Sets the brightness of the camera.
         #self.camera.set(11, 50) # Sets the contrast of the camera.
         #self.camera.set(cv2.CAP_PROP_EXPOSURE, 40)
 
@@ -114,7 +114,7 @@ class GesturesRecognizer:
         # When using multiprocessing with the current module,
         # the model must be loaded inside a child process.
         try:
-            self.model = load_model(f'data{os.sep}gestures_model.h5')
+            self.model = load_model(f'{os.path.dirname(os.path.realpath(__file__))}data{os.sep}gestures_model.h5')
             #self.model = load_model(f'/media/data/sm2/smartmirror2/data{os.sep}gestures_model.h5')
             self.logger.info('The CNN has been loaded.')
         except Exception as error:

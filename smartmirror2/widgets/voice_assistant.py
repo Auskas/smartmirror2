@@ -42,7 +42,7 @@ class VoiceAssistant():
         self.assistant_frame = Frame(self.window, bg='black', bd=2)
         self.assistant_frame.place(relx=self.relx, rely=self.rely)
 
-        self.frames = [PhotoImage(file=f'images{os.sep}wave.gif',format = 'gif -index %i' %(i)) for i in range(1,40)]
+        self.frames = [PhotoImage(file=f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}images{os.sep}wave.gif',format = 'gif -index %i' %(i)) for i in range(1,40)]
         self.wave_label = Label(self.assistant_frame, image=self.frames[0], bg='black', bd=0)
         self.wave_label.grid(column=1, row=0, sticky='nw')
 

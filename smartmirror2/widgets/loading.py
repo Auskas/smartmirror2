@@ -23,20 +23,20 @@ class Loading:
         self.window_height = window.winfo_screenheight()
 
         self.frames = [PhotoImage(
-            file=f'.{os.sep}images{os.sep}loading{os.sep}{i}.png',
+            file=f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}images{os.sep}loading{os.sep}{i}.png',
             ) for i in range(0,8)
         ]
         for i in range(len(self.frames)):
             self.frames[i] = self.frames[i].subsample(2,2)
         self.backup_image = PhotoImage(
-            file=f'.{os.sep}images{os.sep}loading.png'
+            file=f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}images{os.sep}loading.png'
         )
         #print(f'Number of gif frames {len(self.frames)}')
         self.loading_label = Label(
-            self.window, 
-            bg='black', 
+            self.window,
+            bg='black',
             bd=0,
-            width=self.window_width, 
+            width=self.window_width,
             height=self.window_height,
         )
         self.loading_label.pack()
