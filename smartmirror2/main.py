@@ -32,7 +32,7 @@ class Mirror():
         self.logger = logging.getLogger('SM')
         self.logger.setLevel(logging.DEBUG)
 
-        logFileHandler = logging.FileHandler(f'sm.log')
+        logFileHandler = logging.FileHandler(f'sm2.log')
         logFileHandler.setLevel(logging.DEBUG)
 
         logConsole = logging.StreamHandler()
@@ -51,23 +51,37 @@ class Mirror():
 
         self.logger.info('########## MIRROR STARTED ##########')
         self.HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        with open(f'{self.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
-            self.WIDGETS_CONFIG = json.load(widgets_config_file)
-        self.loop = asyncloop
+        self.logger.debug(f'Home directory is {self.HOME_DIR}')
+        try:
+            with open(f'{self.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
+                self.WIDGETS_CONFIG = json.load(widgets_config_file)
+            self.logger.debug('Widgets conf file has been read!')
+        except Exception as exc:
+            self.logger.exception('Cannot open widget config file!')
 
-        self.widgets = {}
+        if os.environ.get('DISPLAY','') == '':
+            self.logger.debug('no display found. Using :0.0')
+            os.environ.__setitem__('DISPLAY', ':0.0')
 
-        self.update_widgets = False
-        
-        self.window = Tk()
-        self.window.title('Smart Mirror Mark II')
-        self.window.configure(bg='black')
-        # Disables closing the window by standard means, such as ALT+F4 etc.
-        #self.window.overrideredirect(True)
-        self.window_width = self.window.winfo_screenwidth()
-        self.window_height = self.window.winfo_screenheight()
-        self.window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
-        self.logger.info('Main window has been created')
+        try:
+            self.loop = asyncloop
+
+            self.widgets = {}
+
+            self.update_widgets = False
+
+            self.window = Tk()
+            self.window.title('Smart Mirror Mark II')
+            self.window.configure(bg='black')
+            # Disables closing the window by standard means, such as ALT+F4 etc.
+            #self.window.overrideredirect(True)
+            self.window_width = self.window.winfo_screenwidth()
+            self.window_height = self.window.winfo_screenheight()
+            self.window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
+            self.logger.info('Main window has been created')
+
+        except Exception as exc:
+            self.logger.exception('Cannot create the main window!')
 
         self.create_loading_window()
         self.loading = Loading(self.loading_window)
@@ -158,7 +172,7 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]            
+                    anchor=params[4]
                 )
                 self.widgets[widget_name] = self.voice_assistant
 
@@ -172,7 +186,7 @@ class Mirror():
 
         self.loading_window.destroy()
         self.window.call("wm", "attributes", ".", "-topmost", "true")
-        
+
         self.queue = Queue()
 
         self.gesture = False
@@ -183,7 +197,7 @@ class Mirror():
         self.cam = cv2.VideoCapture(0)
         if self.cam is None or not self.cam.isOpened():
             self.gestures_recognizer = False
-            self.logger.info('No camera device has been found on board.')    
+            self.logger.info('No camera device has been found on board.')
         else:
             self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue)
             self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
@@ -198,8 +212,8 @@ class Mirror():
         self.tasks.append(
             self.loop.create_task(
                 asyncio.start_server(
-                    self.cmd_from_web_cfg, 
-                    self.SERVER_IP_ADDRESS, 
+                    self.cmd_from_web_cfg,
+                    self.SERVER_IP_ADDRESS,
                     self.SERVER_PORT
                 )
             )
@@ -249,7 +263,7 @@ class Mirror():
                         self.WIDGETS_CONFIG[widget_name]['height'] = float(widgets[widget]['height'])
                         self.WIDGETS_CONFIG[widget_name]['show'] = widgets[widget]['show']
                         self.WIDGETS_CONFIG[widget_name]['anchor'] = widgets[widget]['anchor']
-                    # Special key for YouTube widget.    
+                    # Special key for YouTube widget.
                     if widget_name == 'youtube':
                         self.WIDGETS_CONFIG[widget_name]['defaultVideo'] = widgets[widget]['defaultVideo']
                 self.update_widgets = True
@@ -298,14 +312,14 @@ class Mirror():
                     elif self.gesture == 'sign_of_the_horns':
                         self.youtube.external_command = 'volume_up'
                     elif self.gesture == None:
-                        self.youtube.external_command = None                 
+                        self.youtube.external_command = None
 
                 if self.scraper:
-                    self.covid.covid_figures = self.scraper.covid_figures   
-                    self.stocks.rates_string = self.scraper.rates_string   
+                    self.covid.covid_figures = self.scraper.covid_figures
+                    self.stocks.rates_string = self.scraper.rates_string
                     self.ticker.news_string = self.scraper.news_string
                     self.weather.forecast_string = self.scraper.forecast_string
-            
+
             except Exception as exc:
                 self.logger.error(f'Cannot update the window {exc}')
 
@@ -351,5 +365,3 @@ if __name__ == '__main__':
         asyncloop.run_forever()
     except KeyboardInterrupt:
         mirror.close()
-
-        
