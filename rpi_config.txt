@@ -1,0 +1,7 @@
+# The following adjustments have to be made to your RPI in order to use it as your smart mirror cpu.
+
+1. HDMI config. In the file /boot/config.txt uncomment the following lines:
+#hdmi_force_hotplug=1
+#hdmi_drive=2
+The main goal of the change is to always output video over the HDMI output. Otherwise, if there is no active display at the boot time,
+there is no video.

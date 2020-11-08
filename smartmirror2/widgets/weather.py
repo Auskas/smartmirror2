@@ -19,7 +19,7 @@ class Weather:
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
-            self.logger.addHandler(ch)            
+            self.logger.addHandler(ch)
 
         self.SM2_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.ICONS_DIR = f'{self.SM2_DIR}{os.sep}icons{os.sep}weather{os.sep}'
@@ -45,7 +45,7 @@ class Weather:
         if self.anchor == 'ne':
             self.relx += width
         self.weather_frame.place(
-            relx=self.relx, 
+            relx=self.relx,
             rely=self.rely,
             anchor=self.anchor)
 
@@ -58,7 +58,7 @@ class Weather:
         self.bottomframe_inside.grid(column=0, row=1, sticky=self.anchor)
 
         self.title_label = Label(self.topframe_inside, text="Москва", fg='lightblue', bg='black', font=("SFUIText", self.font_size, "bold"))
-        if self.anchor == 'w':
+        if self.anchor == 'nw':
             self.title_label.pack(side=LEFT)
         else:
             self.title_label.pack(side=RIGHT)
@@ -98,7 +98,7 @@ class Weather:
             self.next_next_forecast.pack(side = LEFT)
         else:
             self.next_next_forecast.pack(side = RIGHT)
-        
+
         self.show = True
 
         self.forecast_string = None
@@ -113,7 +113,7 @@ class Weather:
         }
 
         self.logger.debug('Weather Widget has been initialized.')
-        self.window.update_idletasks() 
+        self.window.update_idletasks()
         self.get_font_size()
         self.status()
 
@@ -122,11 +122,11 @@ class Weather:
             width and height of the widget."""
         while self.font_size > 12:
             self.title_label.config(font=("SFUIText", self.font_size // 2, "bold"))
-    
+
             icon_file_resized = self.icon_file.resize((int(self.font_size * 1.5), int(self.font_size * 1.5)), Image.ANTIALIAS)
             self.icon_render = ImageTk.PhotoImage(icon_file_resized)
             self.icon.configure(image=self.icon_render)
-            
+
             self.degrees.config(font=("SFUIText", self.font_size , "bold"))
 
             self.next_forecast.config(font=("SFUIText", self.font_size // 3, "bold"))
@@ -144,14 +144,14 @@ class Weather:
                 self.logger.debug(f'Target widget width {self.target_width}')
                 self.logger.debug(f'Real widget width {int(self.weather_frame_width)}')
                 self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.weather_frame_height)}')                
+                self.logger.debug(f'Real widget height {int(self.weather_frame_height)}')
                 break
 
 
     def status(self):
         if self.show and self.forecast_string is not None:
             self.weather_frame.place(
-                relx=self.relx, 
+                relx=self.relx,
                 rely=self.rely,
                 anchor=self.anchor
             )
@@ -160,7 +160,7 @@ class Weather:
             self.weather_frame.place_forget()
             self.weather_frame.after(1000, self.status)
 
-    def widget(self):           
+    def widget(self):
         # Special weather forecast for April Fools' Day.
         current_time = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
         if current_time.month == 4 and current_time.day == 1 and self.seconds_counter > 3600:
@@ -169,13 +169,13 @@ class Weather:
         self.title_label.config(text='Москва')
         temp_now = str(self.forecast_string['fact']['temp'])
         weather_icon = self.forecast_string['fact']['icon']
-        
+
         self.icon.configure(image=self.icon_render)
         #self.icon.image = self.icon_render
-        
+
         temp_next = str(self.forecast_string['forecast']['parts'][0]['temp_avg'])
         part_next = self.forecast_string['forecast']['parts'][0]['part_name']
-        
+
         temp_next_next = str(self.forecast_string['forecast']['parts'][1]['temp_avg'])
 
         # The following conditions are for determining the names of the next two part of a day.
@@ -187,7 +187,7 @@ class Weather:
             part_next, part_next_next  = 'Днём', 'вечером'
         else:
             part_next, part_next_next  = 'Вечером', 'ночью'
-            
+
         self.degrees.config(text=f'{temp_now}° ')
         self.next_forecast.config(text=f'{part_next} {temp_next},')
         self.next_next_forecast.config(text=f'{part_next_next} {temp_next_next}')
@@ -208,26 +208,26 @@ class Weather:
         self.font_size = 100
         self.get_font_size()
         self.topframe_inside.grid(
-            column=0, 
-            row=0, 
+            column=0,
+            row=0,
             sticky=self.anchor
         )
 
         self.bottomframe_inside.grid(
-            column=0, 
-            row=1, 
+            column=0,
+            row=1,
             sticky=self.anchor
         )
 
         self.next_frame_top.grid(
-            column=0, 
-            row=0, 
+            column=0,
+            row=0,
             sticky=self.anchor
         )
 
         self.next_frame_bottom.grid(
-            column=0, 
-            row=1, 
+            column=0,
+            row=1,
             sticky=self.anchor
         )
 
@@ -255,6 +255,5 @@ if __name__ == '__main__':
 __version__ = '0.96' # 10th September 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
-__email__ = "dmitry-kud@yandex.ru"    
+__email__ = "dmitry-kud@yandex.ru"
 __status__ = "Development"
-

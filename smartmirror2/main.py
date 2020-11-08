@@ -23,6 +23,7 @@ from widgets.ticker import Ticker
 from widgets.weather import Weather
 from widgets.voice_assistant import VoiceAssistant
 from widgets.loading import Loading
+from widgets.statusbar import Statusbar
 from scraper import Scraper
 from gestures import GesturesRecognizer
 
@@ -175,7 +176,16 @@ class Mirror():
                     anchor=params[4]
                 )
                 self.widgets[widget_name] = self.voice_assistant
-
+            elif widget_name == 'statusbar':
+                self.statusbar = Statusbar(
+                    self.window,
+                    relx=params[0],
+                    rely=params[1],
+                    width=params[2],
+                    height=params[3],
+                    anchor=params[4]
+                )
+                self.widgets[widget_name] = self.statusbar
         for widget_name in self.widgets:
             if self.WIDGETS_CONFIG[widget_name]['show']:
                 self.widgets[widget_name].show = True
@@ -199,7 +209,7 @@ class Mirror():
             self.gestures_recognizer = False
             self.logger.info('No camera device has been found on board.')
         else:
-            self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue)
+            self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue, self.window)
             self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
             self.logger.info('A camera device has been found on board.')
 

@@ -19,6 +19,9 @@ import cv2
 import os, sys, copy
 import logging
 import time
+from tkinter import *
+from multiprocessing import Process
+import PIL.Image, PIL.ImageTk
 
 class GesturesRecognizer:
 
@@ -54,6 +57,8 @@ class GesturesRecognizer:
         self.ROI_SIZE = 250
         self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes
         self.FPS = 30 # the number of frames analyzed per second.
+
+        self.show = False
 
         if __name__ == '__main__':
             self.camera = cv2.VideoCapture(0)
@@ -107,14 +112,12 @@ class GesturesRecognizer:
             self.predicted_gesture = None
             self.logger.error(f'Cannot predict the gesture: {exc}')
 
-
-
     def tracker(self):
 
         # When using multiprocessing with the current module,
         # the model must be loaded inside a child process.
         try:
-            self.model = load_model(f'{os.path.dirname(os.path.realpath(__file__))}data{os.sep}gestures_model.h5')
+            self.model = load_model(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}data{os.sep}gestures_model.h5')
             #self.model = load_model(f'/media/data/sm2/smartmirror2/data{os.sep}gestures_model.h5')
             self.logger.info('The CNN has been loaded.')
         except Exception as error:
@@ -127,6 +130,7 @@ class GesturesRecognizer:
                 ret, frame = self.camera.read()
 
                 if ret:
+
                     frame = cv2.flip(frame, 1)
 
                     frame = cv2.resize(frame, (640,480))
@@ -153,6 +157,13 @@ class GesturesRecognizer:
                         k = cv2.waitKey(int(1))
                         if k == 27:    # Esc key to stop
                             break
+                    # Temporaly camera capture enable to check the real output!
+                    else:
+                        cv2.imshow('Camera capture', frame)
+                        cv2.imshow('Foreground', fgmask)
+                        k = cv2.waitKey(int(1))
+                        if k == 27:    # Esc key to stop
+                            break
                 else:
                     break
             except Exception as exc:
@@ -162,8 +173,10 @@ if __name__ == '__main__':
     try:
         g = GesturesRecognizer()
         g.tracker()
+
     except KeyboardInterrupt:
         g.camera.release()
+        sys.exit()
 
 __version__ = '0.96' # 10th September 2020
 __author__ = 'Dmitry Kudryashov'

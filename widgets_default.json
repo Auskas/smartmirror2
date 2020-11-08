@@ -111,5 +111,19 @@
     "anchor": "w",
     "minwidth": 20,
     "minheight": 5
+  },
+  "statusbar": {
+    "name": "statusbar",
+    "alias": "Status Bar",
+    "id": 9,
+    "show": true,
+    "relx": 5.0,
+    "rely": 55.0,
+    "width": 10.0,
+    "height": 10.0,
+    "keepAspectRatio": false,
+    "anchor": "nw",
+    "minwidth": 5,
+    "minheight": 5
   }
 }
