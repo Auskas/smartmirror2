@@ -2,6 +2,14 @@
 
 1. HDMI config. In the file /boot/config.txt uncomment the following lines:
 #hdmi_force_hotplug=1
-#hdmi_drive=2
 The main goal of the change is to always output video over the HDMI output. Otherwise, if there is no active display at the boot time,
 there is no video.
+
+2. crontab -e
+Execute the command in the terminal and add to the end the following line:
+/usr/bin/python3 /home/pi/sm2/smartmirror2/main.py &
+The first part is the default location of python3 in Raspberry OS, the second part is the full path to the script.
+The ampersand sign (&) is mandatory.
+
+3. Enable SSH to control the device remotely.
+Execute "sudo raspi-config" in the terminal, select Interfacing Options, navigate to SSH, choose Yes, select OK, choose Finish.
