@@ -24,6 +24,7 @@ from widgets.weather import Weather
 from widgets.voice_assistant import VoiceAssistant
 from widgets.loading import Loading
 from widgets.statusbar import Statusbar
+from widgets.gestures_widget import GesturesWidget
 from scraper import Scraper
 from gestures import GesturesRecognizer
 
@@ -186,6 +187,16 @@ class Mirror():
                     anchor=params[4]
                 )
                 self.widgets[widget_name] = self.statusbar
+            elif widget_name == 'gestures_widget':
+                self.gestures_widget = GesturesWidget(
+                    self.window,
+                    relx=params[0],
+                    rely=params[1],
+                    width=params[2],
+                    height=params[3],
+                    anchor=params[4]
+                )
+                self.widgets[widget_name] = self.gestures_widget
         for widget_name in self.widgets:
             if self.WIDGETS_CONFIG[widget_name]['show']:
                 self.widgets[widget_name].show = True
@@ -321,6 +332,8 @@ class Mirror():
                         self.youtube.external_command = 'volume_down'
                     elif self.gesture == 'sign_of_the_horns':
                         self.youtube.external_command = 'volume_up'
+                    #elif self.gesture == '5':
+                        #self.voice_assistant
                     elif self.gesture == None:
                         self.youtube.external_command = None
 
@@ -347,13 +360,16 @@ class Mirror():
                         if key == 'detected_gesture':
                             if data[key] == 'None':
                                 self.gesture = False
+                                self.gestures_widget.detected_gesture = self.gesture
                             else:
                                 self.gesture = data[key]
+                                self.gestures_widget.detected_gesture = self.gesture
                         elif key == 'face_detected':
                             self.face_detected = data[key]
                         else:
                             self.face_detected = False
                             self.gesture = False
+                            self.gestures_widget.detected_gesture = self.gesture
 
                 except Exception as exc:
                     self.logger.warning(f'Cannot process the data in the queue {exc}')

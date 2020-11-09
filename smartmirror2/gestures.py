@@ -71,7 +71,7 @@ class GesturesRecognizer:
             self.logger.critical("Error opening video stream or file")
         _, self.frame = self.camera.read()
 
-        self.camera.set(10, 55) # Sets the brightness of the camera.
+        self.camera.set(10, 35) # Sets the brightness of the camera.
         #self.camera.set(11, 50) # Sets the contrast of the camera.
         #self.camera.set(cv2.CAP_PROP_EXPOSURE, 40)
 

@@ -36,7 +36,7 @@ import alsaaudio
 
 class YoutubePlayer:
 
-    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', default_video='Manowar'):
+    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', default_video='Iron Maiden'):
         self.logger = logging.getLogger('SM.youtube')
         self.loop = asyncloop
 
@@ -77,6 +77,12 @@ class YoutubePlayer:
                #'--no-ts-trust-pcr', '--ts-seek-percent',  '--file-logging', '--logfile=vlc-log.txt', '--aout=alsa'
         if _isLinux:
             args.append('--no-xlib')
+        
+        # The timeout is used to initiate reloading of the video, 
+        # for instance when the internet connection is lost.
+        self.default_timeout = 10 #the number of seconds.
+        self.timeout = self.default_timeout
+
         # Below are some Youtube links for testing purposes. Leave one uncommented to see it on the screen.
         #self.url = str('https://www.youtube.com/watch?v=r_izDyWAid4')
         self.url = ''
@@ -86,7 +92,7 @@ class YoutubePlayer:
         #self.media = self.instance.media_new(self.url)
 
         # Creating an instance of MediaList object and assigning it a tuple containing only one URL from Youtube.
-        self.media_list = self.instance.media_list_new((self.url, ))
+        self.media_list = self.instance.media_list_new()
 
         self.audio = alsaaudio.Mixer()
         self.audio_volume = self.audio.getvolume()[0] * 3
@@ -253,14 +259,19 @@ class YoutubePlayer:
                         results_parser_process = Process(target=self.process_results, args=(results, ))
                         results_parser_process.start()
         except Exception as error:
-            self.logger.debug(f'Cannot load the Youtube page: {error}')
+            self.logger.error(f'Cannot load the Youtube page: {error}')
+            await asyncio.sleep(20)
+            search_loop = self.loop.create_task(self.search(topic))
 
 
     def process_results(self, resp):
         search_results = re.findall(r'"url":"\/watch\?v=(.{11})"', resp)
         if len(search_results) > 0:
-            self.logger.debug('Found the URL for the requested video...')
-            self.queue.put("https://www.youtube.com/watch?v=" + search_results[0])
+            self.logger.debug('Found the URLs for the requested video...')
+            # Puts all the found videos into the queue.
+            #for search_result in search_results:
+                #self.queue.put("https://www.youtube.com/watch?v=" + search_result)
+            self.queue.put(search_results)
         else:
             self.logger.debug(f'Search results are empty.')
             self.queue.put(None)
@@ -270,24 +281,32 @@ class YoutubePlayer:
             if self.queue.empty():
                 await asyncio.sleep(1)
             else:
-                url = self.queue.get()
-                if url is not None:
-                    self.change_url(url)            
+                urls = self.queue.get()
+                if urls is not None:
+                    self.change_url(urls)            
 
-    def change_url(self, url):
+    def change_url(self, urls):
         """ The method is used to change video's URL.
         It stops the player, creates a media object with the requested source,
         creates a list of media containing only one media and
         associates the list to the player. Afterwards the player restarts.
         Arguments: url as a string."""
-        self.logger.debug(f'Changing URL of the media player: {url}')
+        
         # In order to change the video, the script pauses the player, removes the first (and only) video
         # from the media list, adds target URL to the media list, virtually presses next video in
         # the player and finally resumes the playback.
         self.list_player.pause()
 
-        self.media_list.remove_index(0)
-        self.media_list.add_media(url)
+        # Clears the media list instance from all the containing videos.
+        for index in range(self.media_list.count()):
+            self.media_list.remove_index(index)
+        self.logger.debug('Media list has been cleared!') 
+
+        for url in urls:
+            url = "https://www.youtube.com/watch?v=" + url
+            self.media_list.add_media(url)
+        self.logger.debug(f'Found urls have been added to Media list!')
+
         self.list_player.next()
 
         self.player.set_xwindow(self.widget_canvas_id)
@@ -354,7 +373,25 @@ class YoutubePlayer:
 
 
     async def status(self):
+        self.previous_time = 0
         while True:
+            # The following condition is used to check if the video is being played.
+            # In case of the connection lost it decrements the timeout until it reaches
+            # zero and tries to restart the video.
+            self.current_time = self.player.get_time()
+            if self.current_time == self.previous_time:
+                #print(self.current_time)
+                self.timeout -= 0.05
+                if self.timeout <= 0:
+                    self.logger.error(f'Probably the internet connection has been lost. Trying to reload...')
+                    self.timeout = self.default_timeout
+                    self.list_player.pause()
+                    self.list_player.next()
+                    self.list_player.play()
+            else:
+                self.timeout = self.default_timeout
+            self.previous_time = self.current_time
+
             if self.external_command == 'volume_down':
                 self.audio_volume -= 1
                 if self.audio_volume < 0:

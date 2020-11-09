@@ -43,7 +43,7 @@
   },
   "stocks": {
     "name": "stocks",
-    "alias": "Stocks",
+    "alias": "\u0411\u0438\u0440\u0436\u0435\u0432\u044b\u0435 \u043a\u0443\u0440\u0441\u044b",
     "id": 4,
     "show": true,
     "relx": 56.35666118,
@@ -57,7 +57,7 @@
   },
   "youtube": {
     "name": "youtube",
-    "alias": "Youtube player",
+    "alias": "Youtube",
     "id": 5,
     "show": true,
     "relx": 60.45049342,
@@ -86,7 +86,7 @@
   },
   "weather": {
     "name": "weather",
-    "alias": "yandex weather",
+    "alias": "\u041f\u0440\u043e\u0433\u043d\u043e\u0437 \u043f\u043e\u0433\u043e\u0434\u044b",
     "id": 7,
     "show": true,
     "relx": 2.777146382,
@@ -114,11 +114,25 @@
   },
   "statusbar": {
     "name": "statusbar",
-    "alias": "Status Bar",
+    "alias": "\u0421\u043b\u0443\u0436\u0435\u0431\u043d\u0430\u044f \u0438\u043d\u0444\u043e",
     "id": 9,
     "show": true,
     "relx": 2.697113487,
     "rely": 44.76432749,
+    "width": 11.36537829,
+    "height": 11.52229532,
+    "keepAspectRatio": false,
+    "anchor": "nw",
+    "minwidth": 5,
+    "minheight": 5
+  },
+  "gestures_widget": {
+    "name": "gestures",
+    "alias": "\u0416\u0435\u0441\u0442\u044b",
+    "id": 9,
+    "show": true,
+    "relx": 2.697113487,
+    "rely": 64.76432749,
     "width": 11.36537829,
     "height": 11.52229532,
     "keepAspectRatio": false,

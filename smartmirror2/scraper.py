@@ -189,7 +189,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_news)
             if res == False:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
             else:
                 news_parser_process = Process(target=self.news_parser, args=(res, queue))
                 news_parser_process.start()
@@ -204,7 +204,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_covid)
             if res == False:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
             else:
                 covid_parser_process = Process(target=self.covid_parser, args=(res, queue))
                 covid_parser_process.start()
@@ -222,7 +222,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_weather, 'json', payload, headers)
             if res == False:
-                await asyncio.sleep(600)
+                await asyncio.sleep(60)
             else:
                 self.forecast_string = res
                 await asyncio.sleep(43200)

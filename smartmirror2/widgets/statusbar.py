@@ -59,7 +59,7 @@ class Statusbar:
         self.IP_address = ''
 
         self.cpu_temp_label = Label(
-            self.topframe_inside,
+            self.middleframe_inside,
             text='CPU 21 °C',
             fg='lightblue',
             bg='black',
@@ -67,7 +67,7 @@ class Statusbar:
         )
 
         self.gpu_temp_label = Label(
-            self.middleframe_inside,
+            self.topframe_inside,
             text='GPU 22 °C',
             fg='lightblue',
             bg='black',
@@ -99,7 +99,7 @@ class Statusbar:
         self.window.update_idletasks()
         self.get_font_size()
 
-        self.logger.info('Clock widgets has been created.')
+        self.logger.info('Statusbar widget has been created.')
         self.show = True
         self.status()
 
@@ -194,7 +194,7 @@ class Statusbar:
         self.bottomframe_inside.grid(
             column=0,
             row=2,
-            sticky=self.anchortitle_label
+            sticky=self.anchor
         )
 
         if self.anchor == 'nw':
