@@ -80,7 +80,7 @@ class YoutubePlayer:
         
         # The timeout is used to initiate reloading of the video, 
         # for instance when the internet connection is lost.
-        self.default_timeout = 10 #the number of seconds.
+        self.default_timeout = 30 #the number of seconds.
         self.timeout = self.default_timeout
 
         # Below are some Youtube links for testing purposes. Leave one uncommented to see it on the screen.
@@ -160,19 +160,19 @@ class YoutubePlayer:
             )
 
         # Loads the images, that are used in the widget, resizes them and assigns to the widget.
-        image_bar = Image.open(f'icons{os.sep}volume_bar.png')
+        image_bar = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}volume_bar.png')
         image_bar = image_bar.resize((self.volume_range + self.volume_frame_height, self.icons_target_size[0]), Image.ANTIALIAS)
         render_bar = ImageTk.PhotoImage(image_bar)
 
-        image_speaker = Image.open(f'icons{os.sep}speaker.png')
+        image_speaker = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}speaker.png')
         image_speaker = image_speaker.resize(self.icons_target_size, Image.ANTIALIAS)
         render_speaker = ImageTk.PhotoImage(image_speaker)
 
-        image_speaker_loud = Image.open(f'icons{os.sep}speaker_loud.png')
+        image_speaker_loud = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}speaker_loud.png')
         image_speaker_loud = image_speaker_loud.resize(self.icons_target_size, Image.ANTIALIAS)
         render_speaker_loud = ImageTk.PhotoImage(image_speaker_loud)
 
-        image_speaker_ball = Image.open(f'icons{os.sep}speaker_ball.png')
+        image_speaker_ball = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}speaker_ball.png')
         image_speaker_ball = image_speaker_ball.resize(self.icons_target_size, Image.ANTIALIAS)
         render_speaker_ball = ImageTk.PhotoImage(image_speaker_ball)
 
@@ -295,17 +295,20 @@ class YoutubePlayer:
         # In order to change the video, the script pauses the player, removes the first (and only) video
         # from the media list, adds target URL to the media list, virtually presses next video in
         # the player and finally resumes the playback.
+
         self.list_player.pause()
 
         # Clears the media list instance from all the containing videos.
-        for index in range(self.media_list.count()):
-            self.media_list.remove_index(index)
-        self.logger.debug('Media list has been cleared!') 
+        self.media_list.release()
+        self.logger.debug('Media list has been cleared: ') 
 
+        self.media_list = self.instance.media_list_new()
         for url in urls:
             url = "https://www.youtube.com/watch?v=" + url
             self.media_list.add_media(url)
-        self.logger.debug(f'Found urls have been added to Media list!')
+        self.logger.debug(f'{self.media_list.count()} urls have been added to Media list!')
+
+        self.list_player.set_media_list(self.media_list)
 
         self.list_player.next()
 

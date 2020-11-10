@@ -21,12 +21,14 @@ from widgets.stocks import Stocks
 from widgets.youtube import YoutubePlayer
 from widgets.ticker import Ticker
 from widgets.weather import Weather
-from widgets.voice_assistant import VoiceAssistant
 from widgets.loading import Loading
 from widgets.statusbar import Statusbar
 from widgets.gestures_widget import GesturesWidget
+from widgets.voice_assistant_widget import VoiceAssistantWidget
 from scraper import Scraper
 from gestures import GesturesRecognizer
+from voice_assistant import VoiceAssistant
+#from test_cmd import TestCMD
 
 class Mirror():
 
@@ -88,6 +90,8 @@ class Mirror():
         self.create_loading_window()
         self.loading = Loading(self.loading_window)
 
+        self.queue = Queue()
+
         # Initialization of every available widget.
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
@@ -143,7 +147,6 @@ class Mirror():
                     anchor=params[4],
                     default_video=params[5]
                 )
-                #self.youtube.play()
                 self.widgets[widget_name] = self.youtube
 
             elif widget_name == 'ticker':
@@ -167,16 +170,15 @@ class Mirror():
                 )
                 self.widgets[widget_name] = self.weather
             elif widget_name == 'voice_assistant':
-                self.voice_assistant = VoiceAssistant(
+                self.voice_assistant_widget = VoiceAssistantWidget(
                     self.window,
-                    self.WIDGETS_CONFIG,
                     relx=params[0],
                     rely=params[1],
                     width=params[2],
                     height=params[3],
                     anchor=params[4]
                 )
-                self.widgets[widget_name] = self.voice_assistant
+                self.widgets[widget_name] = self.voice_assistant_widget
             elif widget_name == 'statusbar':
                 self.statusbar = Statusbar(
                     self.window,
@@ -208,8 +210,6 @@ class Mirror():
         self.loading_window.destroy()
         self.window.call("wm", "attributes", ".", "-topmost", "true")
 
-        self.queue = Queue()
-
         self.gesture = False
         self.user_detected = False
         self.voice_command = []
@@ -223,6 +223,8 @@ class Mirror():
             self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue, self.window)
             self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
             self.logger.info('A camera device has been found on board.')
+
+        self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
 
         self.SERVER_IP_ADDRESS = '127.0.0.1'
         self.SERVER_PORT = 9086
@@ -240,6 +242,10 @@ class Mirror():
             )
         )
         self.tasks.append(self.loop.create_task(self.process_receiver()))
+        # For testing purposes only!
+        #self.test_cmd = TestCMD(self.queue)
+        #test_cmd_process = Process(target=self.test_cmd.send_command).start()
+
 
     def create_loading_window(self):
         self.loading_window = Toplevel()
@@ -332,10 +338,13 @@ class Mirror():
                         self.youtube.external_command = 'volume_down'
                     elif self.gesture == 'sign_of_the_horns':
                         self.youtube.external_command = 'volume_up'
-                    #elif self.gesture == '5':
-                        #self.voice_assistant
                     elif self.gesture == None:
                         self.youtube.external_command = None
+
+                if self.gesture == '5':
+                    voice_assistant_process = Process(target=self.voice_assistant.listen).start()
+                    self.voice_assistant_widget.show_wave = True
+                    self.voice_assistant_widget.show_wave_widget()
 
                 if self.scraper:
                     self.covid.covid_figures = self.scraper.covid_figures
@@ -364,8 +373,30 @@ class Mirror():
                             else:
                                 self.gesture = data[key]
                                 self.gestures_widget.detected_gesture = self.gesture
+                        
+                        # The following condition processes commands from the voice assistant module.
+                        elif key == 'voice_assistant':
+                            self.voice_assistant_widget.show_wave = False
+                            for cmd_key in data[key]:
+                                if cmd_key == 'youtube_search':
+                                    youtube_search_task = self.loop.create_task(self.youtube.search(data[key][cmd_key]))
+                                elif cmd_key == 'youtube_play':
+                                    self.youtube.play()
+                                elif cmd_key == 'youtube_stop':
+                                    self.youtube.stop()
+                                elif cmd_key == 'youtube_pause':
+                                    self.youtube.list_player.pause()
+                                elif cmd_key == 'youtube_fullscreen':
+                                    if data[key][cmd_key]:
+                                        self.youtube.set_fullscreen()
+                                    else:
+                                        self.youtube.set_window() 
+                                elif cmd_key in self.WIDGETS_CONFIG.keys():
+                                    self.WIDGETS_CONFIG[cmd_key]['show'] = data[key][cmd_key]   
+
                         elif key == 'face_detected':
                             self.face_detected = data[key]
+
                         else:
                             self.face_detected = False
                             self.gesture = False

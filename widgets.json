@@ -102,7 +102,7 @@
     "name": "voice_assistant",
     "alias": "\u0413\u043e\u043b\u043e\u0441\u043e\u0432\u043e\u0439 \u043f\u043e\u043c\u043e\u0449\u043d\u0438\u043a",
     "id": 8,
-    "show": false,
+    "show": true,
     "relx": 30.00003366,
     "rely": 30.0,
     "width": 19.99995512,
