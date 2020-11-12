@@ -5,6 +5,7 @@ import os, sys
 from tkinter import *
 import datetime
 import time
+import cv2
 import logging
 
 class GesturesWidget:
@@ -42,7 +43,7 @@ class GesturesWidget:
             rely=self.rely,
             anchor=self.anchor)
 
-        self.detected_gesture = False
+        self.detected_gesture = 'НЕТ'
 
         self.gestures_dict = {
             '5':'ПЯТЬ',
@@ -109,28 +110,32 @@ class GesturesWidget:
 
     def widget(self):
         self.gestures_label.config(
-            text=f'Жесты управления:\n{self.gestures_dict[self.detected_gesture]}'
+            text=f'Жесты управления:\n{self.detected_gesture}'
         )
+
         self.gestures_frame.after(10, self.status)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        self.gestures_frame.place(relx=self.relx, rely=self.rely)
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        if self.anchor == 'ne':
-            self.relx += width
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.font_size = 50
-        self.get_font_size()
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            self.gestures_frame.place(relx=self.relx, rely=self.rely)
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            if self.anchor == 'ne':
+                self.relx += width
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.font_size = 50
+            self.get_font_size()
 
-        if self.anchor == 'nw':
-            self.gestures_label.pack(side=LEFT)
-        else:
-            self.gestures_label.pack(side=RIGHT)
+            if self.anchor == 'nw':
+                self.gestures_label.pack(side=LEFT)
+            else:
+                self.gestures_label.pack(side=RIGHT)
+        except Exception as exc:
+            self.logger.error('exc')
 
 
 if __name__ == '__main__':

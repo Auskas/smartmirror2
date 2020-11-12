@@ -32,3 +32,8 @@ To run the web server execute the following command:
 ```
 $ python3 smartmirror2/web/manage.py runserver
 ```
+## Examples:
+Smart mirror interface
+![interface_example](https://github.com/Auskas/smartmirror2/blob/master/demo/demo1.gif)
+Web interface
+![web_interface_example](https://github.com/Auskas/smartmirror2/blob/master/demo/demo2.gif)

@@ -92,6 +92,16 @@ class Mirror():
 
         self.queue = Queue()
 
+        # Checks if there is a camera device on board.
+        self.cam = cv2.VideoCapture(0)
+        if self.cam is None or not self.cam.isOpened():
+            self.gestures_recognizer = False
+            self.logger.info('No camera device has been found on board.')
+        else:
+            self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue)
+            self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
+            self.logger.info('A camera device has been found on board.')
+
         # Initialization of every available widget.
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
@@ -189,7 +199,7 @@ class Mirror():
                     anchor=params[4]
                 )
                 self.widgets[widget_name] = self.statusbar
-            elif widget_name == 'gestures_widget':
+            elif widget_name == 'gestures':
                 self.gestures_widget = GesturesWidget(
                     self.window,
                     relx=params[0],
@@ -214,16 +224,6 @@ class Mirror():
         self.user_detected = False
         self.voice_command = []
 
-        # Checks if there is a camera device on board.
-        self.cam = cv2.VideoCapture(0)
-        if self.cam is None or not self.cam.isOpened():
-            self.gestures_recognizer = False
-            self.logger.info('No camera device has been found on board.')
-        else:
-            self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue, self.window)
-            self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
-            self.logger.info('A camera device has been found on board.')
-
         self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
 
         self.SERVER_IP_ADDRESS = '127.0.0.1'
@@ -245,7 +245,16 @@ class Mirror():
         # For testing purposes only!
         #self.test_cmd = TestCMD(self.queue)
         #test_cmd_process = Process(target=self.test_cmd.send_command).start()
-
+        self.gestures_to_command = {
+            '5': 'Распознование голоса',
+            '4': 'Четыре (не назначено)',
+            'pointing_finger': 'Уменьшение громкости',
+            'sign_of_the_horns': 'Увеличение громкости',
+            'inverted_l': 'Следующее видео',
+            'peace': 'Мир (не назначено)',
+            'thumb_up': 'Большой палец вверх (не назначено)',
+            False: 'НЕТ'
+        }
 
     def create_loading_window(self):
         self.loading_window = Toplevel()
@@ -338,13 +347,17 @@ class Mirror():
                         self.youtube.external_command = 'volume_down'
                     elif self.gesture == 'sign_of_the_horns':
                         self.youtube.external_command = 'volume_up'
+                    elif self.gesture == 'inverted_l':
+                        self.youtube.external_command = 'next_video'
                     elif self.gesture == None:
                         self.youtube.external_command = None
 
                 if self.gesture == '5':
-                    voice_assistant_process = Process(target=self.voice_assistant.listen).start()
-                    self.voice_assistant_widget.show_wave = True
-                    self.voice_assistant_widget.show_wave_widget()
+                    if self.voice_assistant_widget.show_wave == False:
+                        voice_assistant_process = Process(target=self.voice_assistant.listen).start()
+                        self.youtube.mute()
+                        self.voice_assistant_widget.show_wave = True
+                        self.voice_assistant_widget.show_wave_widget()
 
                 if self.scraper:
                     self.covid.covid_figures = self.scraper.covid_figures
@@ -367,16 +380,17 @@ class Mirror():
                 try:
                     for key in data.keys():
                         if key == 'detected_gesture':
-                            if data[key] == 'None':
+                            if data[key] == None:
                                 self.gesture = False
-                                self.gestures_widget.detected_gesture = self.gesture
+                                self.gestures_widget.detected_gesture = self.gestures_to_command[self.gesture]
                             else:
                                 self.gesture = data[key]
-                                self.gestures_widget.detected_gesture = self.gesture
+                                self.gestures_widget.detected_gesture = self.gestures_to_command[self.gesture]
                         
                         # The following condition processes commands from the voice assistant module.
                         elif key == 'voice_assistant':
                             self.voice_assistant_widget.show_wave = False
+                            self.youtube.unmute()
                             for cmd_key in data[key]:
                                 if cmd_key == 'youtube_search':
                                     youtube_search_task = self.loop.create_task(self.youtube.search(data[key][cmd_key]))

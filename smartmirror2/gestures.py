@@ -25,7 +25,7 @@ import PIL.Image, PIL.ImageTk
 
 class GesturesRecognizer:
 
-    def __init__(self, *args):
+    def __init__(self, camera, queue):
         self.logger = logging.getLogger('SM.gestures')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -54,26 +54,33 @@ class GesturesRecognizer:
             'thumb_up'
         ]
 
-        self.ROI_SIZE = 250
-        self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes
-        self.FPS = 30 # the number of frames analyzed per second.
-
         self.show = False
 
         if __name__ == '__main__':
             self.camera = cv2.VideoCapture(0)
-            self.queue = False
+            from multiprocessing import Queue
+            self.queue = Queue()
         else:
-            self.camera = args[0]
-            self.queue = args[1]
+            self.camera = camera
+            self.queue = queue
 
         if self.camera.isOpened()== False:
             self.logger.critical("Error opening video stream or file")
         _, self.frame = self.camera.read()
 
-        self.camera.set(10, 35) # Sets the brightness of the camera.
-        #self.camera.set(11, 50) # Sets the contrast of the camera.
-        #self.camera.set(cv2.CAP_PROP_EXPOSURE, 40)
+        camera_width = self.camera.get(cv2.CAP_PROP_FRAME_WIDTH)
+        camera_height = self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        self.logger.info(f'Camera frame size: {camera_width} x {camera_height}')
+        
+        self.ROI_SIZE = int(camera_width * 0.4)
+        self.logger.info(f'ROI size is {self.ROI_SIZE}')
+
+        self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes
+        self.FPS = 30 # the number of frames analyzed per second.
+
+        self.camera.set(10, -50) # Sets the brightness of the camera.
+        self.camera.set(11, 50) # Sets the contrast of the camera.
+        #self.camera.set(cv2.CAP_PROP_EXPOSURE, 100)
 
         self.MODEL_IMG_SIZE = 32
 
@@ -171,7 +178,7 @@ class GesturesRecognizer:
 
 if __name__ == '__main__':
     try:
-        g = GesturesRecognizer()
+        g = GesturesRecognizer(False, False)
         g.tracker()
 
     except KeyboardInterrupt:

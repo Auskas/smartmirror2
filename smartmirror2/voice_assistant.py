@@ -84,20 +84,20 @@ class VoiceAssistant():
             # Catches the exception when there is nothing said during speech recognition.
             except sr.WaitTimeoutError:
                 self.logger.debug('Timeout: no speech has been registred.')
-                self.queue.put({'voice_assistant' : False})
+                self.queue.put({'voice_assistant' : {'error': True}})
             except Exception as exc:
                 self.logger.debug(f'Cannot get the mic: {exc}')
-                self.queue.put({'voice_assistant' : False})
+                self.queue.put({'voice_assistant' : {'error': True}})
 
     def _recognize(self, audio):
         self.logger.info('Trying to recognize speech...')
         try:
-            user_speech = self.speech_recognizer.recognize_google(audio, language = "en-EN").lower()
+            user_speech = self.speech_recognizer.recognize_google(audio, language = "ru-RU").lower()
             self.logger.debug(f'User said: {user_speech}')
             self.cmd_handler(user_speech)
         except sr.UnknownValueError:
             self.logger.info('Cannot recognize speech...')
-            self.queue.put({'voice_assistant' : False})
+            self.queue.put({'voice_assistant' : {'error': True}})
             
     def cmd_handler(self, cmd):
         """ Gets a string of recognized speech as cmd. 
@@ -255,6 +255,7 @@ class VoiceAssistant():
         if len(self.cmd) > 0:
             self.logger.debug(f'The following commands will be processed: {self.cmd}')
             self.cmd['raw_string'] = cmd
+            self.cmd['error'] = False
             self.queue.put({'voice_assistant' : self.cmd})
             self.cmd = {}
           

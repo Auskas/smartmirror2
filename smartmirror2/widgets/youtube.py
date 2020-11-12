@@ -125,6 +125,8 @@ class YoutubePlayer:
 
         self.external_command = None
 
+        self.next_video_asyncio = False
+
         self.queue = Queue()
         receiver_loop = self.loop.create_task(self.process_receiver())
         status_loop = self.loop.create_task(self.status())
@@ -227,6 +229,12 @@ class YoutubePlayer:
             self.widgetCanvas.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.widgetCanvas.config(width=self.video_window_width, height=self.video_window_height)
 
+    def mute(self):
+        self.audio.setmute(1)
+
+    def unmute(self):
+        self.audio.setmute(0)
+
     def play(self):
         self.list_player.play()
         self.video_status = 'running'
@@ -237,6 +245,14 @@ class YoutubePlayer:
         self.widgetCanvas.config(width=0, height=0)
         self.list_player.pause()
         self.video_status = 'stopped'
+
+    async def next_video(self):
+        self.next_video_asyncio = True
+        self.list_player.pause()
+        self.list_player.next()
+        await asyncio.sleep(3)
+        self.list_player.play()
+        self.next_video_asyncio = False
 
     async def search(self, topic):
         """ The method is used to get Youtube link of the desired topic.
@@ -395,6 +411,9 @@ class YoutubePlayer:
                 self.timeout = self.default_timeout
             self.previous_time = self.current_time
 
+            if self.external_command == 'next_video' and self.next_video_asyncio == False:
+                next_video_task = self.loop.create_task(self.next_video())
+
             if self.external_command == 'volume_down':
                 self.audio_volume -= 1
                 if self.audio_volume < 0:
@@ -418,6 +437,8 @@ class YoutubePlayer:
                     self.volume_widget_hide()
                 else:
                     self.volume_widget_timeout -= 1
+
+            self.external_command = None
 
             await asyncio.sleep(0.05)
 
