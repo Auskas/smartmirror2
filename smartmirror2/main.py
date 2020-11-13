@@ -10,6 +10,10 @@ from tkinter import *
 
 import logging
 
+import re
+
+import subprocess
+
 import cv2
 
 from multiprocessing import Process, Queue
@@ -56,6 +60,31 @@ class Mirror():
         self.logger.info('########## MIRROR STARTED ##########')
         self.HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.logger.debug(f'Home directory is {self.HOME_DIR}')
+
+        try:
+            host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
+            ip_address_regex = re.compile(r'(\d)+.(\d)+.(\d).+(\d)')
+            self.IP_ADDRESS = ip_address_regex.search(host_ip_address)
+            if self.IP_ADDRESS is not None:
+                self.SERVER_IP_ADDRESS = self.IP_ADDRESS.group()
+                self.SERVER_PORT = 9086
+                self.logger.info(f'Host IP address is {self.SERVER_IP_ADDRESS}')
+            else:
+                self.SERVER_IP_ADDRESS = 'localhost'
+                self.SERVER_PORT = 9086
+                self.logger.warning(f'IP address has not been assigned to the host! Using localhost...')
+        except Exception as exc:
+            self.logger.error(f'Cannot get the IP address: {exc}')
+
+        # Web server initialization
+        try:
+            if self.SERVER_IP_ADDRESS == 'localhost':
+                os.popen(f'python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver')
+            else:
+                os.popen(f'python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
+            self.logger.info('Successfully initialized the web server!')
+        except Exception as exc:
+            self.logger.error(f'Cannot start the web server: {exc}')
         try:
             with open(f'{self.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
                 self.WIDGETS_CONFIG = json.load(widgets_config_file)
@@ -105,7 +134,21 @@ class Mirror():
         # Initialization of every available widget.
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
-            if widget_name == 'clock':
+
+            if widget_name == 'youtube':
+                self.youtube = YoutubePlayer(
+                    self.window,
+                    asyncloop,
+                    relx=params[0],
+                    rely=params[1],
+                    width=params[2],
+                    height=params[3],
+                    anchor=params[4],
+                    default_video=params[5]
+                )
+                self.widgets[widget_name] = self.youtube
+
+            elif widget_name == 'clock':
                 self.clock = Clock(
                     self.window,
                     relx=params[0],
@@ -145,19 +188,6 @@ class Mirror():
                     anchor=params[4]
                 )
                 self.widgets[widget_name] = self.stocks
-
-            elif widget_name == 'youtube':
-                self.youtube = YoutubePlayer(
-                    self.window,
-                    asyncloop,
-                    relx=params[0],
-                    rely=params[1],
-                    width=params[2],
-                    height=params[3],
-                    anchor=params[4],
-                    default_video=params[5]
-                )
-                self.widgets[widget_name] = self.youtube
 
             elif widget_name == 'ticker':
                 self.ticker = Ticker(
@@ -226,9 +256,6 @@ class Mirror():
 
         self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
 
-        self.SERVER_IP_ADDRESS = '127.0.0.1'
-        self.SERVER_PORT = 9086
-
         self.tasks = []
         self.tasks.append(self.loop.create_task(self.window_updater()))
         self.tasks.append(self.loop.create_task(self.manager()))
@@ -236,7 +263,8 @@ class Mirror():
             self.loop.create_task(
                 asyncio.start_server(
                     self.cmd_from_web_cfg,
-                    self.SERVER_IP_ADDRESS,
+                    #self.SERVER_IP_ADDRESS,
+                    'localhost',
                     self.SERVER_PORT
                 )
             )
@@ -392,19 +420,20 @@ class Mirror():
                             self.voice_assistant_widget.show_wave = False
                             self.youtube.unmute()
                             for cmd_key in data[key]:
-                                if cmd_key == 'youtube_search':
+                                if cmd_key == 'error' and data[key][cmd_key]:
+                                    break
+                                elif cmd_key == 'youtube_search' and data[key][cmd_key]:
                                     youtube_search_task = self.loop.create_task(self.youtube.search(data[key][cmd_key]))
-                                elif cmd_key == 'youtube_play':
+                                elif cmd_key == 'youtube_play' and data[key][cmd_key]:
                                     self.youtube.play()
-                                elif cmd_key == 'youtube_stop':
+                                elif cmd_key == 'youtube_stop' and data[key][cmd_key]:
                                     self.youtube.stop()
-                                elif cmd_key == 'youtube_pause':
+                                elif cmd_key == 'youtube_pause' and data[key][cmd_key]:
                                     self.youtube.list_player.pause()
-                                elif cmd_key == 'youtube_fullscreen':
-                                    if data[key][cmd_key]:
-                                        self.youtube.set_fullscreen()
-                                    else:
-                                        self.youtube.set_window() 
+                                elif cmd_key == 'youtube_fullscreen' and data[key][cmd_key]:
+                                    self.youtube.set_fullscreen()
+                                elif cmd_key == 'youtube_window' and data[key][cmd_key]:
+                                    self.youtube.set_window() 
                                 elif cmd_key in self.WIDGETS_CONFIG.keys():
                                     self.WIDGETS_CONFIG[cmd_key]['show'] = data[key][cmd_key]   
 

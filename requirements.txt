@@ -7,4 +7,3 @@ Django==3.1.1
 django-crispy-forms==1.9.2
 tensorflow-cpu @ https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow_cpu-2.3.0-cp36-cp36m-manylinux2010_x86_64.whl
 Keras==2.4.3
-opencv-contrib-python==4.4.0.42

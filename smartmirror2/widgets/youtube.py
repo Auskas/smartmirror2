@@ -339,24 +339,32 @@ class YoutubePlayer:
     def set_window(self):
         """ The method is used to change the size of the video canvas.
         The canvas occupies only small part of the main window."""
-        self.widgetCanvas.place(
-            relx=self.relx, 
-            rely=self.rely + self.icons_target_size[0] / self.window_height, 
-            anchor=self.anchor)
-        self.widgetCanvas.config(width=self.target_width, height=self.target_height)
-        self.player.set_xwindow(self.widget_canvas_id)
-        self.fullscreen_status = False
-        self.video_status = 'running'
+        try:
+            self.logger.debug('Setting video in WINDOW mode...')
+            self.widgetCanvas.place(
+                relx=self.relx, 
+                rely=self.rely + self.icons_target_size[0] / self.window_height, 
+                anchor=self.anchor)
+            self.widgetCanvas.config(width=self.target_width, height=self.target_height)
+            self.player.set_xwindow(self.widget_canvas_id)
+            self.fullscreen_status = False
+            self.video_status = 'running'
+        except Exception as exc:
+            self.logger.error(f'Cannot set video in WINDOW mode: {exc}')
 
     def set_fullscreen(self):
         """ The method is used to change the size of the video canvas.
         The canvas size equals to the size of the screen.
         Therefore it occupies the whole screen."""
-        self.widgetCanvas.place(relx=0, rely=0, anchor='nw')
-        self.widgetCanvas.config(width=self.w, height=self.h)
-        self.player.set_xwindow(self.widget_canvas_id)
-        self.fullscreen_status = True
-        self.video_status = 'running'
+        try:
+            self.logger.debug('Setting video in FULLSCREEN mode...')
+            self.widgetCanvas.place(relx=0, rely=0, anchor='nw')
+            self.widgetCanvas.config(width=self.window_width, height=self.window_height)
+            self.player.set_xwindow(self.widget_canvas_id)
+            self.fullscreen_status = True
+            self.video_status = 'running'
+        except Exception as exc:
+            self.logger.error(f'Cannot set video in FULLSCREEN mode: {exc}')
 
     def widget_update(self, *args):
         width = args[2]
@@ -487,6 +495,7 @@ if __name__ == '__main__':
         window.geometry("%dx%d+0+0" % (w, h))
 
         youtube = YoutubePlayer(window, loop)
+        youtube.set_fullscreen()
         
         import cv2
         import importlib.util

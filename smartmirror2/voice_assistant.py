@@ -30,8 +30,19 @@ class VoiceAssistant():
 
         self.cmd = {}
 
-        for key in WIDGETS_CONFIG.keys():
-            self.cmd[WIDGETS_CONFIG[key]['name']] = WIDGETS_CONFIG[key]['show']
+        self.WIDGETS_CONFIG = WIDGETS_CONFIG
+
+        for key in self.WIDGETS_CONFIG.keys():
+            self.cmd[self.WIDGETS_CONFIG[key]['name']] = self.WIDGETS_CONFIG[key]['show']
+
+        self.cmd['update'] = False
+        self.cmd['youtube_search'] = False
+        self.cmd['youtube_stop'] = False
+        self.cmd['youtube_pause'] = False
+        self.cmd['youtube_play'] = False
+        self.cmd['youtube_volume'] = False
+        self.cmd['youtube_fullscreen'] = False
+        self.cmd['youtube_window'] = False
 
         self.hide_commands = (
             'убрать', 
@@ -60,10 +71,68 @@ class VoiceAssistant():
             'show', 
             'open', 
             ' on', 
-            'watch', 
+        )
+
+        self.video_commands = (
+            'youtube',
+            'video',
+            'видео',
+            'ютюб',
+            'ютуб'
+        )
+
+        self.all_widgets_commands = (
+            'все виджеты',
+            'всю графику',
+            'всё',
+            'all the widgets',
+            'all widgets'
+        )
+
+        self.fullscreen_commands = (
+            'развернуть',
+            'весь экран',
+            'полный экран',
+            'полноэкранный',
+            'full screen',
+            'fullscreen'
+        )
+
+        self.window_commands = (
+             'окно',
+             'свернуть',
+             'оконный',
+             'window',
+        )
+
+        self.video_stop_commands = (
+            'стоп',
+            'остановить',
+            'stop'
+        )
+
+        self.video_pause_commands = (
+            'пауза',
+            'pause'
+        )
+
+        self.video_play_commands = (
+            'возобновить',
+            'продолжить',
+            'resume',
             'play'
         )
 
+        self.video_search_commands = (
+            'смотреть',
+            'найти',
+            'искать',
+            'воспроизвести',
+            'play',
+            'search',
+            'find',
+            'watch'
+        )
         self.logger.info('Voice assistant has been initialized!')
         
 
@@ -77,7 +146,7 @@ class VoiceAssistant():
             #self.speech_recognizer.dynamic_energy_threshold = False
             self.speech_recognizer.adjust_for_ambient_noise(source, duration=0.5)
             try:
-                audio = self.speech_recognizer.listen(source, timeout=3, phrase_time_limit=3)
+                audio = self.speech_recognizer.listen(source, timeout=4, phrase_time_limit=3)
                 
                 #self.message_label.config(text='CONFIG')
                 self._recognize(audio)
@@ -99,180 +168,253 @@ class VoiceAssistant():
             self.logger.info('Cannot recognize speech...')
             self.queue.put({'voice_assistant' : {'error': True}})
             
-    def cmd_handler(self, cmd):
+    def cmd_handler(self, phrase):
         """ Gets a string of recognized speech as cmd. 
             Checks if there are any sort of commands in it.
             Modifies self.cmd according to the detected commands."""
 
         self.logger.info('Looking for commands in the speech...')
-        if self.second_part_command(cmd) == False and \
-            (
-            cmd.find('все виджеты') != -1 or \
-            cmd.find('all the widgets') != -1 or \
-            cmd.find('all widgets') != -1 or \
-            cmd.find('всю графику') != -1 or \
-            cmd.find('всё') != -1
-            ):
 
-            for key in self.cmd.keys():
-                self.cmd[key] = False
+        words_to_exclude = set()
 
-            #self.logger.debug('All the widgets have been concealed!')
+        detected_words = {
+            'all_widgets': False, 
+            'show': False,
+            'hide': False,
+            'clock': False,
+            'calendar': False,
+            'weather': False,
+            'stocks': False,
+            'covid': False,
+            'ticker': False,
+            'spartak': False,
+            'volume': False,
+            'video': False,
+            'fullscreen': False,
+            'window': False,
+            'stop': False,
+            'pause': False,
+            'play': False,
+            'search': False
+        }
 
-        elif self.second_part_command(cmd) and \
-            (
-            cmd.find('все виджеты') != -1 or \
-            cmd.find('all the widgets') != -1 or \
-            cmd.find('всю графику') != -1 or \
-            cmd.find('всё') != -1
-            ):
+        for command in self.video_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['video'] = True
 
-            for key in self.cmd.keys():
-                self.cmd[key] = True
+        for command in self.video_search_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['search'] = True
 
-            #self.logger.debug('All the widgets is being showing!')
+        # If there is a phrase assosiated with video search:
+        if detected_words['search'] and detected_words['video']:
+            self.logger.debug('Video SEARCH command detected!')
+            for word in words_to_exclude:
+                if phrase.find(word) != -1:
+                    phrase= phrase.replace(word, '')
+            phrase = phrase.strip()
+            self.cmd['youtube_search'] = phrase
+            self.cmd['update'] = True
 
-        elif cmd.find('установить громкость') != -1:
-            try:
-                self.cmd['playback_volume'] = int(cmd[cmd.rfind('установить громкость') + len('установить громкость ') + 1:])
-            except exception as error:
-                self.logger.error('Cannot convert volume control value into an integer.')
+        if phrase.find('громкость') != -1:
+            words_to_exclude.add('громкость')
+            detected_words['volume'] = True
 
-        elif (cmd.find('часы') != -1 or cmd.find('clock') != -1) and \
-              self.second_part_command(cmd) == False:
-            self.cmd['clock'] = False
+        if detected_words['volume'] and detected_words['video']:
+            self.logger.debug('Video VOLUME command detected!')
+            self.cmd['youtube_volume'] = True
+            self.cmd['update'] = True
 
-        elif (cmd.find('часы') != -1 or cmd.find('clock') != -1) and \
-              self.second_part_command(cmd):
-            self.cmd['clock'] = True
+        for command in self.fullscreen_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['fullscreen'] = True
 
-        elif (cmd.find('погод') != -1 or cmd.find('weather') != -1) and \
-              self.second_part_command(cmd) == False:
-            self.cmd['weather'] = False
-
-        elif (cmd.find('погод') != -1 or cmd.find('weather') != -1) and \
-              self.second_part_command(cmd):
-            self.cmd['weather'] = True
-            
-        elif (cmd.find('курс') != -1 or cmd.find('stocks') != -1) and \
-              self.second_part_command(cmd) == False:
-            self.cmd['stocks'] = False
-
-        elif (cmd.find('курс') != -1 or cmd.find('stocks') != -1) and \
-              self.second_part_command(cmd):
-            self.cmd['stocks'] = True
-            
-        elif (cmd.find('спартак') != -1 or cmd.find('spartak') != -1) and \
-              self.second_part_command(cmd) == False:
-            self.cmd['spartak'] = False
-
-        elif (cmd.find('спартак') != -1 or cmd.find('spartak') != -1) and \
-              self.second_part_command(cmd):
-            self.cmd['spartak'] = True
-            
-        elif self.second_part_command(cmd) == False and \
-              (cmd.find('строк') != -1 or cmd.find('ticker') != -1):
-            self.cmd['marquee'] = False
-
-        elif self.second_part_command(cmd) and \
-            (cmd.find('строк') != -1 or cmd.find('ticker') != -1):
-            self.cmd['marquee'] = True
-
-        elif (cmd.find('вирус') != -1 or cmd.find('covid') != -1) and \
-              self.second_part_command(cmd) == False:
-            self.cmd['covid'] = False
-
-        elif (cmd.find('вирус') != -1 or cmd.find('covid') != -1) and \
-              self.second_part_command(cmd):
-            self.cmd['covid'] = True
-            
-        elif cmd.find('полный экран') != -1 or \
-             cmd.find('весь экран') != -1 or \
-             cmd.find('развернуть') != -1 or \
-             cmd.find('full screen') != -1 or \
-             cmd.find('fullscreen') != -1:
+        if detected_words['fullscreen'] and detected_words['video']:
+            self.logger.debug('Video FULLSCREEN command detected!')
             self.cmd['youtube_fullscreen'] = True
+            self.cmd['update'] = True
+
+        for command in self.window_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['window'] = True
         
-        elif cmd.find('убрать') != -1 or \
-             cmd.find('окно') != -1 or \
-             cmd.find('в угол') != -1 or \
-             cmd.find('свернуть') != -1 or \
-             cmd.find('window') != -1:
-            self.cmd['youtube_fullscreen'] = False
-            
-        elif (
-             cmd.find('видео') != -1 or \
-             cmd.find('video') != -1 or \
-             cmd.find('playback') != -1
-             ) and \
-             (
-             cmd.find('стоп') != -1 or \
-             cmd.find('остановить') != -1 or \
-             cmd.find('stop') != -1
-             ):
+        if detected_words['window'] and detected_words['video']:
+            self.logger.debug('Video WINDOW MODE command detected!')
+            self.cmd['youtube_window'] = True
+            self.cmd['update'] = True
+
+        for command in self.video_stop_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['stop'] = True
+
+        if detected_words['stop'] and detected_words['video']:
+            self.logger.debug('Video STOP command detected!')
             self.cmd['youtube_stop'] = True
-        
-        elif (
-            cmd.find('видео') != -1 or \
-            cmd.find('video') != -1 or \
-            cmd.find('playback') != -1
-            ) and \
-            (
-            cmd.find('пауза') != -1 or \
-            cmd.find('pause') != -1
-            ):
+            self.cmd['update'] = True
+
+        for command in self.video_pause_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['pause'] = True
+
+        if detected_words['pause'] and detected_words['video']:
+            self.logger.debug('Video PAUSE command detected!')
             self.cmd['youtube_pause'] = True
-        
-        elif (
-            cmd.find('видео') != -1 or \
-            cmd.find('video') != -1 or \
-            cmd.find('playback') != -1
-            ) and \
-            (
-            cmd.find('возобновить') != -1 or \
-            cmd.find('play') != -1 or \
-            cmd.find('продолжить') != -1 or \
-            cmd.find('resume') != -1
-            ):
+            self.cmd['update'] = True
+
+        for command in self.video_play_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude,add(command)
+                detected_words['play'] = True
+
+        if detected_words['play'] and detected_words['video']:
+            self.logger.debug('Video PLAY command detected!')
             self.cmd['youtube_play'] = True
-        
-        # Youtube video search condition, for instance 'watch youtube Metallica', 
-        # 'show video Liverpool Manchester City' 
-        elif self.second_part_command(cmd) and \
-            (
-            cmd.find('youtube') != -1 or \
-            cmd.find('video') != -1 or \
-            cmd.find('видео') != -1 or \
-            cmd.find('ютюб') != -1 or \
-            cmd.find('ютуб') != -1
-            ):
-            for c in self.show_commands:
-                if cmd.find(c) != -1:
-                    cmd = cmd[cmd.find(cmd):]
-                    cmd = cmd.replace(c, '')
-            self.cmd['youtube_search'] = cmd
+            self.cmd['update'] = True
 
-        if len(self.cmd) > 0:
+
+        for command in self.all_widgets_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['all_widgets'] = True
+
+        for command in self.show_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['show'] = True
+
+        if detected_words['all_widgets'] and detected_words['show']:
+            for widget in self.WIDGETS_CONFIG.keys():
+                self.cmd[widget] = True
+            self.cmd['update'] = True
+            self.logger.debug('SHOW all the widgets command detected!')
+
+        for command in self.hide_commands:
+            if phrase.find(command) != -1:
+                words_to_exclude.add(command)
+                detected_words['hide'] = True
+
+        if detected_words['all_widgets'] and detected_words['hide']:
+            for widget in self.WIDGETS_CONFIG.keys():
+                self.cmd[widget] = False
+            self.cmd['update'] = True
+            self.logger.debug('HIDE all the widgets command detected!')
+
+        if phrase.find('часы') != -1 or phrase.find('clock') != -1:
+            words_to_exclude.add('часы')
+            words_to_exclude.add('clock')
+            if detected_words['show']:
+                self.cmd['clock'] = True
+                self.cmd['update'] = True
+                self.logger.debug('CLOCK widget SHOW command detected!')
+            elif detected_words['hide']:
+                self.logger.debug('CLOCK widget HIDE command detected!')
+                self.cmd['clock'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('календарь') != -1 or phrase.find('calendar') != -1:
+            words_to_exclude.add('календарь')
+            words_to_exclude.add('calendar')
+            if detected_words['show']:
+                self.logger.debug('CALENDAR widget SHOW command detected!')
+                self.cmd['calendar'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('CALENDAR widget HIDE command detected!')
+                self.cmd['calendar'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('погода') != -1 or phrase.find('weather') != -1:
+            words_to_exclude.add('погода')
+            words_to_exclude.add('weather')
+            if detected_words['show']:
+                self.logger.debug('WEATHER widget SHOW command detected!')
+                self.cmd['weather'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('WEATHER widget HIDE command detected!')
+                self.cmd['weather'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('курсы') != -1 or phrase.find('курс') != -1 or phrase.find('stocks') != -1:
+            words_to_exclude.add('курсы')
+            words_to_exclude.add('курс')
+            words_to_exclude.add('stocks')
+            if detected_words['show']:
+                self.logger.debug('STOCKS widget SHOW command detected!')
+                self.cmd['stocks'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('STOCKS widget HIDE command detected!')
+                self.cmd['stocks'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('коронавирус') != -1 or phrase.find('ковид') != -1 or phrase.find('covid') != -1 or phrase.find('coronavirus') != -1:
+            words_to_exclude.add('коронавирус')
+            words_to_exclude.add('ковид')
+            words_to_exclude.add('covid')
+            words_to_exclude.add('coronavirus')
+            if detected_words['show']:
+                self.logger.debug('COVID widget SHOW command detected!')
+                self.cmd['covid'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('COVID widget HIDE command detected!')
+                self.cmd['covid'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('спартак') != -1 or phrase.find('spartak') != -1:
+            words_to_exclude.add('spartak')
+            words_to_exclude.add('спартак')
+            if detected_words['show']:
+                self.logger.debug('SPARTAK widget SHOW command detected!')
+                self.cmd['spartak'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('SPARTAK widget HIDE command detected!')
+                self.cmd['spartak'] = False
+                self.cmd['update'] = True
+
+        if phrase.find('строка') != -1 or phrase.find('строку') != -1 or phrase.find('ticker') != -1:
+            words_to_exclude.add('строка')
+            words_to_exclude.add('строку')
+            if detected_words['show']:
+                self.logger.debug('TICKER widget SHOW command detected!')
+                self.cmd['ticker'] = True
+                self.cmd['update'] = True
+            elif detected_words['hide']:
+                self.logger.debug('TICKER widget HIDE command detected!')
+                self.cmd['ticker'] = False
+                self.cmd['update'] = True
+
+        if self.cmd['update']:
             self.logger.debug(f'The following commands will be processed: {self.cmd}')
-            self.cmd['raw_string'] = cmd
-            self.cmd['error'] = False
-            self.queue.put({'voice_assistant' : self.cmd})
-            self.cmd = {}
-          
-    def second_part_command(self, cmd):
-        """ Method checks if there is a word in the voice command associated with showing or
-            concealing a widget.
-            Returns True if there is a word associated with showing a widget.
-            Returns False if there is a word associated with concealing a widget.
-            Otherwise, returns None."""
-        for c in self.hide_commands:
-            if cmd.find(c) != -1:
-                return False
-        for c in self.show_commands:
-            if cmd.find(c) != -1:
-                return True
-        return None        
+            cmd = self.cmd.copy()
+            # Have to make a copy of the commands in order to leave them intouch
+            # while processing by the main module.
+            self.queue.put({'voice_assistant' : cmd})
 
+        else:
+            self.queue.put({'voice_assistant': {'update': False}})
+            self.logger.debug('No commands have been found in the speech!')
+
+        self.cmd['update'] = False
+        self.cmd['youtube_search'] = False
+        self.cmd['youtube_stop'] = False
+        self.cmd['youtube_pause'] = False
+        self.cmd['youtube_play'] = False
+        self.cmd['youtube_volume'] = False
+        self.cmd['youtube_fullscreen'] = False
+        self.cmd['youtube_window'] = False
+
+        if __name__ == '__main__':
+            next_listening_cycle = Process(target=self.listen).start()
+          
 if __name__ == '__main__':
 
     from tkinter import *

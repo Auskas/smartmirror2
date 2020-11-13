@@ -22,6 +22,7 @@ import time
 from tkinter import *
 from multiprocessing import Process
 import PIL.Image, PIL.ImageTk
+import subprocess
 
 class GesturesRecognizer:
 
@@ -35,13 +36,21 @@ class GesturesRecognizer:
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
-        bg_thresh = 500
+        try:
+            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "exposure_auto=3"])
+        except Exception as exc:
+            self.logger.debug(f'Cannot set camera property: {exc}')
+
+        bg_thresh = 40
         self.background_substractor = cv2.createBackgroundSubtractorMOG2(
             detectShadows=False,
             varThreshold=bg_thresh
             )
         self.kernel = np.ones((4,4),np.uint8)
-        self.dilation_kernel = np.ones((3,3),np.uint8)
+        self.dilation_kernel = np.ones((4,4),np.uint8)
+
+        #self.LEARNING_RATE=0.00005
+        self.LEARNING_RATE=0.00009
 
         self.LABELS = [
             '5',
@@ -80,7 +89,8 @@ class GesturesRecognizer:
 
         self.camera.set(10, -50) # Sets the brightness of the camera.
         self.camera.set(11, 50) # Sets the contrast of the camera.
-        #self.camera.set(cv2.CAP_PROP_EXPOSURE, 100)
+        #self.camera.set(14, 64) # Sets the gain of the camera.
+        #self.camera.set(cv2.CAP_PROP_EXPOSURE, 3)
 
         self.MODEL_IMG_SIZE = 32
 
@@ -132,6 +142,13 @@ class GesturesRecognizer:
             self.logger.error(f'Cannot load the CNN: {error}')
 
         frame_counter = 0
+
+        # Turns off the auto exposure mode.
+        try:
+            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "exposure_auto=1"])
+        except Exception as exc:
+            self.logger.debug(f'Cannot set camera property: {exc}')
+
         while self.camera.isOpened():
             try:
                 ret, frame = self.camera.read()
@@ -144,7 +161,8 @@ class GesturesRecognizer:
 
                     roi = frame[self.begin_Y:self.end_Y, self.begin_X:self.end_X]
 
-                    fgmask = self.background_substractor.apply(roi, learningRate=0.00005)
+                    fgmask = self.background_substractor.apply(roi, learningRate=self.LEARNING_RATE)
+                    #fgmask = self.background_substractor.apply(roi)
 
                     # Get rid of noise
                     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, self.kernel)
