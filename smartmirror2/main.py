@@ -396,7 +396,7 @@ class Mirror():
             except Exception as exc:
                 self.logger.error(f'Cannot update the window {exc}')
 
-            await asyncio.sleep(0.05)
+            await asyncio.sleep(0.1)
 
     async def process_receiver(self):
         """ The method is asynchronously waits for strings in the queue."""

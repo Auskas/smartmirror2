@@ -224,7 +224,7 @@ class YoutubePlayer:
             it will be in the fullscreen mode after resuming the playback and vice versa."""
         if self.fullscreen_status:
             self.widgetCanvas.place(relx=0, rely=0, anchor='nw')
-            self.widgetCanvas.config(width=self.w, height=self.h)
+            self.widgetCanvas.config(width=self.window_width, height=self.window_height)
         else:
             self.widgetCanvas.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.widgetCanvas.config(width=self.video_window_width, height=self.video_window_height)
@@ -247,13 +247,16 @@ class YoutubePlayer:
         self.video_status = 'stopped'
 
     async def next_video(self):
-        self.next_video_asyncio = True
-        self.list_player.pause()
-        self.list_player.next()
-        await asyncio.sleep(3)
-        self.list_player.play()
-        self.next_video_asyncio = False
-
+        try:
+            self.next_video_asyncio = True
+            self.list_player.pause()
+            self.list_player.next()
+            await asyncio.sleep(3)
+            self.list_player.play()
+            self.next_video_asyncio = False
+        except Exception as exc:
+            self.logger.error(f'Cannot play the next video: {exc}')
+            
     async def search(self, topic):
         """ The method is used to get Youtube link of the desired topic.
             It loads the webpage using a proper request and finds the URL of the most relevant video.
@@ -281,16 +284,19 @@ class YoutubePlayer:
 
 
     def process_results(self, resp):
-        search_results = re.findall(r'"url":"\/watch\?v=(.{11})"', resp)
-        if len(search_results) > 0:
-            self.logger.debug('Found the URLs for the requested video...')
-            # Puts all the found videos into the queue.
-            #for search_result in search_results:
-                #self.queue.put("https://www.youtube.com/watch?v=" + search_result)
-            self.queue.put(search_results)
-        else:
-            self.logger.debug(f'Search results are empty.')
-            self.queue.put(None)
+        try:
+            search_results = re.findall(r'"url":"\/watch\?v=(.{11})"', resp)
+            if len(search_results) > 0:
+                self.logger.debug('Found the URLs for the requested video...')
+                # Puts all the found videos into the queue.
+                #for search_result in search_results:
+                    #self.queue.put("https://www.youtube.com/watch?v=" + search_result)
+                self.queue.put(search_results)
+            else:
+                self.logger.debug(f'Search results are empty.')
+                self.queue.put(None)
+        except Exception as exc:
+            self.logger.error(f'Cannot process the search results : {exc}')
 
     async def process_receiver(self):
         while True:
@@ -312,29 +318,32 @@ class YoutubePlayer:
         # from the media list, adds target URL to the media list, virtually presses next video in
         # the player and finally resumes the playback.
 
-        self.list_player.pause()
+        try:
+            self.list_player.pause()
 
-        # Clears the media list instance from all the containing videos.
-        self.media_list.release()
-        self.logger.debug('Media list has been cleared: ') 
+            # Clears the media list instance from all the containing videos.
+            self.media_list.release()
+            self.logger.debug('Media list has been cleared: ') 
 
-        self.media_list = self.instance.media_list_new()
-        for url in urls:
-            url = "https://www.youtube.com/watch?v=" + url
-            self.media_list.add_media(url)
-        self.logger.debug(f'{self.media_list.count()} urls have been added to Media list!')
+            self.media_list = self.instance.media_list_new()
+            for url in urls:
+                url = "https://www.youtube.com/watch?v=" + url
+                self.media_list.add_media(url)
+            self.logger.debug(f'{self.media_list.count()} urls have been added to Media list!')
 
-        self.list_player.set_media_list(self.media_list)
+            self.list_player.set_media_list(self.media_list)
 
-        self.list_player.next()
+            self.list_player.next()
 
-        self.player.set_xwindow(self.widget_canvas_id)
+            self.player.set_xwindow(self.widget_canvas_id)
 
-        self.list_player.play()
+            self.list_player.play()
 
-        self.video_status = 'running'
+            self.video_status = 'running'
 
-        self.logger.debug('The URL has been changed.')
+            self.logger.debug('The URL has been changed.')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the media list and change the URL: {exc}')
 
     def set_window(self):
         """ The method is used to change the size of the video canvas.
@@ -367,36 +376,39 @@ class YoutubePlayer:
             self.logger.error(f'Cannot set video in FULLSCREEN mode: {exc}')
 
     def widget_update(self, *args):
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.icons_target_size = (
-            int(self.target_width / 30), 
-            int(self.target_width / 30)
-        )
+        try:
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.icons_target_size = (
+                int(self.target_width / 30), 
+                int(self.target_width / 30)
+            )
 
-        self.relx = args[0]
-        if self.anchor == 'ne':
-            self.relx += width
-        self.rely = args[1] + self.icons_target_size[0] / self.window_height
+            self.relx = args[0]
+            if self.anchor == 'ne':
+                self.relx += width
+            self.rely = args[1] + self.icons_target_size[0] / self.window_height
 
-        self.volume_frame_width = self.target_width
-        self.volume_frame_height = self.icons_target_size[0]
-        # The range in pixels of the space between the muted speaker icon and the loud speaker to the right.
-        self.volume_range = int(self.volume_frame_width - 3 * self.volume_frame_height)
-        self.volume_frame.place(
-            relx=self.relx, 
-            #rely=self.rely - self.icons_target_size[0], 
-            rely=self.rely,
-            anchor=self.anchor
-            )        
+            self.volume_frame_width = self.target_width
+            self.volume_frame_height = self.icons_target_size[0]
+            # The range in pixels of the space between the muted speaker icon and the loud speaker to the right.
+            self.volume_range = int(self.volume_frame_width - 3 * self.volume_frame_height)
+            self.volume_frame.place(
+                relx=self.relx, 
+                #rely=self.rely - self.icons_target_size[0], 
+                rely=self.rely,
+                anchor=self.anchor
+                )        
 
-        if self.fullscreen_status == False:
-            self.set_window()
+            if self.fullscreen_status == False:
+                self.set_window()
 
-        search_loop = self.loop.create_task(self.search(args[5]))
+            search_loop = self.loop.create_task(self.search(args[5]))
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 
     async def status(self):
@@ -405,48 +417,54 @@ class YoutubePlayer:
             # The following condition is used to check if the video is being played.
             # In case of the connection lost it decrements the timeout until it reaches
             # zero and tries to restart the video.
-            self.current_time = self.player.get_time()
-            if self.current_time == self.previous_time:
-                #print(self.current_time)
-                self.timeout -= 0.05
-                if self.timeout <= 0:
-                    self.logger.error(f'Probably the internet connection has been lost. Trying to reload...')
-                    self.timeout = self.default_timeout
-                    self.list_player.pause()
-                    self.list_player.next()
-                    self.list_player.play()
-            else:
-                self.timeout = self.default_timeout
-            self.previous_time = self.current_time
-
-            if self.external_command == 'next_video' and self.next_video_asyncio == False:
-                next_video_task = self.loop.create_task(self.next_video())
-
-            if self.external_command == 'volume_down':
-                self.audio_volume -= 1
-                if self.audio_volume < 0:
-                    self.audio_volume = 0
-                self.audio.setvolume(int(self.audio_volume // 3))
-                self.volume_widget_ball_position(self.audio_volume // 3)
-
-            elif self.external_command == 'volume_up':
-                self.audio_volume += 1
-                if self.audio_volume > 300:
-                    self.audio_volume = 300
-                self.audio.setvolume(int(self.audio_volume // 3))
-                self.volume_widget_ball_position(self.audio_volume // 3)
-
-            if self.external_command in ('volume_up', 'volume_down') and self.volume_widget_concealed:
-                self.volume_widget_timeout = 20
-                self.volume_widget_show()
-
-            elif self.external_command not in ('volume_up', 'volume_down') and self.volume_widget_concealed == False:
-                if self.volume_widget_timeout == 0:
-                    self.volume_widget_hide()
+            try:
+                self.current_time = self.player.get_time()
+                if self.current_time == self.previous_time:
+                    #print(self.current_time)
+                    self.timeout -= 0.05
+                    if self.timeout <= 0:
+                        self.logger.error(f'Probably the internet connection has been lost. Trying to reload...')
+                        self.timeout = self.default_timeout
+                        self.list_player.pause()
+                        self.list_player.next()
+                        self.list_player.play()
                 else:
-                    self.volume_widget_timeout -= 1
+                    self.timeout = self.default_timeout
+                self.previous_time = self.current_time
+            except Exception as exc:
+                self.logger.error(f'Cannot reload video: {exc}')
 
-            self.external_command = None
+            try:
+                if self.external_command == 'next_video' and self.next_video_asyncio == False:
+                    next_video_task = self.loop.create_task(self.next_video())
+
+                if self.external_command == 'volume_down':
+                    self.audio_volume -= 1
+                    if self.audio_volume < 0:
+                        self.audio_volume = 0
+                    self.audio.setvolume(int(self.audio_volume // 3))
+                    self.volume_widget_ball_position(self.audio_volume // 3)
+
+                elif self.external_command == 'volume_up':
+                    self.audio_volume += 1
+                    if self.audio_volume > 300:
+                        self.audio_volume = 300
+                    self.audio.setvolume(int(self.audio_volume // 3))
+                    self.volume_widget_ball_position(self.audio_volume // 3)
+
+                if self.external_command in ('volume_up', 'volume_down') and self.volume_widget_concealed:
+                    self.volume_widget_timeout = 20
+                    self.volume_widget_show()
+
+                elif self.external_command not in ('volume_up', 'volume_down') and self.volume_widget_concealed == False:
+                    if self.volume_widget_timeout == 0:
+                        self.volume_widget_hide()
+                    else:
+                        self.volume_widget_timeout -= 1
+
+                self.external_command = None
+            except Exception as exc:
+                self.logger.error(f'Cannot execute widget gestures controls: {exc}')
 
             await asyncio.sleep(0.05)
 
