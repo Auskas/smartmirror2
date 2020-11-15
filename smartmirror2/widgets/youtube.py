@@ -377,6 +377,9 @@ class YoutubePlayer:
 
     def widget_update(self, *args):
         try:
+            # !!! Stop video before updating the widget.
+            self.list_player.stop()
+
             width = args[2]
             height = args[3]
             self.anchor = args[4]

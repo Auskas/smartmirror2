@@ -23,6 +23,7 @@ from tkinter import *
 from multiprocessing import Process
 import PIL.Image, PIL.ImageTk
 import subprocess
+import os
 
 class GesturesRecognizer:
 
@@ -36,8 +37,16 @@ class GesturesRecognizer:
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
+        if os.environ.get('DISPLAY', '') == '':
+            os.environ.__setitem__('DISPLAY', ':0.0')
+
         try:
-            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "exposure_auto=3"])
+            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "exposure_auto=1"])
+        except Exception as exc:
+            self.logger.debug(f'Cannot set camera property: {exc}')
+
+        try:
+            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "auto_exposure=1"])
         except Exception as exc:
             self.logger.debug(f'Cannot set camera property: {exc}')
 
@@ -87,8 +96,8 @@ class GesturesRecognizer:
         self.IMG_SIZE = 32 # the CNN is trained on the given images' sizes
         self.FPS = 30 # the number of frames analyzed per second.
 
-        self.camera.set(10, -50) # Sets the brightness of the camera.
-        self.camera.set(11, 50) # Sets the contrast of the camera.
+        #self.camera.set(10, -50) # Sets the brightness of the camera.
+        #self.camera.set(11, 50) # Sets the contrast of the camera.
         #self.camera.set(14, 64) # Sets the gain of the camera.
         #self.camera.set(cv2.CAP_PROP_EXPOSURE, 3)
 
@@ -146,6 +155,11 @@ class GesturesRecognizer:
         # Turns off the auto exposure mode.
         try:
             subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "exposure_auto=1"])
+        except Exception as exc:
+            self.logger.debug(f'Cannot set camera property: {exc}')
+
+        try:
+            subprocess.call(["v4l2-ctl", "-d", "/dev/video0","-c", "auto_exposure=1"])
         except Exception as exc:
             self.logger.debug(f'Cannot set camera property: {exc}')
 
