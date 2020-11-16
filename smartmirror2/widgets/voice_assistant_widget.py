@@ -36,7 +36,7 @@ class VoiceAssistantWidget:
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
 
-        self.font_size = 100
+        self.font_size = 30
 
         self.assistant_frame = Frame(self.window, bg='black', bd=2)
         self.assistant_frame.place(relx=self.relx, rely=self.rely)

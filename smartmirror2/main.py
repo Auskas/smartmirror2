@@ -349,6 +349,11 @@ class Mirror():
             try:
                 if self.update_widgets:
                     self.update_widgets = False
+
+                    # Temporaly stops Gestures Recognizer while updating the widgets.
+                    if self.gestures_recognizer:
+                        self.gestures_recognizer.show = False
+
                     self.create_loading_window()
                     self.loading = Loading(self.loading_window)
                     for widget in self.WIDGETS_CONFIG.keys():
@@ -369,6 +374,8 @@ class Mirror():
                         else:
                             self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = False
                     self.loading_window.destroy()
+                    if self.gestures_recognizer:
+                        self.gestures_recognizer.show = True
 
                 if 'youtube' in self.widgets.keys():
                     if self.gesture == 'pointing_finger':

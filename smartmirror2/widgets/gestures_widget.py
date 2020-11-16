@@ -31,7 +31,7 @@ class GesturesWidget:
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
 
-        self.font_size = 50
+        self.font_size = 40
 
         self.gestures_frame = Frame(self.window, bg='black', bd=0)
 

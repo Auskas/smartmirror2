@@ -22,6 +22,9 @@ class VoiceAssistant():
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
+        if os.environ.get('DISPLAY', '') == '':
+            os.environ.__setitem__('DISPLAY', ':0.0')
+
         self.speech_recognizer = sr.Recognizer()
 
         #print(sr.Microphone.list_microphone_names())
@@ -155,7 +158,7 @@ class VoiceAssistant():
                 self.logger.debug('Timeout: no speech has been registred.')
                 self.queue.put({'voice_assistant' : {'error': True}})
             except Exception as exc:
-                self.logger.debug(f'Cannot get the mic: {exc}')
+                self.logger.error(f'Cannot get the mic: {exc}')
                 self.queue.put({'voice_assistant' : {'error': True}})
 
     def _recognize(self, audio):
@@ -164,8 +167,8 @@ class VoiceAssistant():
             user_speech = self.speech_recognizer.recognize_google(audio, language = "ru-RU").lower()
             self.logger.debug(f'User said: {user_speech}')
             self.cmd_handler(user_speech)
-        except sr.UnknownValueError:
-            self.logger.info('Cannot recognize speech...')
+        except Exception as exc:
+            self.logger.error(f'Cannot recognize speech: {exc}')
             self.queue.put({'voice_assistant' : {'error': True}})
             
     def cmd_handler(self, phrase):

@@ -319,7 +319,7 @@ class YoutubePlayer:
         # the player and finally resumes the playback.
 
         try:
-            self.list_player.pause()
+            self.list_player.stop()
 
             # Clears the media list instance from all the containing videos.
             self.media_list.release()

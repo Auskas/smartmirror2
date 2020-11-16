@@ -29,7 +29,7 @@ class Covid:
         self.anchor = anchor
 
         # The initial size of the widget fonts. It is resized to occupy the target dimesions.
-        self.font_size = 50
+        self.font_size = 30
 
         # Loading biohazard, scull, and heart icons.
         self.icon_cases_file = Image.open(f'{os.path.dirname(os.path.realpath(__file__))}{os.sep}icons{os.sep}biohazard.png')

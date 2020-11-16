@@ -18,7 +18,7 @@ class Stocks:
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
 
-        self.font_size = 100
+        self.font_size = 40
 
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()

@@ -24,6 +24,7 @@ from multiprocessing import Process
 import PIL.Image, PIL.ImageTk
 import subprocess
 import os
+import time
 
 class GesturesRecognizer:
 
@@ -72,7 +73,7 @@ class GesturesRecognizer:
             'thumb_up'
         ]
 
-        self.show = False
+        self.show = True
 
         if __name__ == '__main__':
             self.camera = cv2.VideoCapture(0)
@@ -165,6 +166,11 @@ class GesturesRecognizer:
 
         while self.camera.isOpened():
             try:
+
+                if self.show == False:
+                    time.sleep(1)
+                    continue
+
                 ret, frame = self.camera.read()
 
                 if ret:

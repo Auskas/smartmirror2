@@ -30,7 +30,7 @@ class Statusbar:
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
 
-        self.font_size = 50
+        self.font_size = 30
 
         self.statusbar_frame = Frame(self.window, bg='black', bd=0)
 

@@ -28,7 +28,7 @@ class Clock:
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
 
-        self.font_size = 150
+        self.font_size = 50
         self.timeLbl = Label(
             window, 
             text='00:00:00', 
