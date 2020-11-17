@@ -111,17 +111,22 @@ class Calendar:
             self.date_label.after(1000, self.status)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        if self.anchor == 'e':
-            self.relx += width
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.font_size = 28
-        self.get_font_size()
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            if self.anchor == 'e':
+                self.relx += width
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.font_size = 28
+            self.get_font_size()
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
+
 
 if __name__ == '__main__':
     try:

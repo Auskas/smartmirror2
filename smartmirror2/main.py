@@ -428,8 +428,11 @@ class Mirror():
                             self.youtube.unmute()
                             for cmd_key in data[key]:
                                 if cmd_key == 'error' and data[key][cmd_key]:
+                                    self.voice_assistant_widget.message = data[key][cmd_key]
                                     break
-                                elif cmd_key == 'youtube_search' and data[key][cmd_key]:
+                                else:
+                                    self.voice_assistant_widget.message = data[key]['raw_string']
+                                if cmd_key == 'youtube_search' and data[key][cmd_key]:
                                     youtube_search_task = self.loop.create_task(self.youtube.search(data[key][cmd_key]))
                                 elif cmd_key == 'youtube_play' and data[key][cmd_key]:
                                     self.youtube.play()

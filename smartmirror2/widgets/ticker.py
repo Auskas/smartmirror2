@@ -111,17 +111,21 @@ class Ticker(Canvas):
                 self.after_id = self.after(int(1000/self.fps), self.animate)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        self.place(relx=self.relx, rely=self.rely)
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.configure(width=self.target_width - 3, height=self.target_height - 3)
-        self.font_size = 150
-        self.get_font_size()
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            self.place(relx=self.relx, rely=self.rely)
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.configure(width=self.target_width - 3, height=self.target_height - 3)
+            self.font_size = 150
+            self.get_font_size()
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 if __name__ == '__main__':
     window = Tk()

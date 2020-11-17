@@ -88,22 +88,26 @@ class Stocks:
             self.stocks_label.after(1000, self.status)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        if self.anchor == 'ne':
-            self.relx += width
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.font_size = 100
-        self.get_font_size()
-        self.stocks_label.place(
-            relx=self.relx, 
-            rely=self.rely,
-            anchor=self.anchor
-        )
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            if self.anchor == 'ne':
+                self.relx += width
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.font_size = 100
+            self.get_font_size()
+            self.stocks_label.place(
+                relx=self.relx, 
+                rely=self.rely,
+                anchor=self.anchor
+            )
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 if __name__ == '__main__':
     try:

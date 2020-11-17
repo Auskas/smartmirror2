@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-# voice_assistant_widget.py
+# voice_assistant_widget.py - a widget that displays a moving sound wave gif and a text message.
+# To display a message put a desired string into self.message.
+# The message is displayed for the number of milliseconds set in self.default_timeout variable.
+# To display the wave set self.show_wave = True and execute self.show_wave_widget method.
 
 import logging
 import os
@@ -38,6 +41,9 @@ class VoiceAssistantWidget:
 
         self.font_size = 30
 
+        self.default_timeout = 4000 #default number of milliseconds to display message.
+        self.timeout = self.default_timeout
+
         self.assistant_frame = Frame(self.window, bg='black', bd=2)
         self.assistant_frame.place(relx=self.relx, rely=self.rely)
 
@@ -49,16 +55,13 @@ class VoiceAssistantWidget:
         self.wave_label = Label(self.assistant_frame, image=self.frames[0], bg='black', bd=0)
         self.wave_label.grid(column=0, row=0, sticky='nw')
 
-        self.test_message = 'In the town where I was born lived a man who sailed to sea'
-        #self.message_label_target_width = self.target_width - self.frames[0].width()
-
-        self.message = 'ГОВОРИТЕ: '
+        self.message = 'ОШИБКА: РЕЧЬ НЕ РАСПОЗНАНА'
         self.message_label = Message(
             self.assistant_frame, 
             aspect=150,
             padx=5,
             pady=5,
-            text=self.test_message, 
+            text=self.message, 
             #width=self.message_label_target_width,
             fg='lightblue', bg='black', 
             font=("SFUIText", self.font_size, "bold")
@@ -82,15 +85,15 @@ class VoiceAssistantWidget:
             self.wave_label.config(image=self.icon_wave)
 
             self.window.update()
-            self.time_label_width = self.message_label.winfo_width()
-            self.time_label_height = self.message_label.winfo_height()
-            if self.time_label_width > self.target_width or self.time_label_height > self.target_height:
+            self.message_label_width = self.message_label.winfo_width()
+            self.message_label_height = self.message_label.winfo_height()
+            if self.message_label_width > self.target_width or self.message_label_height > self.target_height:
                 self.font_size -= 1
             else:
                 self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.time_label_width)}')
+                self.logger.debug(f'Real widget width {int(self.message_label_width)}')
                 self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.time_label_height)}')
+                self.logger.debug(f'Real widget height {int(self.message_label_height)}')
                 
 
                 zoom_factor = self.font_size * 16 / self.frames[0].width()
@@ -98,7 +101,7 @@ class VoiceAssistantWidget:
                     for i in range(len(self.frames)):
                         self.frames[i] = self.frames[i].zoom(int(zoom_factor))
                 break
-        self.message_label.config(text='')
+        self.message = ''
         self.wave_label.config(image='')
 
     def status(self):
@@ -108,6 +111,12 @@ class VoiceAssistantWidget:
                 rely=self.rely, 
                 anchor=self.anchor
             )
+            if self.message != '':
+                self.timeout -= 1000
+                if self.timeout <= 0:
+                    self.timeout = self.default_timeout
+                    self.message = ''
+            self.message_label.config(text=self.message)
         else:
             self.assistant_frame.place_forget()
         self.assistant_frame.after(1000, self.status)
@@ -115,7 +124,6 @@ class VoiceAssistantWidget:
     def show_wave_widget(self, ind=0):
         try:
             if self.show and self.show_wave:
-                #self.message_label.config(text=self.message)
                 frame = self.frames[ind]
 
                 ind += 1
@@ -130,13 +138,17 @@ class VoiceAssistantWidget:
             self.logger.warning(f'Cannot display widget: {exc}')
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 if __name__ == '__main__':
     window = Tk()

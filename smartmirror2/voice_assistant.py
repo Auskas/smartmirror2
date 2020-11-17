@@ -141,7 +141,7 @@ class VoiceAssistant():
 
     def listen(self):
         self.logger.info('Listening to the microphone...')
-        with sr.Microphone(sample_rate=16000, chunk_size=1024) as source:
+        with sr.Microphone(device_index=0, sample_rate=44100, chunk_size=1024) as source:
             # Represents the minimum length of silence (in seconds) that will register as the end of a phrase (type: float).
             self.speech_recognizer.pause_threshold = 1
             # The duration parameter is the maximum number of seconds that it will dynamically adjust the threshold for before returning.
@@ -150,16 +150,14 @@ class VoiceAssistant():
             self.speech_recognizer.adjust_for_ambient_noise(source, duration=0.5)
             try:
                 audio = self.speech_recognizer.listen(source, timeout=4, phrase_time_limit=3)
-                
-                #self.message_label.config(text='CONFIG')
                 self._recognize(audio)
             # Catches the exception when there is nothing said during speech recognition.
             except sr.WaitTimeoutError:
                 self.logger.debug('Timeout: no speech has been registred.')
-                self.queue.put({'voice_assistant' : {'error': True}})
+                self.queue.put({'voice_assistant' : {'error': 'ОШИБКА: ТИШИНА'}})
             except Exception as exc:
                 self.logger.error(f'Cannot get the mic: {exc}')
-                self.queue.put({'voice_assistant' : {'error': True}})
+                self.queue.put({'voice_assistant' : {'error': 'ОШИБКА: МИКРОФОН НЕ НАЙДЕН'}})
 
     def _recognize(self, audio):
         self.logger.info('Trying to recognize speech...')
@@ -169,7 +167,7 @@ class VoiceAssistant():
             self.cmd_handler(user_speech)
         except Exception as exc:
             self.logger.error(f'Cannot recognize speech: {exc}')
-            self.queue.put({'voice_assistant' : {'error': True}})
+            self.queue.put({'voice_assistant' : {'error': 'ОШИБКА: РЕЧЬ НЕ РАСПОЗНАНА'}})
             
     def cmd_handler(self, phrase):
         """ Gets a string of recognized speech as cmd. 
@@ -177,6 +175,8 @@ class VoiceAssistant():
             Modifies self.cmd according to the detected commands."""
 
         self.logger.info('Looking for commands in the speech...')
+
+        raw_string = phrase.copy()
 
         words_to_exclude = set()
 
@@ -398,12 +398,13 @@ class VoiceAssistant():
         if self.cmd['update']:
             self.logger.debug(f'The following commands will be processed: {self.cmd}')
             cmd = self.cmd.copy()
+            cmd['raw_string'] = raw_string
             # Have to make a copy of the commands in order to leave them intouch
             # while processing by the main module.
             self.queue.put({'voice_assistant' : cmd})
 
         else:
-            self.queue.put({'voice_assistant': {'update': False}})
+            self.queue.put({'voice_assistant': {'update': False, 'raw_string': raw_string}})
             self.logger.debug('No commands have been found in the speech!')
 
         self.cmd['update'] = False

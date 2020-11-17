@@ -134,8 +134,9 @@ class GesturesWidget:
                 self.gestures_label.pack(side=LEFT)
             else:
                 self.gestures_label.pack(side=RIGHT)
+            self.logger.debug('Widget has been updated!')
         except Exception as exc:
-            self.logger.error('exc')
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 
 if __name__ == '__main__':

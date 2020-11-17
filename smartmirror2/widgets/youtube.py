@@ -410,6 +410,7 @@ class YoutubePlayer:
                 self.set_window()
 
             search_loop = self.loop.create_task(self.search(args[5]))
+            self.logger.debug('Widget has been updated!')
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
 

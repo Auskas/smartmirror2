@@ -2,6 +2,7 @@
 # statusbar.py - creates a widget that shows the temperature of the RPI and the IP address if it is assigned.
 
 import os, sys
+import subprocess
 from tkinter import *
 import datetime
 import time
@@ -18,6 +19,8 @@ class Statusbar:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.REFRESH_RATE = 10000 # time in milliseconds between measurments.
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -54,47 +57,92 @@ class Statusbar:
         self.bottomframe_inside = Frame(self.statusbar_frame, bg='black', bd=0)
         self.bottomframe_inside.grid(column=0, row=2, sticky=self.anchor)
 
-        self.temp_CPU = ''
-        self.temp_GPU = ''
-        self.IP_address = ''
-
-        self.cpu_temp_label = Label(
-            self.middleframe_inside,
-            text='CPU 21 °C',
-            fg='lightblue',
-            bg='black',
-            font=("SFUIText", self.font_size, "bold")
+        self.temp_CPU = subprocess.Popen(
+            'cat /sys/class/thermal/thermal_zone0/temp',
+            shell=True, 
+            stdin=None, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE
         )
 
-        self.gpu_temp_label = Label(
-            self.topframe_inside,
-            text='GPU 22 °C',
-            fg='lightblue',
-            bg='black',
-            font=("SFUIText", self.font_size, "bold")
+        _, temp_CPU_error = self.temp_CPU.communicate() 
+        if temp_CPU_error.decode("utf-8").find('not found') != -1:
+            self.logger.warning('CPU temperature measurment is not supported!')
+            self.temp_CPU.stdout.close()
+            self.temp_CPU = False
+        else:
+            self.temp_CPU = 'CPU __._°C'
+
+        self.temp_GPU = subprocess.Popen(
+            'vcgencmd measure_temp',
+            shell=True, 
+            stdin=None, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE
         )
 
-        self.ip_address_label = Label(
-            self.bottomframe_inside,
-            text='000.000.000.000',
-            fg='lightblue',
-            bg='black',
-            font=("SFUIText", self.font_size, "bold")
+        _, temp_GPU_error = self.temp_GPU.communicate() 
+        if temp_GPU_error.decode("utf-8").find('not found') != -1:
+            self.logger.warning('GPU temperature measurement is not supported!')
+            self.temp_GPU.stdout.close()
+            self.temp_GPU = False
+        else:
+            self.temp_GPU = 'GPU __._°C'
+        
+        self.IP_address = subprocess.Popen(
+            'hostname -I',
+            shell=True, 
+            stdin=None, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE
         )
-        if self.anchor == 'nw':
-            self.cpu_temp_label.pack(side=LEFT)
-        else:
-            self.cpu_temp_label.pack(side=RIGHT)
 
-        if self.anchor == 'nw':
-            self.gpu_temp_label.pack(side=LEFT)
+        _, IP_address_error = self.IP_address.communicate() 
+        if IP_address_error.decode("utf-8").find('not found') != -1:
+            self.logger.warning('Cannot get the IP address!')
+            self.IP_address.stdout.close()
+            self.IP_address = False
         else:
-            self.gpu_temp_label.pack(side=RIGHT)
+            self.IP_address = 'IP: ___.___.___.___'
 
-        if self.anchor == 'nw':
-            self.ip_address_label.pack(side=LEFT)
-        else:
-            self.ip_address_label.pack(side=RIGHT)
+        if self.temp_CPU:
+            self.cpu_temp_label = Label(
+                self.middleframe_inside,
+                text='CPU 21 °C',
+                fg='lightblue',
+                bg='black',
+                font=("SFUIText", self.font_size, "bold")
+            )
+            if self.anchor == 'nw':
+                self.cpu_temp_label.pack(side=LEFT)
+            else:
+                self.cpu_temp_label.pack(side=RIGHT)
+
+        if self.temp_GPU:
+            self.gpu_temp_label = Label(
+                self.topframe_inside,
+                text='GPU 22 °C',
+                fg='lightblue',
+                bg='black',
+                font=("SFUIText", self.font_size, "bold")
+            )
+            if self.anchor == 'nw':
+                self.gpu_temp_label.pack(side=LEFT)
+            else:
+                self.gpu_temp_label.pack(side=RIGHT)
+
+        if self.IP_address:
+            self.ip_address_label = Label(
+                self.bottomframe_inside,
+                text='000.000.000.000',
+                fg='lightblue',
+                bg='black',
+                font=("SFUIText", self.font_size, "bold")
+            )
+            if self.anchor == 'nw':
+                self.ip_address_label.pack(side=LEFT)
+            else:
+                self.ip_address_label.pack(side=RIGHT)
 
         self.window.update_idletasks()
         self.get_font_size()
@@ -107,9 +155,12 @@ class Statusbar:
         """ The method decreases the font size until it satisfies the target
             width and height of the widget."""
         while self.font_size > 12:
-            self.cpu_temp_label.config(font=("SFUIText", self.font_size, "bold"))
-            self.gpu_temp_label.config(font=("SFUIText", self.font_size, "bold"))
-            self.ip_address_label.config(font=("SFUIText", self.font_size, "bold"))
+            if self.temp_CPU:
+                self.cpu_temp_label.config(font=("SFUIText", self.font_size, "bold"))
+            if self.temp_GPU:
+                self.gpu_temp_label.config(font=("SFUIText", self.font_size, "bold"))
+            if self.IP_address:
+                self.ip_address_label.config(font=("SFUIText", self.font_size, "bold"))
 
             self.window.update_idletasks()
 
@@ -137,75 +188,115 @@ class Statusbar:
             self.statusbar_frame.after(1000, self.status)
 
     def widget(self):
-        self.cpu_temp_label.config(text=self.temp_CPU)
-        self.gpu_temp_label.config(text=self.temp_GPU)
-        self.ip_address_label.config(text=self.IP_address)
+        if self.temp_CPU:
+            self.cpu_temp_label.config(text=self.temp_CPU)
+        if self.temp_GPU:
+            self.gpu_temp_label.config(text=self.temp_GPU)
+        if self.IP_address:
+            self.ip_address_label.config(text=self.IP_address)
         self.measure_temp()
 
     def measure_temp(self):
-        try:
-            self.temp_CPU = os.popen("cat /sys/class/thermal/thermal_zone0/temp").readline()
-            self.temp_CPU = round(int(self.temp_CPU) / 1000, 1)
-            self.temp_CPU = f'CPU {str(self.temp_CPU)}°C'
-        except Exception as exc:
-            self.temp_CPU = ''
-            self.logger.error(f'Cannot get the CPU temp: {exc}')
+        if self.temp_CPU:
+            try:
+                self.temp_CPU = subprocess.Popen(
+                    'cat /sys/class/thermal/thermal_zone0/temp',
+                    shell=True, 
+                    stdin=None, 
+                    stdout=subprocess.PIPE, 
+                    stderr=subprocess.PIPE
+                )
 
-        try:
-            self.temp_GPU = os.popen("vcgencmd measure_temp").readline()
-            self.temp_GPU = self.temp_GPU[self.temp_GPU.find('=') + 1: self.temp_GPU.find("'")]
-            self.temp_GPU = float(self.temp_GPU)
-            self.temp_GPU = f'GPU {self.temp_GPU}°C'
-        except Exception as exc:
-            self.logger.error(f'Cannot get the GPU temp: {exc}')
+                self.temp_CPU, _ = self.temp_CPU.communicate() 
+                self.temp_CPU = round(int(self.temp_CPU.decode('utf-8')) / 1000, 1)
+                self.temp_CPU = f'CPU {str(self.temp_CPU)}°C'
+            except Exception as exc:
+                self.temp_CPU = ''
+                self.logger.error(f'Cannot get the CPU temp: {exc}')
 
-        try:
-            self.IP_address = f'IP: {os.popen("hostname -I").readline()}'
-        except Exception as exc:
-            self.logger.error(f'Cannot get the IP address: {exc}')
+        if self.temp_GPU:
+            try:
+                self.temp_GPU = subprocess.Popen(
+                    'vcgencmd measure_temp',
+                    shell=True, 
+                    stdin=None, 
+                    stdout=subprocess.PIPE, 
+                    stderr=subprocess.PIPE
+                )
+                self.temp_GPU, _ = self.temp_GPU.communicate()
+                self.temp_GPU = self.temp_GPU.decode('utf-8')
+                self.temp_GPU = self.temp_GPU[self.temp_GPU.find('=') + 1: self.temp_GPU.find("'")]
+                self.temp_GPU = float(self.temp_GPU)
+                self.temp_GPU = f'GPU {self.temp_GPU}°C'
+            except Exception as exc:
+                self.logger.error(f'Cannot get the GPU temp: {exc}')
 
-        self.statusbar_frame.after(3000, self.status)
+        if self.IP_address:
+            try:
+                self.IP_address = subprocess.Popen(
+                    'hostname -I',
+                    shell=True, 
+                    stdin=None, 
+                    stdout=subprocess.PIPE, 
+                    stderr=subprocess.PIPE
+                )
+
+                self.IP_address, _ = self.IP_address.communicate()
+                self.IP_address = f'IP: {self.IP_address.decode("utf-8")}'
+            except Exception as exc:
+                self.logger.error(f'Cannot get the IP address: {exc}')
+
+        self.statusbar_frame.after(self.REFRESH_RATE, self.status)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        self.statusbar_frame.place(relx=self.relx, rely=self.rely)
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        if self.anchor == 'ne':
-            self.relx += width
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.font_size = 50
-        self.get_font_size()
-        self.topframe_inside.grid(
-            column=0,
-            row=0,
-            sticky=self.anchor
-        )
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            self.statusbar_frame.place(relx=self.relx, rely=self.rely)
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            if self.anchor == 'ne':
+                self.relx += width
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.font_size = 50
+            self.get_font_size()
+            self.topframe_inside.grid(
+                column=0,
+                row=0,
+                sticky=self.anchor
+            )
 
-        self.middleframe_inside.grid(
-            column=0,
-            row=1,
-            sticky=self.anchor
-        )
+            self.middleframe_inside.grid(
+                column=0,
+                row=1,
+                sticky=self.anchor
+            )
 
-        self.bottomframe_inside.grid(
-            column=0,
-            row=2,
-            sticky=self.anchor
-        )
+            self.bottomframe_inside.grid(
+                column=0,
+                row=2,
+                sticky=self.anchor
+            )
 
-        if self.anchor == 'nw':
-            self.cpu_temp_label.pack(side=LEFT)
-            self.gpu_temp_label.pack(side = LEFT)
-            self.ip_address_label.pack(side = LEFT)
-        else:
-            self.cpu_temp_label.pack(side=RIGHT)
-            self.gpu_temp_label.pack(side = RIGHT)
-            self.ip_address_label.pack(side = RIGHT)
-
+            if self.anchor == 'nw':
+                if self.temp_CPU:
+                    self.cpu_temp_label.pack(side=LEFT)
+                if self.temp_GPU:
+                    self.gpu_temp_label.pack(side = LEFT)
+                if self.IP_address:
+                    self.ip_address_label.pack(side = LEFT)
+            else:
+                if self.temp_CPU:
+                    self.cpu_temp_label.pack(side=RIGHT)
+                if self.temp_GPU:
+                    self.gpu_temp_label.pack(side = RIGHT)
+                if self.IP_address:
+                    self.ip_address_label.pack(side = RIGHT)
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 if __name__ == '__main__':
     try:

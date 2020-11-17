@@ -105,10 +105,14 @@ class Weather:
         self.april_fools_forecast = {
             'fact': {'temp': -1, 'icon': 'fct_+sn'},
             'forecast': {
-                'parts': [
-                    {'temp_avg': -5, 'part_name': 'evening'},
-                    {'temp_avg': -8, 'part_name': 'night'}
-                ]
+                'parts': {
+                    'day': { 
+                        'temp_avg': -5
+                    },
+                    'evening': {
+                        'temp_avg': -8, 'part_name': 'night'
+                    }
+                }
             }
         }
 
@@ -161,84 +165,108 @@ class Weather:
             self.weather_frame.after(1000, self.status)
 
     def widget(self):
-        # Special weather forecast for April Fools' Day.
-        current_time = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
-        if current_time.month == 4 and current_time.day == 1 and self.seconds_counter > 3600:
-            self.forecast_string = self.april_fools_forecast
+        try:
+            # Special weather forecast for April Fools' Day.
+            current_time = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
+            if current_time.month == 4 and current_time.day == 1 and self.seconds_counter > 3600:
+                self.forecast_string = self.april_fools_forecast
 
-        self.title_label.config(text='Москва')
-        temp_now = str(self.forecast_string['fact']['temp'])
-        weather_icon = self.forecast_string['fact']['icon']
+            self.title_label.config(text='Москва')
+            temp_now = str(self.forecast_string['fact']['temp'])
+            weather_icon = self.forecast_string['fact']['icon']
 
-        self.icon.configure(image=self.icon_render)
-        #self.icon.image = self.icon_render
+            self.icon.configure(image=self.icon_render)
+            #self.icon.image = self.icon_render
 
-        temp_next = str(self.forecast_string['forecast']['parts'][0]['temp_avg'])
-        part_next = self.forecast_string['forecast']['parts'][0]['part_name']
+            # Gets the name of the next forecast periods.
+            parts = set()
+            for part in self.forecast_string['forecast']['parts'].keys():
+                parts.add(part)
 
-        temp_next_next = str(self.forecast_string['forecast']['parts'][1]['temp_avg'])
+            if 'morning' in parts and 'day' in parts:
+                part_next, part_next_next = 'morning', 'day'
+            elif 'day' in parts and 'evening' in parts:
+                part_next, part_next_next = 'day', 'evening'
+            elif 'evening' in parts and 'night' in parts:
+                part_next, part_next_next = 'evening', 'night'
+            elif 'night' in parts and 'morning' in parts:
+                part_next, part_next_next = 'night', 'morning'
+            else:
+                part_next, part_next_next = False, False
 
-        # The following conditions are for determining the names of the next two part of a day.
-        if part_next == 'night':
-            part_next, part_next_next  = 'Ночью', 'утром'
-        elif part_next == 'morning':
-            part_next, part_next_next  = 'Утром', 'днём'
-        elif part_next == 'day':
-            part_next, part_next_next  = 'Днём', 'вечером'
-        else:
-            part_next, part_next_next  = 'Вечером', 'ночью'
+            if part_next:
+                temp_next = str(self.forecast_string['forecast']['parts'][part_next]['temp_avg'])
+            if part_next_next:
+                temp_next_next = str(self.forecast_string['forecast']['parts'][part_next_next]['temp_avg'])
 
-        self.degrees.config(text=f'{temp_now}° ')
-        self.next_forecast.config(text=f'{part_next} {temp_next},')
-        self.next_next_forecast.config(text=f'{part_next_next} {temp_next_next}')
+            # The following conditions are for determining the names of the next two part of a day.
+            if part_next == 'night':
+                part_next, part_next_next  = 'Ночью', 'утром'
+            elif part_next == 'morning':
+                part_next, part_next_next  = 'Утром', 'днём'
+            elif part_next == 'day':
+                part_next, part_next_next  = 'Днём', 'вечером'
+            elif part_next == 'evening':
+                part_next, part_next_next  = 'Вечером', 'ночью'
+            else:
+                part_next, part_next_next  = '', ''
 
+            self.degrees.config(text=f'{temp_now}° ')
+            self.next_forecast.config(text=f'{part_next} {temp_next},')
+            self.next_next_forecast.config(text=f'{part_next_next} {temp_next_next}')
+        except Exception as exc:
+            self.logger.error(f'Cannot form the forecast strings: {exc}')
         self.weather_frame.after(1000, self.status)
 
     def widget_update(self, *args):
-        self.relx = args[0]
-        self.rely = args[1]
-        self.weather_frame.place(relx=self.relx, rely=self.rely)
-        width = args[2]
-        height = args[3]
-        self.anchor = args[4]
-        if self.anchor == 'ne':
-            self.relx += width
-        self.target_width = int(width * self.window_width)
-        self.target_height = int(height * self.window_height)
-        self.font_size = 100
-        self.get_font_size()
-        self.topframe_inside.grid(
-            column=0,
-            row=0,
-            sticky=self.anchor
-        )
+        try:
+            self.relx = args[0]
+            self.rely = args[1]
+            self.weather_frame.place(relx=self.relx, rely=self.rely)
+            width = args[2]
+            height = args[3]
+            self.anchor = args[4]
+            if self.anchor == 'ne':
+                self.relx += width
+            self.target_width = int(width * self.window_width)
+            self.target_height = int(height * self.window_height)
+            self.font_size = 100
+            self.get_font_size()
+            self.topframe_inside.grid(
+                column=0,
+                row=0,
+                sticky=self.anchor
+            )
 
-        self.bottomframe_inside.grid(
-            column=0,
-            row=1,
-            sticky=self.anchor
-        )
+            self.bottomframe_inside.grid(
+                column=0,
+                row=1,
+                sticky=self.anchor
+            )
 
-        self.next_frame_top.grid(
-            column=0,
-            row=0,
-            sticky=self.anchor
-        )
+            self.next_frame_top.grid(
+                column=0,
+                row=0,
+                sticky=self.anchor
+            )
 
-        self.next_frame_bottom.grid(
-            column=0,
-            row=1,
-            sticky=self.anchor
-        )
+            self.next_frame_bottom.grid(
+                column=0,
+                row=1,
+                sticky=self.anchor
+            )
 
-        if self.anchor == 'nw':
-            self.title_label.pack(side=LEFT)
-            self.next_forecast.pack(side = LEFT)
-            self.next_next_forecast.pack(side = LEFT)
-        else:
-            self.title_label.pack(side=RIGHT)
-            self.next_forecast.pack(side = RIGHT)
-            self.next_next_forecast.pack(side = RIGHT)
+            if self.anchor == 'nw':
+                self.title_label.pack(side=LEFT)
+                self.next_forecast.pack(side = LEFT)
+                self.next_next_forecast.pack(side = LEFT)
+            else:
+                self.title_label.pack(side=RIGHT)
+                self.next_forecast.pack(side = RIGHT)
+                self.next_next_forecast.pack(side = RIGHT)
+            self.logger.debug('Widget has been updated!')
+        except Exception as exc:
+            self.logger.error(f'Cannot update the widget: {exc}')
 
 
 if __name__ == '__main__':
