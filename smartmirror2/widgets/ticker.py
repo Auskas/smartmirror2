@@ -131,7 +131,7 @@ class Ticker(Canvas):
             #self.configure(width=self.target_width - 3, height=self.target_height - 3)
             self.place(relx=self.relx, rely=self.rely)
 
-            self.font_size = 50
+            self.font_size = 30
             self.get_font_size()
             self.logger.debug('Widget has been updated!')
         except Exception as exc:

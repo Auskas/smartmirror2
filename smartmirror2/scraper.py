@@ -222,7 +222,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_weather, 'json', payload, headers)
             if res == False:
-                await asyncio.sleep(60)
+                await asyncio.sleep(3600)
             else:
                 self.forecast_string = res
                 await asyncio.sleep(43200)

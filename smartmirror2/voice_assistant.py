@@ -176,7 +176,7 @@ class VoiceAssistant():
 
         self.logger.info('Looking for commands in the speech...')
 
-        raw_string = phrase.copy()
+        raw_string = phrase
 
         words_to_exclude = set()
 
