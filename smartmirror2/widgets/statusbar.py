@@ -250,6 +250,7 @@ class Statusbar:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating statusbar widget...')
             self.relx = args[0]
             self.rely = args[1]
             self.statusbar_frame.place(relx=self.relx, rely=self.rely)
@@ -261,6 +262,19 @@ class Statusbar:
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
             self.font_size = 50
+
+            self.statusbar_frame.place(
+                relx=self.relx,
+                rely=self.rely,
+                anchor=self.anchor
+            )
+            if self.cpu_temp_label:
+                self.cpu_temp_label.config(text='CPU __._°C')
+            if self.gpu_temp_label:
+                self.gpu_temp_label.config(text='GPU __._°C')
+            if self.ip_address_label:
+                self.ip_address_label.config(text='000.000.000.000')
+
             self.get_font_size()
             self.topframe_inside.grid(
                 column=0,
@@ -297,6 +311,10 @@ class Statusbar:
             self.logger.debug('Widget has been updated!')
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
+
+    def destroy(self):
+        self.logger.debug('Closing Statusbar...')
+        self.statusbar_frame.destroy()
 
 if __name__ == '__main__':
     try:

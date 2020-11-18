@@ -377,6 +377,7 @@ class YoutubePlayer:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating Youtube widget...')
             # !!! Stop video before updating the widget.
             self.list_player.stop()
 
@@ -399,9 +400,9 @@ class YoutubePlayer:
             self.volume_frame_height = self.icons_target_size[0]
             # The range in pixels of the space between the muted speaker icon and the loud speaker to the right.
             self.volume_range = int(self.volume_frame_width - 3 * self.volume_frame_height)
+            
             self.volume_frame.place(
                 relx=self.relx, 
-                #rely=self.rely - self.icons_target_size[0], 
                 rely=self.rely,
                 anchor=self.anchor
                 )        
@@ -421,57 +422,59 @@ class YoutubePlayer:
             # The following condition is used to check if the video is being played.
             # In case of the connection lost it decrements the timeout until it reaches
             # zero and tries to restart the video.
-            try:
-                self.current_time = self.player.get_time()
-                if self.current_time == self.previous_time:
-                    #print(self.current_time)
-                    self.timeout -= 0.05
-                    if self.timeout <= 0:
-                        self.logger.error(f'Probably the internet connection has been lost. Trying to reload...')
-                        self.timeout = self.default_timeout
-                        self.list_player.pause()
-                        self.list_player.next()
-                        self.list_player.play()
-                else:
-                    self.timeout = self.default_timeout
-                self.previous_time = self.current_time
-            except Exception as exc:
-                self.logger.error(f'Cannot reload video: {exc}')
-
-            try:
-                if self.external_command == 'next_video' and self.next_video_asyncio == False:
-                    next_video_task = self.loop.create_task(self.next_video())
-
-                if self.external_command == 'volume_down':
-                    self.audio_volume -= 1
-                    if self.audio_volume < 0:
-                        self.audio_volume = 0
-                    self.audio.setvolume(int(self.audio_volume // 3))
-                    self.volume_widget_ball_position(self.audio_volume // 3)
-
-                elif self.external_command == 'volume_up':
-                    self.audio_volume += 1
-                    if self.audio_volume > 300:
-                        self.audio_volume = 300
-                    self.audio.setvolume(int(self.audio_volume // 3))
-                    self.volume_widget_ball_position(self.audio_volume // 3)
-
-                if self.external_command in ('volume_up', 'volume_down') and self.volume_widget_concealed:
-                    self.volume_widget_timeout = 20
-                    self.volume_widget_show()
-
-                elif self.external_command not in ('volume_up', 'volume_down') and self.volume_widget_concealed == False:
-                    if self.volume_widget_timeout == 0:
-                        self.volume_widget_hide()
+            if self.show:
+                try:
+                    self.current_time = self.player.get_time()
+                    if self.current_time == self.previous_time:
+                        #print(self.current_time)
+                        self.timeout -= 0.05
+                        if self.timeout <= 0:
+                            self.logger.error(f'Probably the internet connection has been lost. Trying to reload...')
+                            self.timeout = self.default_timeout
+                            self.list_player.pause()
+                            self.list_player.next()
+                            self.list_player.play()
                     else:
-                        self.volume_widget_timeout -= 1
+                        self.timeout = self.default_timeout
+                    self.previous_time = self.current_time
+                except Exception as exc:
+                    self.logger.error(f'Cannot reload video: {exc}')
 
-                self.external_command = None
-            except Exception as exc:
-                self.logger.error(f'Cannot execute widget gestures controls: {exc}')
+                try:
+                    if self.external_command == 'next_video' and self.next_video_asyncio == False:
+                        next_video_task = self.loop.create_task(self.next_video())
 
-            await asyncio.sleep(0.05)
+                    if self.external_command == 'volume_down':
+                        self.audio_volume -= 1
+                        if self.audio_volume < 0:
+                            self.audio_volume = 0
+                        self.audio.setvolume(int(self.audio_volume // 3))
+                        self.volume_widget_ball_position(self.audio_volume // 3)
 
+                    elif self.external_command == 'volume_up':
+                        self.audio_volume += 1
+                        if self.audio_volume > 300:
+                            self.audio_volume = 300
+                        self.audio.setvolume(int(self.audio_volume // 3))
+                        self.volume_widget_ball_position(self.audio_volume // 3)
+
+                    if self.external_command in ('volume_up', 'volume_down') and self.volume_widget_concealed:
+                        self.volume_widget_timeout = 20
+                        self.volume_widget_show()
+
+                    elif self.external_command not in ('volume_up', 'volume_down') and self.volume_widget_concealed == False:
+                        if self.volume_widget_timeout == 0:
+                            self.volume_widget_hide()
+                        else:
+                            self.volume_widget_timeout -= 1
+
+                    self.external_command = None
+                except Exception as exc:
+                    self.logger.error(f'Cannot execute widget gestures controls: {exc}')
+
+                await asyncio.sleep(0.05)
+            else:
+                await asyncio.sleep(1)
 
     async def window_updater(self):
         """ This method is used only if the module is executed directly.
@@ -505,6 +508,11 @@ class YoutubePlayer:
                             self.gesture = False
                 except Exception as exc:
                     self.logger.warning(f'Cannot process the data in the queue {exc}')
+
+    def destroy(self):
+        self.logger.debug('Closing Youtube...')
+        self.list_player.stop()
+        self.media_list.release()
 
 if __name__ == '__main__':
     try:

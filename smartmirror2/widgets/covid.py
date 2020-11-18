@@ -224,6 +224,7 @@ class Covid:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating Covid-19 widget...')
             self.relx = args[0]
             self.rely = args[1]
             width = args[2]
@@ -231,11 +232,18 @@ class Covid:
             self.anchor = args[4]
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 50
+            self.font_size = 40
+
+            self.covid_frame.place(relx=self.relx, rely=self.rely)
+
             self.get_font_size()
             self.logger.debug('Widget has been updated!')
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
+
+    def destroy(self):
+        self.logger.debug('Closing Covid-19...')
+        self.covid_frame.destroy()
             
 if __name__ == '__main__':
     try:

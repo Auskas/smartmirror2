@@ -180,8 +180,12 @@ class Weather:
 
             # Gets the name of the next forecast periods.
             parts = set()
-            for part in self.forecast_string['forecast']['parts'].keys():
-                parts.add(part)
+            try:
+                for part in self.forecast_string['forecast']['parts'].keys():
+                    parts.add(part)
+            except AttributeError:
+                parts.add(self.forecast_string['forecast']['parts'][0]['part_name'])
+                parts.add(self.forecast_string['forecast']['parts'][1]['part_name'])
 
             if 'morning' in parts and 'day' in parts:
                 part_next, part_next_next = 'morning', 'day'
@@ -195,9 +199,15 @@ class Weather:
                 part_next, part_next_next = False, False
 
             if part_next:
-                temp_next = str(self.forecast_string['forecast']['parts'][part_next]['temp_avg'])
+                try:
+                    temp_next = str(self.forecast_string['forecast']['parts'][part_next]['temp_avg'])
+                except TypeError:
+                    temp_next = str(self.forecast_string['forecast']['parts'][0]['temp_avg'])
             if part_next_next:
-                temp_next_next = str(self.forecast_string['forecast']['parts'][part_next_next]['temp_avg'])
+                try:
+                    temp_next_next = str(self.forecast_string['forecast']['parts'][part_next_next]['temp_avg'])
+                except TypeError:
+                    temp_next_next = str(self.forecast_string['forecast']['parts'][1]['temp_avg'])
 
             # The following conditions are for determining the names of the next two part of a day.
             if part_next == 'night':
@@ -220,6 +230,7 @@ class Weather:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating Weather widget...')
             self.relx = args[0]
             self.rely = args[1]
             self.weather_frame.place(relx=self.relx, rely=self.rely)
@@ -230,7 +241,14 @@ class Weather:
                 self.relx += width
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 100
+            self.font_size = 50
+
+            self.weather_frame.place(
+                relx=self.relx,
+                rely=self.rely,
+                anchor=self.anchor
+            )
+            
             self.get_font_size()
             self.topframe_inside.grid(
                 column=0,
@@ -268,6 +286,9 @@ class Weather:
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
 
+    def destroy(self):
+        self.logger.debug('Closing Weather...')
+        self.weather_frame.destroy()
 
 if __name__ == '__main__':
     window = Tk()

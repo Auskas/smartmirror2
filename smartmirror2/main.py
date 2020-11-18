@@ -61,6 +61,10 @@ class Mirror():
         self.HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.logger.debug(f'Home directory is {self.HOME_DIR}')
 
+        # If FULL_SCREEN_MODE is True the main window occupies the entire screen.
+        # Warning: In full screen mode the window can be closed only from terminal.
+        self.FULL_SCREEN_MODE = True
+
         try:
             host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
             ip_address_regex = re.compile(r'(\d)+.(\d)+.(\d).+(\d)')
@@ -85,6 +89,7 @@ class Mirror():
             self.logger.info('Successfully initialized the web server!')
         except Exception as exc:
             self.logger.error(f'Cannot start the web server: {exc}')
+
         try:
             with open(f'{self.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
                 self.WIDGETS_CONFIG = json.load(widgets_config_file)
@@ -106,18 +111,20 @@ class Mirror():
             self.window = Tk()
             self.window.title('Smart Mirror Mark II')
             self.window.configure(bg='black')
-            # Disables closing the window by standard means, such as ALT+F4 etc.
-            #self.window.overrideredirect(True)
+            
+            if self.FULL_SCREEN_MODE:
+                self.window.attributes('-fullscreen',True)
+
             self.window_width = self.window.winfo_screenwidth()
             self.window_height = self.window.winfo_screenheight()
             self.window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
+            #self.window.bind('<Escape>', self.test)
             self.logger.info('Main window has been created')
 
         except Exception as exc:
             self.logger.exception('Cannot create the main window!')
 
         self.create_loading_window()
-        self.loading = Loading(self.loading_window)
 
         self.queue = Queue()
 
@@ -289,8 +296,10 @@ class Mirror():
         self.loading_window.title('Loading...')
         self.loading_window.configure(bg='black')
         self.loading_window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
-        #self.loading_window.overrideredirect(True)
+        if self.FULL_SCREEN_MODE:
+            self.loading_window.attributes('-fullscreen',True)
         self.loading_window.lift(self.window)
+        self.loading = Loading(self.loading_window)
 
     def widget_init(self, widget_name):
         if widget_name == 'youtube':
@@ -339,7 +348,7 @@ class Mirror():
         writer.close()
 
     async def window_updater(self):
-        interval = 1/120
+        interval = 1/60
         while True:
             self.window.update()
             await asyncio.sleep(interval)
@@ -355,7 +364,13 @@ class Mirror():
                         self.gestures_recognizer.show = False
 
                     self.create_loading_window()
-                    self.loading = Loading(self.loading_window)
+
+                    # Stops widgets while updating them.
+                    for widget in self.WIDGETS_CONFIG.keys():
+                        self.widgets[widget].show = False
+
+                    time.sleep(1)
+
                     for widget in self.WIDGETS_CONFIG.keys():
                         if self.WIDGETS_CONFIG[widget]['show']:
                             if widget == 'youtube':
@@ -373,9 +388,18 @@ class Mirror():
                             )
                         else:
                             self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = False
-                    self.loading_window.destroy()
+                    
+                    # Returns widgets to normal operation.
+                    for widget in self.WIDGETS_CONFIG.keys():
+                        if self.WIDGETS_CONFIG[widget]['show']:
+                            self.widgets[widget].show = True
+
                     if self.gestures_recognizer:
                         self.gestures_recognizer.show = True
+                    
+                    self.loading_window.destroy()
+
+
 
                 if 'youtube' in self.widgets.keys():
                     if self.gesture == 'pointing_finger':
@@ -461,12 +485,24 @@ class Mirror():
     def close(self):
         try:
             self.logger.info('Closing mirror...')
+            self.logger.debug('Cancel tasks...')
             for task in self.tasks:
                 task.cancel()
+
             if self.cam is not None or self.cam.isOpened():
+                self.logger.debug('Closing camera...')
                 self.cam.release()
+
+            self.logger.debug('Closing widgets...')
+            for widget in self.widgets.keys():
+                self.widgets[widget].show = False
+                self.widgets[widget].destroy()
+
+            self.window.destroy()
+            self.logger.debug('Main window has been destroyed!')
+            sys.exit()
         except Exception as exc:
-            self.logger(f'Cannot close the mirror: {exc}')
+            self.logger.error(f'Cannot close the mirror: {exc}')
 
 if __name__ == '__main__':
     try:
@@ -474,4 +510,6 @@ if __name__ == '__main__':
         mirror = Mirror(asyncloop)
         asyncloop.run_forever()
     except KeyboardInterrupt:
+        mirror.logger.info('KeyboardInterrupt!')
         mirror.close()
+        self.logger.info('CLOSED!')

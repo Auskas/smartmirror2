@@ -117,6 +117,7 @@ class GesturesWidget:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating Gestures widget...')
             self.relx = args[0]
             self.rely = args[1]
             self.gestures_frame.place(relx=self.relx, rely=self.rely)
@@ -128,6 +129,14 @@ class GesturesWidget:
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
             self.font_size = 50
+
+            self.gestures_frame.place(
+                relx=self.relx,
+                rely=self.rely,
+                anchor=self.anchor
+            )
+            self.gestures_label.config(text='Указательный палец')
+
             self.get_font_size()
 
             if self.anchor == 'nw':
@@ -138,6 +147,9 @@ class GesturesWidget:
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
 
+    def destroy(self):
+        self.logger.debug('Closing Gestures...')
+        self.gestures_frame.destroy()
 
 if __name__ == '__main__':
     try:

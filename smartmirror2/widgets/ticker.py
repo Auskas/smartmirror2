@@ -22,6 +22,7 @@ class Ticker(Canvas):
 
         self.font_size = 40
 
+        self.window = window
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
         self.window_height = window.winfo_screenheight()
@@ -65,27 +66,32 @@ class Ticker(Canvas):
     def get_font_size(self):
         """ The method decreases the font size until it satisfies the target
             width and height of the widget."""
-        self.itemconfig(self.text_id, text=self.april_fools_news)
-        while self.font_size > 12:
-            self.itemconfig(self.text_id, font=("SFUIText", self.font_size, "bold"))
-            x0 = self.winfo_width()
-            y0 = int(self.winfo_height()/2)
-            self.coords("text", 0, y0)
-            (x0, y0, x1, y1) = self.bbox("text")
-            if y1 > self.target_height:
-                self.font_size -= 1
-            else:
-                self.itemconfig(self.text_id, text=self.news_string)
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {self.winfo_width()}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {self.winfo_height()}')
-                break
-            self.update()
+        try:
+            self.itemconfig(self.text_id, text=self.april_fools_news)
+            self.coords("text", 0, 0)
+            while self.font_size > 12:
+                self.itemconfig(self.text_id, font=("SFUIText", self.font_size, "bold"))
+                x0 = self.winfo_width()
+                y0 = int(self.winfo_height()/2)
+                self.coords("text", 0, y0)
+                (x0, y0, x1, y1) = self.bbox("text")
+                if y1 > self.target_height:
+                    self.font_size -= 1
+                else:
+                    self.itemconfig(self.text_id, text=self.news_string)
+                    self.logger.debug(f'Target widget width {self.target_width}')
+                    self.logger.debug(f'Real widget width {self.winfo_width()}')
+                    self.logger.debug(f'Target widget height {self.target_height}')
+                    self.logger.debug(f'Real widget height {self.winfo_height()}')
+                    break
+                self.update()
+        except Exception as exc:
+            self.logger.error(f'Cannot adjust the size of the widget: {exc}')
 
     def animate(self):
         if self.show == False:
-            self.after_id = self.after(2000, self.animate)
+            self.place_forget()
+            self.after_id = self.after(1000, self.animate)
         else:
             (x0, y0, x1, y1) = self.bbox("text")
 
@@ -112,6 +118,7 @@ class Ticker(Canvas):
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating ticker widget...')
             self.relx = args[0]
             self.rely = args[1]
             self.place(relx=self.relx, rely=self.rely)
@@ -120,23 +127,40 @@ class Ticker(Canvas):
             self.anchor = args[4]
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.configure(width=self.target_width - 3, height=self.target_height - 3)
-            self.font_size = 150
+
+            #self.configure(width=self.target_width - 3, height=self.target_height - 3)
+            self.place(relx=self.relx, rely=self.rely)
+
+            self.font_size = 50
             self.get_font_size()
             self.logger.debug('Widget has been updated!')
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
 
+    def destroy(self):
+        self.logger.debug('Closing Ticker...')
+        #self.destroy()
+
+    def close_window(self, event):
+        """ For testing purposes only."""
+        sys.exit()
+        #self.logger.debug('Escape key has been pressed, closing the window!')
+        #self.window.destroy()
+
 if __name__ == '__main__':
-    window = Tk()
-    window.title('Main Window')
-    window.configure(bg='black')
-    window.overrideredirect(True)
-    w, h = window.winfo_screenwidth(), window.winfo_screenheight()
-    window.geometry("%dx%d+0+0" % (w, h))
-    m = Ticker(window)
-    m.news_string = m.april_fools_news
-    window.mainloop()
+    try:
+        window = Tk()
+        window.title('Main Window')
+        window.configure(bg='black')
+        window.attributes('-fullscreen',True)
+        w, h = window.winfo_screenwidth(), window.winfo_screenheight()
+        window.geometry("%dx%d+0+0" % (w, h))
+        m = Ticker(window)
+        m.news_string = m.april_fools_news
+        window.bind('<Escape>', m.close_window)
+        window.mainloop()
+    except KeyboardInterrupt:
+        window.destroy()
 
 __version__ = '0.96' # 10th September 2020
 __author__ = 'Dmitry Kudryashov'

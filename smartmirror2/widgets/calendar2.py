@@ -112,6 +112,7 @@ class Calendar:
 
     def widget_update(self, *args):
         try:
+            self.logger.debug('Updating Calendar widget...')
             self.relx = args[0]
             self.rely = args[1]
             width = args[2]
@@ -122,11 +123,18 @@ class Calendar:
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
             self.font_size = 28
+
+            self.date_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
+            self.date_label.config(text='Понедельник, 00 сентября')
+            
             self.get_font_size()
             self.logger.debug('Widget has been updated!')
         except Exception as exc:
             self.logger.error(f'Cannot update the widget: {exc}')
 
+    def destroy(self):
+        self.logger.debug('Closing Calendar...')
+        self.date_label.destroy()
 
 if __name__ == '__main__':
     try:
