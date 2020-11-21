@@ -18,7 +18,8 @@ class VoiceAssistantWidget:
         rely=0.4, 
         width=0.1, 
         height=0.1, 
-        anchor='nw'        
+        anchor='nw',
+        show=True        
     ):
 
         self.logger = logging.getLogger('SM.voice_assistant_widget')
@@ -38,6 +39,7 @@ class VoiceAssistantWidget:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
+        self.show = show
 
         self.font_size = 30
 
@@ -68,7 +70,6 @@ class VoiceAssistantWidget:
         )
         self.message_label.grid(column=1, row=0, sticky=self.anchor)
 
-        self.show = True
         self.show_wave = False
         self.get_font_size()
         self.logger.info('Voice assistant widget has been initialized!')
@@ -90,10 +91,10 @@ class VoiceAssistantWidget:
             if self.message_label_width > self.target_width or self.message_label_height > self.target_height:
                 self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.message_label_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.message_label_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.message_label_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.message_label_height)}')
                 
 
                 zoom_factor = self.font_size * 16 / self.frames[0].width()
@@ -177,3 +178,9 @@ if __name__ == '__main__':
     widget.show_wave = True
     widget.show_wave_widget()
     window.mainloop()
+
+__version__ = '0.97' # 19th November 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"
+__status__ = "Development"

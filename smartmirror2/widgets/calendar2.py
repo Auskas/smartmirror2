@@ -10,7 +10,7 @@ import logging
 
 class Calendar:
 
-    def __init__(self, window, relx=0.05, rely=0.15, width=0.36, height=0.12, anchor='nw'):
+    def __init__(self, window, relx=0.05, rely=0.15, width=0.36, height=0.12, anchor='nw', show=True):
 
         self.logger = logging.getLogger('SM.calendar')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -29,6 +29,7 @@ class Calendar:
         self.rely = rely
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
+        self.show = show
 
         # Initial font size
         self.font_size = 28
@@ -72,10 +73,10 @@ class Calendar:
             if self.date_label_width > self.target_width or self.date_label_height > self.target_height:
                 self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.date_label_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.date_label_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.date_label_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.date_label_height)}')
                 break
 
     def get_time(self):
@@ -100,7 +101,6 @@ class Calendar:
         self.date_label.config(text=self.current_date_str)
 
         self.date_label.after(1000, self.status)
-        self.show = True
 
     def status(self):
         if self.show:
@@ -149,7 +149,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"    

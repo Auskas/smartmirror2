@@ -10,7 +10,7 @@ import logging
 
 class Statusbar:
 
-    def __init__(self, window, relx=0.05, rely=0.55, width=0.1, height=0.1, anchor='nw'):
+    def __init__(self, window, relx=0.05, rely=0.55, width=0.1, height=0.1, anchor='nw', show=True):
         self.logger = logging.getLogger('SM.statusbar')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -32,6 +32,7 @@ class Statusbar:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
+        self.show = show
 
         self.font_size = 30
 
@@ -148,7 +149,6 @@ class Statusbar:
         self.get_font_size()
 
         self.logger.info('Statusbar widget has been created.')
-        self.show = True
         self.status()
 
     def get_font_size(self):
@@ -169,10 +169,10 @@ class Statusbar:
             if self.statusbar_frame_width > self.target_width or self.statusbar_frame_height > self.target_height:
                 self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.statusbar_frame_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.statusbar_frame_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.statusbar_frame_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.statusbar_frame_height)}')
                 break
 
     def status(self):
@@ -329,7 +329,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit()
 
-__version__ = '0.1' # 7th November 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"

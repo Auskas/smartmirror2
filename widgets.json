@@ -59,7 +59,7 @@
     "name": "youtube",
     "alias": "Youtube",
     "id": 5,
-    "show": true,
+    "show": false,
     "relx": 48.83691652,
     "rely": 32.59084381,
     "width": 49.51312837,
@@ -109,7 +109,7 @@
     "height": 5.0,
     "keepAspectRatio": false,
     "anchor": "nw",
-    "minwidth": 20,
+    "minwidth": 10,
     "minheight": 5
   },
   "statusbar": {

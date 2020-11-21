@@ -65,3 +65,9 @@ if __name__ == '__main__':
         window.mainloop()
     except KeyboardInterrupt:
         sys.exit()
+
+__version__ = '0.97' # 19th November 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"
+__status__ = "Development"

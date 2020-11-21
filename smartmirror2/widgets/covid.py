@@ -8,7 +8,7 @@ import os
 
 class Covid:
 
-    def __init__(self, window, relx=0.62, rely=0.03, width=0.36, height=0.09, anchor='nw'):
+    def __init__(self, window, relx=0.62, rely=0.03, width=0.36, height=0.09, anchor='nw', show=True):
         self.logger = logging.getLogger('SM.covid')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -27,6 +27,7 @@ class Covid:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
+        self.show = show
 
         # The initial size of the widget fonts. It is resized to occupy the target dimesions.
         self.font_size = 30
@@ -121,8 +122,6 @@ class Covid:
         self.rus_recovered = Label(self.bottom_frame_cases, text='00,000,000', fg='white', bg='black', font=("SFUIText", self.font_size - 2, "bold"))
         self.rus_recovered.grid(column=6, row=0, sticky=self.anchor)
 
-        self.show = True
-
         # Default Covid-19 data
         self.covid_figures = [
             '24,925,950', '861,668', '18,209,780',
@@ -191,10 +190,10 @@ class Covid:
             if self.covid_frame_width > self.target_width or self.covid_frame_height > self.target_height:
                 self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.covid_frame_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.covid_frame_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.covid_frame_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.covid_frame_height)}')
                 break
 
     def widget(self):
@@ -258,7 +257,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"

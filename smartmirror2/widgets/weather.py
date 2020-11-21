@@ -11,7 +11,7 @@ from PIL import Image, ImageTk
 
 class Weather:
 
-    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.2, anchor='nw'):
+    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.2, anchor='nw', show=True):
         self.logger = logging.getLogger('SM.weather')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -35,6 +35,7 @@ class Weather:
         self.relx = relx
         self.rely = rely
         self.anchor = anchor
+        self.show = show
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
 
@@ -99,8 +100,6 @@ class Weather:
         else:
             self.next_next_forecast.pack(side = RIGHT)
 
-        self.show = True
-
         self.forecast_string = None
         self.april_fools_forecast = {
             'fact': {'temp': -1, 'icon': 'fct_+sn'},
@@ -145,10 +144,10 @@ class Weather:
             if self.weather_frame_width > self.target_width or self.weather_frame_height > self.target_height:
                 self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.weather_frame_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.weather_frame_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.weather_frame_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.weather_frame_height)}')
                 break
 
 
@@ -301,7 +300,7 @@ if __name__ == '__main__':
     a.forecast_string = a.april_fools_forecast
     window.mainloop()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"

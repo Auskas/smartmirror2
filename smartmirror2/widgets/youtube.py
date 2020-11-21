@@ -36,7 +36,7 @@ import alsaaudio
 
 class YoutubePlayer:
 
-    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', default_video='Iron Maiden'):
+    def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', show=True, default_video='Iron Maiden'):
         self.logger = logging.getLogger('SM.youtube')
         self.loop = asyncloop
 
@@ -56,6 +56,8 @@ class YoutubePlayer:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
+
+        self.show = show
 
         self.icons_target_size = (
             int(self.target_width / 30), 
@@ -95,6 +97,8 @@ class YoutubePlayer:
         self.media_list = self.instance.media_list_new()
 
         self.audio = alsaaudio.Mixer()
+        # Unmutes the system audio if it has been muted due to any errors.
+        self.audio.setmute(0)
         self.audio_volume = self.audio.getvolume()[0] * 3
 
         # Creating an instance of the player.
@@ -131,15 +135,14 @@ class YoutubePlayer:
         receiver_loop = self.loop.create_task(self.process_receiver())
         status_loop = self.loop.create_task(self.status())
 
-        # Changes the video to the topic written in default_video
-        initial_search_loop = self.loop.create_task(self.search(self.default_video))
+        if self.show:
+            # Changes the video to the topic written in default_video
+            initial_search_loop = self.loop.create_task(self.search(self.default_video))
         
         self.create_volume_bar()
         
         if __name__ == '__main__':
             self.loop.create_task(self.window_updater())
-
-        self.show = True
 
         self.logger.info('Youtube widget has been initialized.')
 
@@ -370,6 +373,10 @@ class YoutubePlayer:
             self.widgetCanvas.place(relx=0, rely=0, anchor='nw')
             self.widgetCanvas.config(width=self.window_width, height=self.window_height)
             self.player.set_xwindow(self.widget_canvas_id)
+
+            # Makes the widget appear on top of the others.
+            self.window.lift(self.widgetCanvas)
+
             self.fullscreen_status = True
             self.video_status = 'running'
         except Exception as exc:
@@ -474,6 +481,8 @@ class YoutubePlayer:
 
                 await asyncio.sleep(0.05)
             else:
+                if self.video_status == 'running':
+                    self.stop()
                 await asyncio.sleep(1)
 
     async def window_updater(self):
@@ -527,18 +536,18 @@ if __name__ == '__main__':
         youtube = YoutubePlayer(window, loop)
         youtube.set_fullscreen()
         
-        import cv2
-        import importlib.util
-        spec = importlib.util.spec_from_file_location("gestures.py", "/media/data/sm2/smartmirror2/gestures.py")
-        gestures = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(gestures)
+        #import cv2
+        #import importlib.util
+        #spec = importlib.util.spec_from_file_location("gestures.py", "/media/data/sm2/smartmirror2/gestures.py")
+        #gestures = importlib.util.module_from_spec(spec)
+        #spec.loader.exec_module(gestures)
         
 
         from multiprocessing import Process, Queue
-        cam = cv2.VideoCapture(0)
+        #cam = cv2.VideoCapture(0)
         queue = Queue()
-        gestures_recognizer = gestures.GesturesRecognizer(cam, queue)
-        gestures_recognizer_process = Process(target=gestures_recognizer.tracker).start()
+        #gestures_recognizer = gestures.GesturesRecognizer(cam, queue)
+        #gestures_recognizer_process = Process(target=gestures_recognizer.tracker).start()
 
         loop.create_task(youtube.process_receiver_main(queue))
         loop.run_forever()
@@ -547,7 +556,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"    

@@ -8,7 +8,7 @@ import logging
 
 class Stocks:
 
-    def __init__(self, window, relx=0.65, rely=0.65, width=0.4, height=0.1, anchor='ne'):
+    def __init__(self, window, relx=0.65, rely=0.65, width=0.4, height=0.1, anchor='ne', show=True):
         self.logger = logging.getLogger('SM.stocks')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -30,6 +30,7 @@ class Stocks:
         self.target_height = int(height * self.window_height)
 
         self.anchor = anchor
+        self.show = show
 
         self.rates_string = '*** Обновление данных по котировкам ***'
         self.rates_test_string = '$ 000.0↓   € 000.0↓   Brent 000.0↑'
@@ -41,8 +42,6 @@ class Stocks:
         if self.anchor == 'ne':
             self.relx += width
         self.stocks_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
-        
-        self.show = True
         
         self.get_font_size()
 
@@ -63,11 +62,11 @@ class Stocks:
                 else:
                     self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.stocks_label_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.stocks_label_height)}')
-                self.stocks_label.config(text='*** Обновление данных по котировкам ***')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.stocks_label_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.stocks_label_height)}')
+                #self.stocks_label.config(text='*** Обновление данных по котировкам ***')
                 break
         self.stocks_label.config(text='*** Обновление данных по котировкам ***')
 
@@ -134,3 +133,9 @@ if __name__ == '__main__':
         window.mainloop()
     except KeyboardInterrupt:
         sys.exit()
+
+__version__ = '0.97' # 19th November 2020
+__author__ = 'Dmitry Kudryashov'
+__maintainer__ = 'Dmitry Kudryashov'
+__email__ = "dmitry-kud@yandex.ru"
+__status__ = "Development"

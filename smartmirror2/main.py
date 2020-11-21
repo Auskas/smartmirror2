@@ -64,6 +64,8 @@ class Mirror():
         # If FULL_SCREEN_MODE is True the main window occupies the entire screen.
         # Warning: In full screen mode the window can be closed only from terminal.
         self.FULL_SCREEN_MODE = True
+        self.VOICE_RECOGNITION = False
+        self.GESTURES_RECOGNIZER = False
 
         try:
             host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
@@ -130,7 +132,7 @@ class Mirror():
 
         # Checks if there is a camera device on board.
         self.cam = cv2.VideoCapture(0)
-        if self.cam is None or not self.cam.isOpened():
+        if self.GESTURES_RECOGNIZER == False or self.cam is None or not self.cam.isOpened():
             self.gestures_recognizer = False
             self.logger.info('No camera device has been found on board.')
         else:
@@ -151,7 +153,8 @@ class Mirror():
                     width=params[2],
                     height=params[3],
                     anchor=params[4],
-                    default_video=params[5]
+                    show=params[5],
+                    default_video=params[6]
                 )
                 self.widgets[widget_name] = self.youtube
 
@@ -162,7 +165,8 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.clock
             elif widget_name == 'calendar':
@@ -172,7 +176,8 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.calendar
             elif widget_name == 'covid':
@@ -182,7 +187,8 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5],
                 )
                 self.widgets[widget_name] = self.covid
             elif widget_name == 'stocks':
@@ -192,7 +198,8 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.stocks
 
@@ -203,7 +210,8 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.ticker
             elif widget_name == 'weather':
@@ -213,19 +221,22 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.weather
             elif widget_name == 'voice_assistant':
-                self.voice_assistant_widget = VoiceAssistantWidget(
-                    self.window,
-                    relx=params[0],
-                    rely=params[1],
-                    width=params[2],
-                    height=params[3],
-                    anchor=params[4]
-                )
-                self.widgets[widget_name] = self.voice_assistant_widget
+                if self.VOICE_RECOGNITION:
+                    self.voice_assistant_widget = VoiceAssistantWidget(
+                        self.window,
+                        relx=params[0],
+                        rely=params[1],
+                        width=params[2],
+                        height=params[3],
+                        anchor=params[4],
+                        show=params[5]
+                    )
+                    self.widgets[widget_name] = self.voice_assistant_widget
             elif widget_name == 'statusbar':
                 self.statusbar = Statusbar(
                     self.window,
@@ -233,19 +244,22 @@ class Mirror():
                     rely=params[1],
                     width=params[2],
                     height=params[3],
-                    anchor=params[4]
+                    anchor=params[4],
+                    show=params[5]
                 )
                 self.widgets[widget_name] = self.statusbar
             elif widget_name == 'gestures':
-                self.gestures_widget = GesturesWidget(
-                    self.window,
-                    relx=params[0],
-                    rely=params[1],
-                    width=params[2],
-                    height=params[3],
-                    anchor=params[4]
-                )
-                self.widgets[widget_name] = self.gestures_widget
+                if self.GESTURES_RECOGNIZER:
+                    self.gestures_widget = GesturesWidget(
+                        self.window,
+                        relx=params[0],
+                        rely=params[1],
+                        width=params[2],
+                        height=params[3],
+                        anchor=params[4],
+                        show=params[5]
+                    )
+                    self.widgets[widget_name] = self.gestures_widget
         for widget_name in self.widgets:
             if self.WIDGETS_CONFIG[widget_name]['show']:
                 self.widgets[widget_name].show = True
@@ -261,7 +275,10 @@ class Mirror():
         self.user_detected = False
         self.voice_command = []
 
-        self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
+        if self.VOICE_RECOGNITION:
+            self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
+        else:
+            self.voice_assistant = False
 
         self.tasks = []
         self.tasks.append(self.loop.create_task(self.window_updater()))
@@ -298,7 +315,7 @@ class Mirror():
         self.loading_window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
         if self.FULL_SCREEN_MODE:
             self.loading_window.attributes('-fullscreen',True)
-        self.loading_window.lift(self.window)
+        #self.loading_window.lift(self.window)
         self.loading = Loading(self.loading_window)
 
     def widget_init(self, widget_name):
@@ -312,6 +329,7 @@ class Mirror():
             round(self.WIDGETS_CONFIG[widget_name]['width'] / 100, 5),
             round(self.WIDGETS_CONFIG[widget_name]['height'] / 100, 5),
             self.WIDGETS_CONFIG[widget_name]['anchor'],
+            self.WIDGETS_CONFIG[widget_name]['show'],
             default_video
         )
 

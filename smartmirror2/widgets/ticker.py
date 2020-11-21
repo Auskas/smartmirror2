@@ -7,7 +7,7 @@ import logging
 
 class Ticker(Canvas):
 
-    def __init__(self, window, relx=0.0, rely=0.93, width=0.97, height=0.05, anchor='nw', fps=125):
+    def __init__(self, window, relx=0.0, rely=0.93, width=0.97, height=0.05, anchor='nw', show=True, fps=125):
         # Special news ticker for April's Fool day.
         self.april_fools_news = 'Владимир Путин выступил на Генеральной ассамблее ООН в костюме Деда Мороза.   ***   Дмитрий Медведев в ходе своего визита на Дальний восток заявил о невозможности разблокировки своего айфона.   ***  Укробандеровские собакофашисты вновь нарушили перемирие на Донбасе, коварно атаковав позиции отважных ополченцев.   ***    В ходе военных учений в Калининградской области российские войска уничтожили двести танков и триста самолетов противника. Условного.   ***   Президент России заявил о двухкратном снижении темпов прироста скорости падения российской экономики.   ***   Согласно опроса ФГЛПРФ ЗД более половины респондентов заявили о беззаговорочной поддержке курса Президента. Кормильца нашего, храни его Бог, благослави все дела его праведные.   ***   Виталий Мутко во время встречи со студентами МГУ признался, что только искренняя любовь к Отчизне заставляет его оставаться на своём посту.   ***   Глава МИД России Сергей Лавров считает овец перед сном.   ***   "Патриотизм и любовь к Родине обязаны быть в сердце каждого россиянина", - заявил Игорь Сечин на встрече с гостями и журналистами на борту своей яхты в Монте-Карло.   ***   Патриарх Московский и Всея Руси Кирилл считает, что российскому обществу следует отказаться от чрезмерной роскоши. В пользу РПЦ.'
         self.news_string = '   *** Загрузка новостей ***   '
@@ -34,7 +34,7 @@ class Ticker(Canvas):
 
         self.anchor = anchor
 
-        self.show = True
+        self.show = show
 
         # borderwidth default size is 2 (we don't need any borders), highlightbackground default is white - when the canvas is not in the focus.
         Canvas.__init__(
@@ -79,10 +79,10 @@ class Ticker(Canvas):
                     self.font_size -= 1
                 else:
                     self.itemconfig(self.text_id, text=self.news_string)
-                    self.logger.debug(f'Target widget width {self.target_width}')
-                    self.logger.debug(f'Real widget width {self.winfo_width()}')
-                    self.logger.debug(f'Target widget height {self.target_height}')
-                    self.logger.debug(f'Real widget height {self.winfo_height()}')
+                    #self.logger.debug(f'Target widget width {self.target_width}')
+                    #self.logger.debug(f'Real widget width {self.winfo_width()}')
+                    #self.logger.debug(f'Target widget height {self.target_height}')
+                    #self.logger.debug(f'Real widget height {self.winfo_height()}')
                     break
                 self.update()
         except Exception as exc:
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         window.destroy()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"    

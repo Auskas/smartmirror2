@@ -8,7 +8,7 @@ import logging
 
 class Clock:
 
-    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw'):
+    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw', show=True):
         self.logger = logging.getLogger('SM.clock')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -27,6 +27,7 @@ class Clock:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
         self.anchor = anchor
+        self.show = show
 
         self.font_size = 50
         self.timeLbl = Label(
@@ -47,7 +48,6 @@ class Clock:
         self.get_font_size()
 
         self.logger.info('Clock widgets has been created.')
-        self.show = True
         self.status()
 
     def get_font_size(self):
@@ -66,10 +66,10 @@ class Clock:
                 else:
                     self.font_size -= 1
             else:
-                self.logger.debug(f'Target widget width {self.target_width}')
-                self.logger.debug(f'Real widget width {int(self.time_label_width)}')
-                self.logger.debug(f'Target widget height {self.target_height}')
-                self.logger.debug(f'Real widget height {int(self.time_label_height)}')
+                #self.logger.debug(f'Target widget width {self.target_width}')
+                #self.logger.debug(f'Real widget width {int(self.time_label_width)}')
+                #self.logger.debug(f'Target widget height {self.target_height}')
+                #self.logger.debug(f'Real widget height {int(self.time_label_height)}')
                 break
         
     def get_time(self):
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit()
 
-__version__ = '0.96' # 10th September 2020
+__version__ = '0.97' # 19th November 2020
 __author__ = 'Dmitry Kudryashov'
 __maintainer__ = 'Dmitry Kudryashov'
 __email__ = "dmitry-kud@yandex.ru"    

@@ -38,24 +38,26 @@ class LuaUpdater:
                 self.logger.debug('Script is not running under root privileges.')
                 self.is_root = False
             process = subprocess.Popen('locate youtube.luac', stdout=subprocess.PIPE, shell=True)
-            self.target_file = process.communicate()[0].strip().decode('utf-8')
-            if self.target_file == '':
+            
+            target_files_string = process.communicate()[0].strip().decode('utf-8')
+            self.target_files = target_files_string.split('\n')
+            if len(self.target_files) == 0:
                 self.logger.error('Cannot locate the target file in your Linux system.')
             else:
-                self.logger.debug(f'Target file path: {self.target_file}')
+                self.logger.debug(f'Target files path: {self.target_files}')
 
         elif self.user_system == 'Windows':
             target_file_32_bit = f'C:{os.sep}Program Files (x86){os.sep}VideoLAN{os.sep}VLC{os.sep}lua{os.sep}playlist{os.sep}youtube.luac'
             target_file_64_bit = f'C:{os.sep}Program Files{os.sep}VideoLAN{os.sep}VLC{os.sep}lua{os.sep}playlist{os.sep}youtube.luac'
             if os.path.isfile(target_file_32_bit):
                 self.logger.debug(f'Target file has been detected (32 bit OS): {target_file_32_bit}')
-                self.target_file = target_file_32_bit
+                self.target_files = [target_file_32_bit]
             elif os.path.isfile(target_file_64_bit):
                 self.logger.debug(f'Target file has been detected (64 bit OS): {target_file_64_bit}')
-                self.target_file = target_file_64_bit
+                self.target_files = [target_file_64_bit]
             else:
                 self.logger.error('Cannot locate the lua file in windows.')
-                self.target_file = ''
+                self.target_file = []
 
         else:
             self.logger.warning('Sorry your OS is not supported!')
@@ -100,15 +102,17 @@ class LuaUpdater:
 
             if self.user_system == 'Linux':
                 if self.is_root:
-                    with open(self.target_file, 'w') as target_file:
-                        target_file.write(luac)
+                    for target_file in self.target_files:
+                        with open(self.target_file, 'w') as target_file:
+                            target_file.write(luac)
                     self.logger.debug('youtube.luac has been successfully updated.')
                 else:
                     with open(self.temp_file, 'w') as temp_file:
                         temp_file.write(luac)
                     self.logger.debug('youtube.luac has been saved to a temp file.')
                     try:
-                        subprocess.call(['sudo', 'cp', '-rf', self.temp_file, self.target_file])
+                        for target_file in self.target_files:
+                            subprocess.call(['sudo', 'cp', '-rf', self.temp_file, target_file])
                         self.logger.debug('youtube.luac has been successfully updated.')
                     except Exception as error:
                         self.logger.debug(f'Cannot rewrite the file: {error}')
@@ -119,7 +123,7 @@ class LuaUpdater:
                         temp_file.write(luac)
                     self.logger.debug('youtube.luac has been saved to a temp file.')
                     try:
-                        shutil.copy(self.temp_file, self.target_file)
+                        shutil.copy(self.temp_file, self.target_files[0])
                     except Exception as copy_error:
                         self.logger.error(f'Cannot copy the file: {copy_error}')
 
