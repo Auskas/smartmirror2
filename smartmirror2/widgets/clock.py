@@ -8,7 +8,7 @@ import logging
 
 class Clock:
 
-    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw', show=True):
+    def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw', show=True, font_color='lightblue'):
         self.logger = logging.getLogger('SM.clock')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.

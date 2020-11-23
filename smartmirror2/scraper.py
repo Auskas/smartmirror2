@@ -33,10 +33,14 @@ class Scraper:
         self.news_string = '   *** Загрузка новостей ***   '
         self.rates_string = '*** Обновление данных по котировкам ***'
         self.covid_figures = [
-            '24,925,950', '861,668', '18,209,780',
-            '1,000,500', '+4,952',
-            '17,414', '+31',
-            '821,169'
+            '*** Загрузка данных по коронавирусу ***', 
+            '', 
+            '',
+            '',
+            '',
+            '',
+            '',
+            ''
         ]
         self.forecast_string = None
 
@@ -189,7 +193,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_news)
             if res == False:
-                await asyncio.sleep(60)
+                await asyncio.sleep(600)
             else:
                 news_parser_process = Process(target=self.news_parser, args=(res, queue))
                 news_parser_process.start()
@@ -204,7 +208,7 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_covid)
             if res == False:
-                await asyncio.sleep(60)
+                await asyncio.sleep(600)
             else:
                 covid_parser_process = Process(target=self.covid_parser, args=(res, queue))
                 covid_parser_process.start()

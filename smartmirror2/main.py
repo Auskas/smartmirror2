@@ -63,7 +63,7 @@ class Mirror():
 
         # If FULL_SCREEN_MODE is True the main window occupies the entire screen.
         # Warning: In full screen mode the window can be closed only from terminal.
-        self.FULL_SCREEN_MODE = True
+        self.FULL_SCREEN_MODE = False
         self.VOICE_RECOGNITION = False
         self.GESTURES_RECOGNIZER = False
 
@@ -73,22 +73,19 @@ class Mirror():
             self.IP_ADDRESS = ip_address_regex.search(host_ip_address)
             if self.IP_ADDRESS is not None:
                 self.SERVER_IP_ADDRESS = self.IP_ADDRESS.group()
-                self.SERVER_PORT = 9086
+                self.SERVER_PORT = 80
                 self.logger.info(f'Host IP address is {self.SERVER_IP_ADDRESS}')
             else:
                 self.SERVER_IP_ADDRESS = 'localhost'
-                self.SERVER_PORT = 9086
+                self.SERVER_PORT = 80
                 self.logger.warning(f'IP address has not been assigned to the host! Using localhost...')
         except Exception as exc:
             self.logger.error(f'Cannot get the IP address: {exc}')
 
-        # Web server initialization
+        # Web server initialization...
         try:
-            if self.SERVER_IP_ADDRESS == 'localhost':
-                os.popen(f'python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver')
-            else:
-                os.popen(f'python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
-            self.logger.info('Successfully initialized the web server!')
+            os.popen(f'sudo python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
+            self.logger.info(f'Web server has been initialized at {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
         except Exception as exc:
             self.logger.error(f'Cannot start the web server: {exc}')
 
@@ -120,7 +117,6 @@ class Mirror():
             self.window_width = self.window.winfo_screenwidth()
             self.window_height = self.window.winfo_screenheight()
             self.window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
-            #self.window.bind('<Escape>', self.test)
             self.logger.info('Main window has been created')
 
         except Exception as exc:
@@ -226,17 +222,16 @@ class Mirror():
                 )
                 self.widgets[widget_name] = self.weather
             elif widget_name == 'voice_assistant':
-                if self.VOICE_RECOGNITION:
-                    self.voice_assistant_widget = VoiceAssistantWidget(
-                        self.window,
-                        relx=params[0],
-                        rely=params[1],
-                        width=params[2],
-                        height=params[3],
-                        anchor=params[4],
-                        show=params[5]
-                    )
-                    self.widgets[widget_name] = self.voice_assistant_widget
+                self.voice_assistant_widget = VoiceAssistantWidget(
+                    self.window,
+                    relx=params[0],
+                    rely=params[1],
+                    width=params[2],
+                    height=params[3],
+                    anchor=params[4],
+                    show=params[5]
+                )
+                self.widgets[widget_name] = self.voice_assistant_widget
             elif widget_name == 'statusbar':
                 self.statusbar = Statusbar(
                     self.window,
@@ -249,17 +244,16 @@ class Mirror():
                 )
                 self.widgets[widget_name] = self.statusbar
             elif widget_name == 'gestures':
-                if self.GESTURES_RECOGNIZER:
-                    self.gestures_widget = GesturesWidget(
-                        self.window,
-                        relx=params[0],
-                        rely=params[1],
-                        width=params[2],
-                        height=params[3],
-                        anchor=params[4],
-                        show=params[5]
-                    )
-                    self.widgets[widget_name] = self.gestures_widget
+                self.gestures_widget = GesturesWidget(
+                    self.window,
+                    relx=params[0],
+                    rely=params[1],
+                    width=params[2],
+                    height=params[3],
+                    anchor=params[4],
+                    show=params[5]
+                )
+                self.widgets[widget_name] = self.gestures_widget
         for widget_name in self.widgets:
             if self.WIDGETS_CONFIG[widget_name]['show']:
                 self.widgets[widget_name].show = True
@@ -287,9 +281,8 @@ class Mirror():
             self.loop.create_task(
                 asyncio.start_server(
                     self.cmd_from_web_cfg,
-                    #self.SERVER_IP_ADDRESS,
                     'localhost',
-                    self.SERVER_PORT
+                    '9086'
                 )
             )
         )
@@ -315,7 +308,7 @@ class Mirror():
         self.loading_window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
         if self.FULL_SCREEN_MODE:
             self.loading_window.attributes('-fullscreen',True)
-        #self.loading_window.lift(self.window)
+        self.loading_window.attributes("-topmost", True)
         self.loading = Loading(self.loading_window)
 
     def widget_init(self, widget_name):
@@ -366,7 +359,7 @@ class Mirror():
         writer.close()
 
     async def window_updater(self):
-        interval = 1/60
+        interval = 1/30
         while True:
             self.window.update()
             await asyncio.sleep(interval)
