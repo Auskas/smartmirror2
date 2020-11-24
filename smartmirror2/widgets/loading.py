@@ -9,13 +9,15 @@ import os
 class Loading:
 
     def __init__(self, window):
-        self.logger = logging.getLogger('SM.loading')
+        self.logger = logging.getLogger('SM2.loading')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of LOADING widget...')
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -41,7 +43,7 @@ class Loading:
         )
         self.loading_label.pack()
         #self.loading_label.configure(image=self.backup_image)
-        self.logger.info('Loading widget has been created.')
+        self.logger.info('LOADING widget has been created.')
         self.widget()
 
     def widget(self, ind=0):

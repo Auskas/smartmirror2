@@ -29,7 +29,7 @@ import time
 class GesturesRecognizer:
 
     def __init__(self, camera, queue):
-        self.logger = logging.getLogger('SM.gestures')
+        self.logger = logging.getLogger('SM2.gestures')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()

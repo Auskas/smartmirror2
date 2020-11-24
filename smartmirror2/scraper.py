@@ -10,14 +10,15 @@ import aiohttp
 import asyncio
 import logging
 import time
-import bs4
+import bs4, lxml
 from multiprocessing import Process, Queue
 import requests
+import re
 
 class Scraper:
     
     def __init__(self, asyncloop):
-        self.logger = logging.getLogger('SM.scraper')
+        self.logger = logging.getLogger('SM2.scraper')
         self.loop = asyncloop
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -50,6 +51,10 @@ class Scraper:
         else:
             self.logger.debug('YANDEX_WEATHER_TOKEN environment variable found')
 
+        if __name__ == '__main__':
+            self.yandex_weather_token = ''
+            self.logger.debug('Yandex weather token will not be used (__main__)')
+        
         queue = Queue()
         rates_loop = self.loop.create_task(self.ratesbot(queue))
         news_loop = self.loop.create_task(self.newsbot(queue))
@@ -130,7 +135,7 @@ class Scraper:
             number_of_news = 1
             for tag in newsTags:
                 tagTitle = tag.find('div', class_ = 'left-feed-title')
-                tagText = tag.find('div', class_= 'left-feed-anons')
+                #tagText = tag.find('div', class_= 'left-feed-anons')
                 new_news.append(tagTitle.getText().strip() + '   ***   ')
                 number_of_news += 1
                 if number_of_news == 10:
@@ -153,23 +158,33 @@ class Scraper:
                 On success puts a dictionary with the key 'covid_figures' and 
             the list as the value into the queue."""
         try:
-            st_time = time.perf_counter()
+            #st_time = time.perf_counter() 
+            
             temp_figures = []
-            soup = bs4.BeautifulSoup(res, features='html.parser')
+            soup = bs4.BeautifulSoup(res, features='lxml')
+
             figures = soup.find_all('div', class_='maincounter-number')
             for figure in figures:
                 temp_figures.append(figure.getText().replace('\n',''))
-            national_figures = soup.find_all('tr')
-            for nation in national_figures:
-                country = nation.getText()
-                if country.find('Russia') != -1:
-                    temp_figures.extend(country.split()[2:7])
-                    break
+
+            nation = re.compile('Russia')
+            national_figures = soup.find('a', text=nation, attrs = {'class': 'mt_a'}).parent.parent
+
+            temp_figures.extend(national_figures.getText().split()[2:7])
+
+            # The old approach.
+            #national_figures = soup.find_all('tr')
+            #for nation in national_figures:
+                #country = nation.getText()
+                #if country.find('Russia') != -1:
+                    #temp_figures.extend(country.split()[2:7])
+                    #break
             if len(temp_figures) > 7:
                 queue.put({'covid_figures': temp_figures})
                 self.logger.info('Got the Covid-19 latest figures.')
             else:
                 self.logger.warning('Cannot find the Covid-19 figures on the page')
+            #self.logger.debug(f'Covid parser runtime: {time.perf_counter() - st_time} seconds.')
         except Exception as exc:
             self.logger.error(f'Cannot update the Covid-19 figures: {exc}')
 

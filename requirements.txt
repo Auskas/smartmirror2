@@ -2,8 +2,9 @@ Pillow==7.2.0
 python-vlc==3.0.11115
 aiohttp==3.6.2
 beautifulsoup4==4.9.1
+lxml==4.6.1
 opencv-contrib-python==4.2.0.34
 Django==3.1.1
 django-crispy-forms==1.9.2
-tensorflow-cpu @ https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow_cpu-2.3.0-cp36-cp36m-manylinux2010_x86_64.whl
+#tensorflow-cpu @ https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow_cpu-2.3.0-cp36-cp36m-manylinux2010_x86_64.whl
 Keras==2.4.3
