@@ -12,14 +12,16 @@ class Calendar:
 
     def __init__(self, window, relx=0.05, rely=0.15, width=0.36, height=0.12, anchor='nw', show=True):
 
-        self.logger = logging.getLogger('SM.calendar')
+        self.logger = logging.getLogger('SM2.calendar')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
-            
+
+        self.logger.info('Initialization of Calendar widget...')
+        
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
         self.window_height = window.winfo_screenheight()

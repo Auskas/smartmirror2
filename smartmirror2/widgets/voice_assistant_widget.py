@@ -22,14 +22,16 @@ class VoiceAssistantWidget:
         show=True        
     ):
 
-        self.logger = logging.getLogger('SM.voice_assistant_widget')
+        self.logger = logging.getLogger('SM2.voice_assistant_widget')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)    
-            
+
+        self.logger.info('Initialization of VOICE ASSISTANT widget...')
+
         self.window = window
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
@@ -72,7 +74,7 @@ class VoiceAssistantWidget:
 
         self.show_wave = False
         self.get_font_size()
-        self.logger.info('Voice assistant widget has been initialized!')
+        self.logger.info('VOICE ASSISTANT widget has been initialized!')
         self.status()
 
     def get_font_size(self):

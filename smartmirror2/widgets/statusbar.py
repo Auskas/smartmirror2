@@ -11,7 +11,7 @@ import logging
 class Statusbar:
 
     def __init__(self, window, relx=0.05, rely=0.55, width=0.1, height=0.1, anchor='nw', show=True):
-        self.logger = logging.getLogger('SM.statusbar')
+        self.logger = logging.getLogger('SM2.statusbar')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -19,6 +19,8 @@ class Statusbar:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of STATUSBAR widget...')
 
         self.REFRESH_RATE = 10000 # time in milliseconds between measurments.
 
@@ -148,7 +150,7 @@ class Statusbar:
         self.window.update_idletasks()
         self.get_font_size()
 
-        self.logger.info('Statusbar widget has been created.')
+        self.logger.info('STATUSBAR widget has been created.')
         self.status()
 
     def get_font_size(self):

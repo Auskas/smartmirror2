@@ -9,13 +9,15 @@ import os
 class Covid:
 
     def __init__(self, window, relx=0.62, rely=0.03, width=0.36, height=0.09, anchor='nw', show=True, font_color='lightblue'):
-        self.logger = logging.getLogger('SM.covid')
+        self.logger = logging.getLogger('SM2.covid')
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of COVID widget...')
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -126,7 +128,7 @@ class Covid:
         #print(int(self.covid_frame_width / self.window_width * 100))
         #print(int(self.covid_frame_height / self.window_height * 100))
         self.get_font_size()
-        self.logger.info('Covid widget has been created.')
+        self.logger.info('COVID widget has been created.')
         self.widget()
 
     def get_font_size(self):

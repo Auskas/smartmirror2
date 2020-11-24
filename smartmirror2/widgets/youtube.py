@@ -37,7 +37,7 @@ import alsaaudio
 class YoutubePlayer:
 
     def __init__(self, window, asyncloop, relx=0.48, rely=0.42, width=0.4, height=0.4, anchor='nw', show=True, default_video='Iron Maiden'):
-        self.logger = logging.getLogger('SM.youtube')
+        self.logger = logging.getLogger('SM2.youtube')
         self.loop = asyncloop
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -46,6 +46,8 @@ class YoutubePlayer:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of YOUTUBE widget...')
 
         self.window = window
 
@@ -144,7 +146,7 @@ class YoutubePlayer:
         if __name__ == '__main__':
             self.loop.create_task(self.window_updater())
 
-        self.logger.info('Youtube widget has been initialized.')
+        self.logger.info('YOUTUBE widget has been initialized.')
 
     def create_volume_bar(self):
 

@@ -11,7 +11,7 @@ import logging
 class GesturesWidget:
 
     def __init__(self, window, relx=0.05, rely=0.55, width=0.1, height=0.1, anchor='nw', show=True):
-        self.logger = logging.getLogger('SM.gestures_widget')
+        self.logger = logging.getLogger('SM2.gestures_widget')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -19,6 +19,8 @@ class GesturesWidget:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of GESTURES widget...')
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -74,7 +76,7 @@ class GesturesWidget:
         self.window.update_idletasks()
         self.get_font_size()
 
-        self.logger.info('Clock widgets has been created.')
+        self.logger.info('GESTURES widget has been created.')
         self.status()
 
     def get_font_size(self):

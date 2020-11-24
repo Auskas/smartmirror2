@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # main.py - the main module for my smart mirror project.
 
-import sys
+import sys, os
 if sys.version_info[0] < 3:
     raise Exception("Python 3 required to run the script!")
-import os, time, json
+import time, json
 import asyncio
 from tkinter import *
 
@@ -14,30 +14,21 @@ import re
 
 import subprocess
 
-import cv2
-
 from multiprocessing import Process, Queue
-
 from widgets.clock import Clock
 from widgets.calendar2 import Calendar
 from widgets.covid import Covid
 from widgets.stocks import Stocks
-from widgets.youtube import YoutubePlayer
 from widgets.ticker import Ticker
 from widgets.weather import Weather
 from widgets.loading import Loading
 from widgets.statusbar import Statusbar
-from widgets.gestures_widget import GesturesWidget
-from widgets.voice_assistant_widget import VoiceAssistantWidget
 from scraper import Scraper
-from gestures import GesturesRecognizer
-from voice_assistant import VoiceAssistant
-#from test_cmd import TestCMD
 
 class Mirror():
 
     def __init__(self, asyncloop):
-        self.logger = logging.getLogger('SM')
+        self.logger = logging.getLogger('SM2')
         self.logger.setLevel(logging.DEBUG)
 
         logFileHandler = logging.FileHandler(f'sm2.log')
@@ -66,6 +57,18 @@ class Mirror():
         self.FULL_SCREEN_MODE = False
         self.VOICE_RECOGNITION = False
         self.GESTURES_RECOGNIZER = False
+        self.YOUTUBE = False
+
+        if self.VOICE_RECOGNITION:
+            from voice_assistant import VoiceAssistant
+            from widgets.voice_assistant_widget import VoiceAssistantWidget
+
+        if self.GESTURES_RECOGNIZER:
+            from gestures import GesturesRecognizer
+            from widgets.gestures_widget import GesturesWidget
+
+        if self.YOUTUBE:
+            from widgets.youtube import YoutubePlayer
 
         try:
             host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
@@ -127,20 +130,26 @@ class Mirror():
         self.queue = Queue()
 
         # Checks if there is a camera device on board.
-        self.cam = cv2.VideoCapture(0)
-        if self.GESTURES_RECOGNIZER == False or self.cam is None or not self.cam.isOpened():
+        
+        if self.GESTURES_RECOGNIZER == False:
             self.gestures_recognizer = False
-            self.logger.info('No camera device has been found on board.')
+            self.cam = False
+            self.logger.info('Gestures recognizer is off')
         else:
-            self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue)
-            self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
-            self.logger.info('A camera device has been found on board.')
+            self.cam = cv2.VideoCapture(0)
+            if self.cam is None or not self.cam.isOpened():
+                self.gestures_recognizer = False
+                self.logger.info('A camera device has NOT been found on board.')
+            else:
+                self.gestures_recognizer = GesturesRecognizer(self.cam, self.queue)
+                self.gestures_recognizer_process = Process(target=self.gestures_recognizer.tracker).start()
+                self.logger.info('A camera device has been found on board.')
 
         # Initialization of every available widget.
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
 
-            if widget_name == 'youtube':
+            if widget_name == 'youtube' and self.YOUTUBE:
                 self.youtube = YoutubePlayer(
                     self.window,
                     asyncloop,
@@ -221,7 +230,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.weather
-            elif widget_name == 'voice_assistant':
+            elif widget_name == 'voice_assistant' and self.VOICE_RECOGNITION:
                 self.voice_assistant_widget = VoiceAssistantWidget(
                     self.window,
                     relx=params[0],
@@ -243,7 +252,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.statusbar
-            elif widget_name == 'gestures':
+            elif widget_name == 'gestures' and self.GESTURES_RECOGNIZER:
                 self.gestures_widget = GesturesWidget(
                     self.window,
                     relx=params[0],
@@ -410,8 +419,6 @@ class Mirror():
                     
                     self.loading_window.destroy()
 
-
-
                 if 'youtube' in self.widgets.keys():
                     if self.gesture == 'pointing_finger':
                         self.youtube.external_command = 'volume_down'
@@ -500,7 +507,7 @@ class Mirror():
             for task in self.tasks:
                 task.cancel()
 
-            if self.cam is not None or self.cam.isOpened():
+            if self.cam is not False and self.cam is not None and self.cam.isOpened():
                 self.logger.debug('Closing camera...')
                 self.cam.release()
 
@@ -523,4 +530,3 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         mirror.logger.info('KeyboardInterrupt!')
         mirror.close()
-        self.logger.info('CLOSED!')

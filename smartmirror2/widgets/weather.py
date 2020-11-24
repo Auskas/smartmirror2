@@ -12,7 +12,7 @@ from PIL import Image, ImageTk
 class Weather:
 
     def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.2, anchor='nw', show=True):
-        self.logger = logging.getLogger('SM.weather')
+        self.logger = logging.getLogger('SM2.weather')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -20,6 +20,8 @@ class Weather:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of WEATHER widget...')
 
         self.SM2_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.ICONS_DIR = f'{self.SM2_DIR}{os.sep}icons{os.sep}weather{os.sep}'
@@ -114,10 +116,9 @@ class Weather:
                 }
             }
         }
-
-        self.logger.debug('Weather Widget has been initialized.')
         self.window.update_idletasks()
         self.get_font_size()
+        self.logger.debug('WEATHER widget has been initialized.')
         self.status()
 
     def get_font_size(self):

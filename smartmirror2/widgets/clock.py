@@ -9,7 +9,7 @@ import logging
 class Clock:
 
     def __init__(self, window, relx=0.05, rely=0.05, width=0.2, height=0.1, anchor='nw', show=True, font_color='lightblue'):
-        self.logger = logging.getLogger('SM.clock')
+        self.logger = logging.getLogger('SM2.clock')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -17,6 +17,8 @@ class Clock:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of CLOCK widget...')
 
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
@@ -47,7 +49,7 @@ class Clock:
         self.time_label_height = self.timeLbl.winfo_height()
         self.get_font_size()
 
-        self.logger.info('Clock widgets has been created.')
+        self.logger.info('CLOCK widgets has been created.')
         self.status()
 
     def get_font_size(self):

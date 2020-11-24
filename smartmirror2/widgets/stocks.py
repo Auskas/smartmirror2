@@ -9,7 +9,7 @@ import logging
 class Stocks:
 
     def __init__(self, window, relx=0.65, rely=0.65, width=0.4, height=0.1, anchor='ne', show=True):
-        self.logger = logging.getLogger('SM.stocks')
+        self.logger = logging.getLogger('SM2.stocks')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
             ch = logging.StreamHandler()
@@ -17,6 +17,8 @@ class Stocks:
             ch.setFormatter(formatter)
             self.logger.setLevel(logging.DEBUG)
             self.logger.addHandler(ch)
+
+        self.logger.info('Initialization of STOCKS widget...')
 
         self.font_size = 40
 
@@ -45,7 +47,7 @@ class Stocks:
         
         self.get_font_size()
 
-        self.logger.debug('Stocks Widget has been created.')
+        self.logger.debug('STOCKS Widget has been created.')
         self.widget()
 
     def get_font_size(self):
