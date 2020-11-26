@@ -13,13 +13,16 @@ import logging
 import re
 
 import subprocess
-
 from multiprocessing import Process, Queue
+
+import settings
+
 from widgets.clock import Clock
 from widgets.calendar2 import Calendar
 from widgets.covid import Covid
 from widgets.stocks import Stocks
-from widgets.ticker import Ticker
+#from widgets.ticker import Ticker
+from widgets.ticker2 import Ticker
 from widgets.weather import Weather
 from widgets.loading import Loading
 from widgets.statusbar import Statusbar
@@ -52,45 +55,45 @@ class Mirror():
         self.HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.logger.debug(f'Home directory is {self.HOME_DIR}')
 
-        # If FULL_SCREEN_MODE is True the main window occupies the entire screen.
-        # Warning: In full screen mode the window can be closed only from terminal.
-        self.FULL_SCREEN_MODE = False
-        self.VOICE_RECOGNITION = False
-        self.GESTURES_RECOGNIZER = False
-        self.YOUTUBE = False
 
-        if self.VOICE_RECOGNITION:
+
+        if settings.VOICE_RECOGNITION:
             from voice_assistant import VoiceAssistant
             from widgets.voice_assistant_widget import VoiceAssistantWidget
 
-        if self.GESTURES_RECOGNIZER:
+        if settings.GESTURES_RECOGNIZER:
             from gestures import GesturesRecognizer
             from widgets.gestures_widget import GesturesWidget
 
-        if self.YOUTUBE:
+        if settings.YOUTUBE:
             from widgets.youtube import YoutubePlayer
 
-        try:
-            host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
-            ip_address_regex = re.compile(r'(\d)+.(\d)+.(\d).+(\d)')
-            self.IP_ADDRESS = ip_address_regex.search(host_ip_address)
-            if self.IP_ADDRESS is not None:
-                self.SERVER_IP_ADDRESS = self.IP_ADDRESS.group()
-                self.SERVER_PORT = 80
-                self.logger.info(f'Host IP address is {self.SERVER_IP_ADDRESS}')
-            else:
-                self.SERVER_IP_ADDRESS = 'localhost'
-                self.SERVER_PORT = 80
-                self.logger.warning(f'IP address has not been assigned to the host! Using localhost...')
-        except Exception as exc:
-            self.logger.error(f'Cannot get the IP address: {exc}')
+        if settings.WEB_SERVER:
+            self.logger.info('Web server will be started.')
+            try:
+                host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
+                ip_address_regex = re.compile(r'(\d)+.(\d)+.(\d).+(\d)')
+                self.IP_ADDRESS = ip_address_regex.search(host_ip_address)
+                if self.IP_ADDRESS is not None:
+                    self.SERVER_IP_ADDRESS = self.IP_ADDRESS.group()
+                    self.SERVER_PORT = settings.SERVER_PORT
+                    self.logger.info(f'Host IP address is {self.SERVER_IP_ADDRESS}')
+                else:
+                    self.SERVER_IP_ADDRESS = 'localhost'
+                    self.SERVER_PORT = settings.SERVER_PORT
+                    self.logger.warning(f'IP address has not been assigned to the host! Using localhost...')
+            except Exception as exc:
+                self.logger.error(f'Cannot get the IP address: {exc}')
+        else:
+            self.logger.info('Web server will not be started due to settings.')
 
         # Web server initialization...
-        try:
-            os.popen(f'sudo python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
-            self.logger.info(f'Web server has been initialized at {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
-        except Exception as exc:
-            self.logger.error(f'Cannot start the web server: {exc}')
+        if settings.WEB_SERVER:
+            try:
+                os.popen(f'sudo python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
+                self.logger.info(f'Web server has been initialized at {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
+            except Exception as exc:
+                self.logger.error(f'Cannot start the web server: {exc}')
 
         try:
             with open(f'{self.HOME_DIR}{os.sep}widgets.json', encoding='utf-8') as widgets_config_file:
@@ -114,7 +117,7 @@ class Mirror():
             self.window.title('Smart Mirror Mark II')
             self.window.configure(bg='black')
             
-            if self.FULL_SCREEN_MODE:
+            if settings.FULL_SCREEN_MODE:
                 self.window.attributes('-fullscreen',True)
 
             self.window_width = self.window.winfo_screenwidth()
@@ -131,7 +134,7 @@ class Mirror():
 
         # Checks if there is a camera device on board.
         
-        if self.GESTURES_RECOGNIZER == False:
+        if settings.GESTURES_RECOGNIZER == False:
             self.gestures_recognizer = False
             self.cam = False
             self.logger.info('Gestures recognizer is off')
@@ -149,7 +152,7 @@ class Mirror():
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
 
-            if widget_name == 'youtube' and self.YOUTUBE:
+            if widget_name == 'youtube' and settings.YOUTUBE:
                 self.youtube = YoutubePlayer(
                     self.window,
                     asyncloop,
@@ -230,7 +233,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.weather
-            elif widget_name == 'voice_assistant' and self.VOICE_RECOGNITION:
+            elif widget_name == 'voice_assistant' and settings.VOICE_RECOGNITION:
                 self.voice_assistant_widget = VoiceAssistantWidget(
                     self.window,
                     relx=params[0],
@@ -252,7 +255,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.statusbar
-            elif widget_name == 'gestures' and self.GESTURES_RECOGNIZER:
+            elif widget_name == 'gestures' and settings.GESTURES_RECOGNIZER:
                 self.gestures_widget = GesturesWidget(
                     self.window,
                     relx=params[0],
@@ -278,7 +281,7 @@ class Mirror():
         self.user_detected = False
         self.voice_command = []
 
-        if self.VOICE_RECOGNITION:
+        if settings.VOICE_RECOGNITION:
             self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
         else:
             self.voice_assistant = False
@@ -315,7 +318,7 @@ class Mirror():
         self.loading_window.title('Loading...')
         self.loading_window.configure(bg='black')
         self.loading_window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
-        if self.FULL_SCREEN_MODE:
+        if settings.FULL_SCREEN_MODE:
             self.loading_window.attributes('-fullscreen',True)
         self.loading_window.attributes("-topmost", True)
         self.loading = Loading(self.loading_window)
@@ -439,7 +442,7 @@ class Mirror():
                 if self.scraper:
                     self.covid.covid_figures = self.scraper.covid_figures
                     self.stocks.rates_string = self.scraper.rates_string
-                    self.ticker.news_string = self.scraper.news_string
+                    self.ticker.news_list = self.scraper.news_list
                     self.weather.forecast_string = self.scraper.forecast_string
 
             except Exception as exc:

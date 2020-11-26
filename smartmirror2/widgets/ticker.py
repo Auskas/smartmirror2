@@ -3,11 +3,13 @@
 
 from tkinter import *
 import datetime
+import time
 import logging
 
 class Ticker(Canvas):
 
-    def __init__(self, window, relx=0.0, rely=0.93, width=0.97, height=0.05, anchor='nw', show=True, fps=30):
+    def __init__(self, window, relx=0.0, rely=0.93, width=0.97, height=0.1, anchor='nw', show=True, fps=30):
+        self.st_time = time.perf_counter()
         self.logger = logging.getLogger('SM2.ticker')
 
         if __name__ == '__main__': # Creates a logger if the module is called directly.
@@ -23,7 +25,7 @@ class Ticker(Canvas):
         self.april_fools_news = 'Владимир Путин выступил на Генеральной ассамблее ООН в костюме Деда Мороза.   ***   Дмитрий Медведев в ходе своего визита на Дальний восток заявил о невозможности разблокировки своего айфона.   ***  Укробандеровские собакофашисты вновь нарушили перемирие на Донбасе, коварно атаковав позиции отважных ополченцев.   ***    В ходе военных учений в Калининградской области российские войска уничтожили двести танков и триста самолетов противника. Условного.   ***   Президент России заявил о двухкратном снижении темпов прироста скорости падения российской экономики.   ***   Согласно опроса ФГЛПРФ ЗД более половины респондентов заявили о беззаговорочной поддержке курса Президента. Кормильца нашего, храни его Бог, благослави все дела его праведные.   ***   Виталий Мутко во время встречи со студентами МГУ признался, что только искренняя любовь к Отчизне заставляет его оставаться на своём посту.   ***   Глава МИД России Сергей Лавров считает овец перед сном.   ***   "Патриотизм и любовь к Родине обязаны быть в сердце каждого россиянина", - заявил Игорь Сечин на встрече с гостями и журналистами на борту своей яхты в Монте-Карло.   ***   Патриарх Московский и Всея Руси Кирилл считает, что российскому обществу следует отказаться от чрезмерной роскоши. В пользу РПЦ.'
         self.news_string = '   *** Загрузка новостей ***   '
 
-        self.font_size = 40
+        self.font_size = 30
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -74,7 +76,7 @@ class Ticker(Canvas):
         try:
             self.itemconfig(self.text_id, text=self.april_fools_news)
             self.coords("text", 0, 0)
-            while self.font_size > 12:
+            while self.font_size > 10:
                 self.itemconfig(self.text_id, font=("SFUIText", self.font_size, "bold"))
                 x0 = self.winfo_width()
                 y0 = int(self.winfo_height()/2)
@@ -86,8 +88,9 @@ class Ticker(Canvas):
                     self.itemconfig(self.text_id, text=self.news_string)
                     #self.logger.debug(f'Target widget width {self.target_width}')
                     #self.logger.debug(f'Real widget width {self.winfo_width()}')
-                    #self.logger.debug(f'Target widget height {self.target_height}')
-                    #self.logger.debug(f'Real widget height {self.winfo_height()}')
+                    self.logger.debug(f'Target widget height {self.target_height}')
+                    self.logger.debug(f'Real widget height {self.winfo_height()}')
+                    self.logger.debug(f'The font size is set to {self.font_size}')
                     break
                 self.update()
         except Exception as exc:
@@ -98,6 +101,7 @@ class Ticker(Canvas):
             self.place_forget()
             self.after_id = self.after(1000, self.animate)
         else:
+            self.logger.info(f'The overall time for one hop is {time.perf_counter() - self.st_time} seconds.')
             (x0, y0, x1, y1) = self.bbox("text")
 
             # The text is off the screen. Resetting the x while also getting the news from newsruBot.
@@ -136,7 +140,7 @@ class Ticker(Canvas):
             #self.configure(width=self.target_width - 3, height=self.target_height - 3)
             self.place(relx=self.relx, rely=self.rely)
 
-            self.font_size = 40
+            self.font_size = 30
             self.get_font_size()
             self.logger.debug('Widget has been updated!')
         except Exception as exc:

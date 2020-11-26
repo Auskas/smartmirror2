@@ -22,7 +22,7 @@ class Statusbar:
 
         self.logger.info('Initialization of STATUSBAR widget...')
 
-        self.REFRESH_RATE = 10000 # time in milliseconds between measurments.
+        self.REFRESH_RATE = 5000 # time in milliseconds between measurments.
 
         self.window = window
         # Dimesnsions of the main window (screen size)
@@ -196,9 +196,9 @@ class Statusbar:
             self.gpu_temp_label.config(text=self.temp_GPU)
         if self.IP_address:
             self.ip_address_label.config(text=self.IP_address)
-        self.measure_temp()
+        self.measure_temp_cpu()
 
-    def measure_temp(self):
+    def measure_temp_cpu(self):
         if self.temp_CPU:
             try:
                 self.temp_CPU = subprocess.Popen(
@@ -217,37 +217,49 @@ class Statusbar:
                 self.logger.error(f'Cannot get the CPU temp: {exc}')
 
         if self.temp_GPU:
-            try:
-                self.temp_GPU = subprocess.Popen(
-                    'vcgencmd measure_temp',
-                    shell=True, 
-                    stdin=None, 
-                    stdout=subprocess.PIPE, 
-                    stderr=subprocess.PIPE
-                )
-                self.temp_GPU, _ = self.temp_GPU.communicate()
-                self.temp_GPU = self.temp_GPU.decode('utf-8')
-                self.temp_GPU = self.temp_GPU[self.temp_GPU.find('=') + 1: self.temp_GPU.find("'")]
-                self.temp_GPU = float(self.temp_GPU)
-                self.temp_GPU = f'GPU {self.temp_GPU}°C'
-            except Exception as exc:
-                self.logger.error(f'Cannot get the GPU temp: {exc}')
+            self.statusbar_frame.after(self.REFRESH_RATE, self.measure_temp_gpu)
+        else:
+            if self.IP_address:
+                self.statusbar_frame.after(self.REFRESH_RATE, self.get_ip_address)
+            else:
+                self.statusbar_frame.after(self.REFRESH_RATE, self.status)
+
+    def measure_temp_gpu(self):
+        try:
+            self.temp_GPU = subprocess.Popen(
+                'vcgencmd measure_temp',
+                shell=True, 
+                stdin=None, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
+            )
+            self.temp_GPU, _ = self.temp_GPU.communicate()
+            self.temp_GPU = self.temp_GPU.decode('utf-8')
+            self.temp_GPU = self.temp_GPU[self.temp_GPU.find('=') + 1: self.temp_GPU.find("'")]
+            self.temp_GPU = float(self.temp_GPU)
+            self.temp_GPU = f'GPU {self.temp_GPU}°C'
+        except Exception as exc:
+            self.logger.error(f'Cannot get the GPU temp: {exc}')
 
         if self.IP_address:
-            try:
-                self.IP_address = subprocess.Popen(
-                    'hostname -I',
-                    shell=True, 
-                    stdin=None, 
-                    stdout=subprocess.PIPE, 
-                    stderr=subprocess.PIPE
-                )
+            self.statusbar_frame.after(self.REFRESH_RATE, self.get_ip_address)
+        else:
+            self.statusbar_frame.after(self.REFRESH_RATE, self.status)
 
-                self.IP_address, _ = self.IP_address.communicate()
-                self.IP_address = f'IP: {self.IP_address.decode("utf-8")}'
-            except Exception as exc:
-                self.logger.error(f'Cannot get the IP address: {exc}')
+    def get_ip_address(self):
+        try:
+            self.IP_address = subprocess.Popen(
+                'hostname -I',
+                shell=True, 
+                stdin=None, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
+            )
 
+            self.IP_address, _ = self.IP_address.communicate()
+            self.IP_address = f'IP: {self.IP_address.decode("utf-8")}'
+        except Exception as exc:
+            self.logger.error(f'Cannot get the IP address: {exc}')
         self.statusbar_frame.after(self.REFRESH_RATE, self.status)
 
     def widget_update(self, *args):

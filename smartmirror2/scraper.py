@@ -31,7 +31,7 @@ class Scraper:
         self.url_covid = 'https://www.worldometers.info/coronavirus/'
         self.url_weather = 'https://api.weather.yandex.ru/v1/informers?'
         self.logger.debug('An instance of Scraper has been created.')
-        self.news_string = '   *** Загрузка новостей ***   '
+        self.news_list = ['Загрузка новостей']
         self.rates_string = '*** Обновление данных по котировкам ***'
         self.covid_figures = [
             '*** Загрузка данных по коронавирусу ***', 
@@ -123,8 +123,8 @@ class Scraper:
                 Processes the data to find the main news on the page.
                 Forms a string that represents the news separated by the three
             asterisks. 
-                On success puts a dictionary with the key 'news_string' and 
-            the string as the value into the queue."""
+                On success puts a dictionary with the key 'news_list' and 
+            the list as the value into the queue."""
         new_news = []
         try:
             soup = bs4.BeautifulSoup(res, features='html.parser')
@@ -141,7 +141,7 @@ class Scraper:
                 if number_of_news == 10:
                     break
             if len(new_news) > 0:
-                queue.put({'news_string': ''.join(new_news)})
+                queue.put({'news_list': new_news})
                 self.logger.info('Got the latest news.')
             else:
                 self.logger.warning('Cannot find the news on the page')
@@ -258,8 +258,8 @@ class Scraper:
                 data = queue.get()
                 try:
                     for key in data.keys():
-                        if key == 'news_string':
-                            self.news_string = data[key]
+                        if key == 'news_list':
+                            self.news_list = data[key]
                         elif key == 'rates_string':
                             self.rates_string = data[key]
                         elif key == 'covid_figures':

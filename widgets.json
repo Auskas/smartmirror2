@@ -75,13 +75,13 @@
     "alias": "\u0411\u0435\u0433\u0443\u0449\u0430\u044f \u0441\u0442\u0440\u043e\u043a\u0430",
     "id": 6,
     "show": true,
-    "relx": 1.292326077,
-    "rely": 81.13788151,
-    "width": 97.17041068,
-    "height": 11.68087971,
+    "relx": 0,
+    "rely": 85,
+    "width": 100,
+    "height": 9,
     "keepAspectRatio": false,
     "anchor": "nw",
-    "minwidth": 30,
+    "minwidth": 100,
     "minheight": 3
   },
   "weather": {

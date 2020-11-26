@@ -16,3 +16,8 @@ Execute "sudo raspi-config" in the terminal, select Interfacing Options, navigat
 
 4. Disable RPI screen sleeping.
 Execute raspi-config. In Advanced options disable screen blanking.
+
+5. Auto hide mouse cursor.
+sudo apt-get install unclutter
+sudo nano /etc/xdg/lxsession/LXDE/autostart
+Add '@unclutter -idle 0.1 -root' to the file.
