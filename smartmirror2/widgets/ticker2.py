@@ -112,23 +112,26 @@ class Ticker():
             self.logger.error(f'Cannot adjust the size of the widget: {exc}')
 
     def animate(self):
-        #print(self.ticker_label.winfo_width())
-        if self.ticker_label.winfo_x() > -self.ticker_label.winfo_width():
-            self.ticker_label.place(x=self.ticker_label.winfo_x() - self.TICKER_SPEED, rely=self.rely)
-        else:
-            #self.logger.info(f'The overall time for one hop is {time.perf_counter() - self.st_time} seconds.')
-            number_of_news = len(self.news_list)
-            if number_of_news > 0:
-                if self.news_index > number_of_news - 1:
-                    self.news_index = 0
+        if self.show:
+            if self.ticker_label.winfo_x() > -self.ticker_label.winfo_width():
+                self.ticker_label.place(x=self.ticker_label.winfo_x() - self.TICKER_SPEED, rely=self.rely)
+            else:
+                #self.logger.info(f'The overall time for one hop is {time.perf_counter() - self.st_time} seconds.')
+                number_of_news = len(self.news_list)
+                if number_of_news > 0:
+                    if self.news_index > number_of_news - 1:
+                        self.news_index = 0
 
-                self.ticker_label.config(text=f'*** {self.news_list[self.news_index]} ***')
+                    self.ticker_label.config(text=f'*** {self.news_list[self.news_index]} ***')
+                    self.ticker_label.place(x=self.window_width, rely=self.rely)
+                    self.ticker_label.update()               
+
+                    self.news_index += 1
                 self.ticker_label.place(x=self.window_width, rely=self.rely)
-                self.ticker_label.update()               
-
-                self.news_index += 1
-            self.ticker_label.place(x=self.window_width, rely=self.rely)
-        self.ticker_label.after(self.REFRESH_RATE, self.animate)
+            self.ticker_label.after(self.REFRESH_RATE, self.animate)
+        else:
+            self.ticker_label.place_forget()
+            self.ticker_label.after(1000, self.animate)
 
     def widget_update(self, *args):
         try:

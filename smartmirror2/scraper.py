@@ -43,7 +43,7 @@ class Scraper:
             '',
             ''
         ]
-        self.forecast_string = None
+        self.forecast_json = None
 
         self.yandex_weather_token = os.environ.get('YANDEX_WEATHER_TOKEN')
         if self.yandex_weather_token == None:
@@ -241,9 +241,10 @@ class Scraper:
         while True:
             res = await self.get_page(self.url_weather, 'json', payload, headers)
             if res == False:
-                await asyncio.sleep(3600)
+                await asyncio.sleep(600)
             else:
-                self.forecast_string = res
+                self.logger.debug('Got the latest weather forecast.')
+                self.forecast_json = res
                 await asyncio.sleep(43200)
 
     async def process_receiver(self, queue):

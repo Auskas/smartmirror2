@@ -8,6 +8,7 @@ import datetime
 import logging
 import os
 from PIL import Image, ImageTk
+from copy import deepcopy
 
 class Weather:
 
@@ -102,7 +103,9 @@ class Weather:
         else:
             self.next_next_forecast.pack(side = RIGHT)
 
-        self.forecast_string = None
+        self.forecast_json = None
+        self.current_forecast = None
+
         self.april_fools_forecast = {
             'fact': {'temp': -1, 'icon': 'fct_+sn'},
             'forecast': {
@@ -153,27 +156,26 @@ class Weather:
 
 
     def status(self):
-        if self.show and self.forecast_string is not None:
-            self.weather_frame.place(
-                relx=self.relx,
-                rely=self.rely,
-                anchor=self.anchor
-            )
-            self.widget()
+        if self.show and self.forecast_json is not None:
+            if self.forecast_json != self.current_forecast:
+                self.current_forecast = deepcopy(self.forecast_json)
+                self.weather_frame.after(1500, self.widget)
+            else:
+                self.weather_frame.after(1500, self.status)
         else:
             self.weather_frame.place_forget()
-            self.weather_frame.after(1000, self.status)
+            self.weather_frame.after(1500, self.status)
 
     def widget(self):
         try:
             # Special weather forecast for April Fools' Day.
             current_time = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
             if current_time.month == 4 and current_time.day == 1 and self.seconds_counter > 3600:
-                self.forecast_string = self.april_fools_forecast
+                self.forecast_json = self.april_fools_forecast
 
             self.title_label.config(text='Москва')
-            temp_now = str(self.forecast_string['fact']['temp'])
-            weather_icon = self.forecast_string['fact']['icon']
+            temp_now = str(self.forecast_json['fact']['temp'])
+            weather_icon = self.forecast_json['fact']['icon']
 
             self.icon.configure(image=self.icon_render)
             #self.icon.image = self.icon_render
@@ -181,11 +183,11 @@ class Weather:
             # Gets the name of the next forecast periods.
             parts = set()
             try:
-                for part in self.forecast_string['forecast']['parts'].keys():
+                for part in self.forecast_json['forecast']['parts'].keys():
                     parts.add(part)
             except AttributeError:
-                parts.add(self.forecast_string['forecast']['parts'][0]['part_name'])
-                parts.add(self.forecast_string['forecast']['parts'][1]['part_name'])
+                parts.add(self.forecast_json['forecast']['parts'][0]['part_name'])
+                parts.add(self.forecast_json['forecast']['parts'][1]['part_name'])
 
             if 'morning' in parts and 'day' in parts:
                 part_next, part_next_next = 'morning', 'day'
@@ -200,14 +202,14 @@ class Weather:
 
             if part_next:
                 try:
-                    temp_next = str(self.forecast_string['forecast']['parts'][part_next]['temp_avg'])
+                    temp_next = str(self.forecast_json['forecast']['parts'][part_next]['temp_avg'])
                 except TypeError:
-                    temp_next = str(self.forecast_string['forecast']['parts'][0]['temp_avg'])
+                    temp_next = str(self.forecast_json['forecast']['parts'][0]['temp_avg'])
             if part_next_next:
                 try:
-                    temp_next_next = str(self.forecast_string['forecast']['parts'][part_next_next]['temp_avg'])
+                    temp_next_next = str(self.forecast_json['forecast']['parts'][part_next_next]['temp_avg'])
                 except TypeError:
-                    temp_next_next = str(self.forecast_string['forecast']['parts'][1]['temp_avg'])
+                    temp_next_next = str(self.forecast_json['forecast']['parts'][1]['temp_avg'])
 
             # The following conditions are for determining the names of the next two part of a day.
             if part_next == 'night':
@@ -224,9 +226,16 @@ class Weather:
             self.degrees.config(text=f'{temp_now}° ')
             self.next_forecast.config(text=f'{part_next} {temp_next},')
             self.next_next_forecast.config(text=f'{part_next_next} {temp_next_next}')
+        
+            self.weather_frame.place(
+                relx=self.relx,
+                rely=self.rely,
+                anchor=self.anchor
+            )
         except Exception as exc:
-            self.logger.error(f'Cannot form the forecast strings: {exc}')
-        self.weather_frame.after(1000, self.status)
+            self.logger.error(f'An error occured while parsing the JSON weather forecast: {exc}')
+            self.weather_frame.place_forget()
+        self.weather_frame.after(1500, self.status)
 
     def widget_update(self, *args):
         try:
@@ -298,7 +307,7 @@ if __name__ == '__main__':
     w, h = window.winfo_screenwidth(), window.winfo_screenheight()
     window.geometry("%dx%d+0+0" % (w, h))
     a = Weather(window)
-    a.forecast_string = a.april_fools_forecast
+    a.forecast_json = a.april_fools_forecast
     window.mainloop()
 
 __version__ = '0.97' # 19th November 2020

@@ -41,7 +41,7 @@ class Mirror():
         logConsole.setLevel(logging.DEBUG)
 
         formatterFile = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        formatterConsole = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+        formatterConsole = logging.Formatter('%(asctime)s- %(name)s - %(levelname)s - %(message)s')
         logFileHandler.setFormatter(formatterFile)
         logConsole.setFormatter(formatterConsole)
 
@@ -443,7 +443,7 @@ class Mirror():
                     self.covid.covid_figures = self.scraper.covid_figures
                     self.stocks.rates_string = self.scraper.rates_string
                     self.ticker.news_list = self.scraper.news_list
-                    self.weather.forecast_string = self.scraper.forecast_string
+                    self.weather.forecast_json = self.scraper.forecast_json
 
             except Exception as exc:
                 self.logger.error(f'Cannot update the window {exc}')
