@@ -389,7 +389,7 @@ class Mirror():
                     self.create_loading_window()
 
                     # Stops widgets while updating them.
-                    for widget in self.WIDGETS_CONFIG.keys():
+                    for widget in self.widgets.keys():
                         self.widgets[widget].show = False
 
                     time.sleep(1)
@@ -400,20 +400,23 @@ class Mirror():
                                 default_video = self.WIDGETS_CONFIG[widget]['defaultVideo']
                             else:
                                 default_video = None
-                            self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = True
-                            self.widgets[self.WIDGETS_CONFIG[widget]['name']].widget_update(
-                                round(self.WIDGETS_CONFIG[widget]['relx'] / 100, 5),
-                                round(self.WIDGETS_CONFIG[widget]['rely'] / 100, 5),
-                                round(self.WIDGETS_CONFIG[widget]['width'] / 100, 5),
-                                round(self.WIDGETS_CONFIG[widget]['height'] / 100, 5),
-                                self.WIDGETS_CONFIG[widget]['anchor'],
-                                default_video
-                            )
+
+                            if widget in self.widgets.keys():
+                                self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = True
+                                self.widgets[self.WIDGETS_CONFIG[widget]['name']].widget_update(
+                                    round(self.WIDGETS_CONFIG[widget]['relx'] / 100, 5),
+                                    round(self.WIDGETS_CONFIG[widget]['rely'] / 100, 5),
+                                    round(self.WIDGETS_CONFIG[widget]['width'] / 100, 5),
+                                    round(self.WIDGETS_CONFIG[widget]['height'] / 100, 5),
+                                    self.WIDGETS_CONFIG[widget]['anchor'],
+                                    default_video
+                                )
                         else:
-                            self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = False
+                            if widget in self.widgets.keys():
+                                self.widgets[self.WIDGETS_CONFIG[widget]['name']].show = False
                     
                     # Returns widgets to normal operation.
-                    for widget in self.WIDGETS_CONFIG.keys():
+                    for widget in self.widgets.keys():
                         if self.WIDGETS_CONFIG[widget]['show']:
                             self.widgets[widget].show = True
 

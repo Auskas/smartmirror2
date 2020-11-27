@@ -42,7 +42,7 @@ class Weather:
         self.target_width = int(width * self.window_width)
         self.target_height = int(height * self.window_height)
 
-        self.font_size = 50
+        self.font_size = 100
         # The main frame of the widget.
         self.weather_frame = Frame(self.window, bg='black', bd=0)
 
@@ -250,7 +250,7 @@ class Weather:
                 self.relx += width
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 50
+            self.font_size = 100
 
             self.weather_frame.place(
                 relx=self.relx,

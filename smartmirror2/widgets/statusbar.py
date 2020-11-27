@@ -36,7 +36,7 @@ class Statusbar:
         self.anchor = anchor
         self.show = show
 
-        self.font_size = 30
+        self.font_size = 50
 
         self.statusbar_frame = Frame(self.window, bg='black', bd=0)
 
@@ -282,11 +282,11 @@ class Statusbar:
                 rely=self.rely,
                 anchor=self.anchor
             )
-            if self.cpu_temp_label:
+            if self.temp_CPU:
                 self.cpu_temp_label.config(text='CPU __._°C')
-            if self.gpu_temp_label:
+            if self.temp_GPU:
                 self.gpu_temp_label.config(text='GPU __._°C')
-            if self.ip_address_label:
+            if self.IP_address:
                 self.ip_address_label.config(text='000.000.000.000')
 
             self.get_font_size()

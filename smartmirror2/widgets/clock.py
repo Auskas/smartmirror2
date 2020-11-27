@@ -31,7 +31,7 @@ class Clock:
         self.anchor = anchor
         self.show = show
 
-        self.font_size = 50
+        self.font_size = 100
         self.timeLbl = Label(
             window, 
             text='00:00:00', 
@@ -106,7 +106,7 @@ class Clock:
                 self.relx += width
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 150
+            self.font_size = 100
 
             self.timeLbl.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.timeLbl.config(text='00:00:00')

@@ -34,7 +34,7 @@ class Calendar:
         self.show = show
 
         # Initial font size
-        self.font_size = 28
+        self.font_size = 100
 
         self.date_label = Label(
             window, text='Понедельник, 00 сентября', 
@@ -124,7 +124,7 @@ class Calendar:
                 self.relx += width
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 28
+            self.font_size = 100
 
             self.date_label.place(relx=self.relx, rely=self.rely, anchor=self.anchor)
             self.date_label.config(text='Понедельник, 00 сентября')

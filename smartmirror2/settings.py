@@ -14,7 +14,7 @@ GESTURES_RECOGNIZER = False
 YOUTUBE = False
 
 # Enable or disable web server.
-WEB_SERVER = False
+WEB_SERVER = True
 
 # Web server port.
 SERVER_PORT = 80

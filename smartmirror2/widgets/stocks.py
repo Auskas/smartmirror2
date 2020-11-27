@@ -20,7 +20,7 @@ class Stocks:
 
         self.logger.info('Initialization of STOCKS widget...')
 
-        self.font_size = 40
+        self.font_size = 100
 
         # Dimesnsions of the main window (screen size)
         self.window_width = window.winfo_screenwidth()
@@ -100,7 +100,7 @@ class Stocks:
                 self.relx += width
             self.target_width = int(width * self.window_width)
             self.target_height = int(height * self.window_height)
-            self.font_size = 50
+            self.font_size = 100
 
             self.stocks_label.place(
                 relx=self.relx, 
