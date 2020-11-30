@@ -15,7 +15,7 @@ import re
 import subprocess
 from multiprocessing import Process, Queue
 
-import settings
+from settings import *
 
 from widgets.clock import Clock
 from widgets.calendar2 import Calendar
@@ -55,20 +55,18 @@ class Mirror():
         self.HOME_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.logger.debug(f'Home directory is {self.HOME_DIR}')
 
-
-
-        if settings.VOICE_RECOGNITION:
+        if VOICE_RECOGNITION:
             from voice_assistant import VoiceAssistant
             from widgets.voice_assistant_widget import VoiceAssistantWidget
 
-        if settings.GESTURES_RECOGNIZER:
+        if GESTURES_RECOGNIZER:
             from gestures import GesturesRecognizer
             from widgets.gestures_widget import GesturesWidget
 
-        if settings.YOUTUBE:
+        if YOUTUBE:
             from widgets.youtube import YoutubePlayer
 
-        if settings.WEB_SERVER:
+        if WEB_SERVER:
             self.logger.info('Web server will be started.')
             try:
                 host_ip_address = f'IP: {os.popen("hostname -I").readline()}'
@@ -76,19 +74,19 @@ class Mirror():
                 self.IP_ADDRESS = ip_address_regex.search(host_ip_address)
                 if self.IP_ADDRESS is not None:
                     self.SERVER_IP_ADDRESS = self.IP_ADDRESS.group()
-                    self.SERVER_PORT = settings.SERVER_PORT
+                    self.SERVER_PORT = SERVER_PORT
                     self.logger.info(f'Host IP address is {self.SERVER_IP_ADDRESS}')
                 else:
                     self.SERVER_IP_ADDRESS = 'localhost'
-                    self.SERVER_PORT = settings.SERVER_PORT
+                    self.SERVER_PORT = SERVER_PORT
                     self.logger.warning(f'IP address has not been assigned to the host! Using localhost...')
             except Exception as exc:
                 self.logger.error(f'Cannot get the IP address: {exc}')
         else:
-            self.logger.info('Web server will not be started due to settings.')
+            self.logger.info('Web server will not be started due to ')
 
         # Web server initialization...
-        if settings.WEB_SERVER:
+        if WEB_SERVER:
             try:
                 os.popen(f'sudo python3 {self.HOME_DIR}{os.sep}web{os.sep}manage.py runserver {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
                 self.logger.info(f'Web server has been initialized at {self.SERVER_IP_ADDRESS}:{self.SERVER_PORT}')
@@ -117,7 +115,7 @@ class Mirror():
             self.window.title('Smart Mirror Mark II')
             self.window.configure(bg='black')
             
-            if settings.FULL_SCREEN_MODE:
+            if FULL_SCREEN_MODE:
                 self.window.attributes('-fullscreen',True)
 
             self.window_width = self.window.winfo_screenwidth()
@@ -134,7 +132,7 @@ class Mirror():
 
         # Checks if there is a camera device on board.
         
-        if settings.GESTURES_RECOGNIZER == False:
+        if GESTURES_RECOGNIZER == False:
             self.gestures_recognizer = False
             self.cam = False
             self.logger.info('Gestures recognizer is off')
@@ -152,7 +150,7 @@ class Mirror():
         for widget_name in self.WIDGETS_CONFIG.keys():
             params = self.widget_init(widget_name)
 
-            if widget_name == 'youtube' and settings.YOUTUBE:
+            if widget_name == 'youtube' and YOUTUBE:
                 self.youtube = YoutubePlayer(
                     self.window,
                     asyncloop,
@@ -233,7 +231,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.weather
-            elif widget_name == 'voice_assistant' and settings.VOICE_RECOGNITION:
+            elif widget_name == 'voice_assistant' and VOICE_RECOGNITION:
                 self.voice_assistant_widget = VoiceAssistantWidget(
                     self.window,
                     relx=params[0],
@@ -255,7 +253,7 @@ class Mirror():
                     show=params[5]
                 )
                 self.widgets[widget_name] = self.statusbar
-            elif widget_name == 'gestures' and settings.GESTURES_RECOGNIZER:
+            elif widget_name == 'gestures' and GESTURES_RECOGNIZER:
                 self.gestures_widget = GesturesWidget(
                     self.window,
                     relx=params[0],
@@ -271,8 +269,27 @@ class Mirror():
                 self.widgets[widget_name].show = True
             else:
                 self.widgets[widget_name].show = False
+        
+        # Initialization of motion sensor.
+        if PIR_SENSOR:
+            # Make sure that it is an RPI.
+            hw_arch = subprocess.Popen(
+                'uname --m',
+                shell=True, 
+                stdin=None, 
+                stdout=subprocess.PIPE, 
+                stderr=subprocess.PIPE
+            )
+            hw_arch_out, hw_arch_error = hw_arch.communicate() 
+            hw_arch_out = hw_arch_out.decode('utf-8')
+            if hw_arch_out.find('arm') != -1:
+                from rpi_pir import PIR
+                self.motion_sensor = PIR(self.loop)
+            else:
+                self.logger.info('Cannot initialize the motion sensor  - the device is not an RPI.')
+        # Motion sensor initialization end.
 
-        self.scraper = Scraper(asyncloop)
+        self.scraper = Scraper(self.loop)
 
         self.loading_window.destroy()
         self.window.call("wm", "attributes", ".", "-topmost", "true")
@@ -281,7 +298,7 @@ class Mirror():
         self.user_detected = False
         self.voice_command = []
 
-        if settings.VOICE_RECOGNITION:
+        if VOICE_RECOGNITION:
             self.voice_assistant = VoiceAssistant(self.WIDGETS_CONFIG, self.queue)
         else:
             self.voice_assistant = False
@@ -318,7 +335,7 @@ class Mirror():
         self.loading_window.title('Loading...')
         self.loading_window.configure(bg='black')
         self.loading_window.geometry("%dx%d+0+0" % (self.window_width, self.window_height))
-        if settings.FULL_SCREEN_MODE:
+        if FULL_SCREEN_MODE:
             self.loading_window.attributes('-fullscreen',True)
         self.loading_window.attributes("-topmost", True)
         self.loading = Loading(self.loading_window)

@@ -14,7 +14,16 @@ GESTURES_RECOGNIZER = False
 YOUTUBE = False
 
 # Enable or disable web server.
-WEB_SERVER = True
+WEB_SERVER = False
 
 # Web server port.
 SERVER_PORT = 80
+
+# Enable or disable the display auto on and off functionality.
+PIR_SENSOR = True
+
+# Time in seconds that indicates how much time the user must be exposed to the mirror to switch the display on.
+PIR_DELAY = 3
+
+# Time in seconds that indicates in how many seconds the display will be switched off.
+PIR_TIMEOUT = 10
